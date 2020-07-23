@@ -7,6 +7,7 @@ public abstract class BaseFact {
     private static final long startTime = System.nanoTime();
 
     protected void start(int bitLLength) {
+        bitLLength /=2;
         Random random = new Random(123);
 
         BigInteger A = new BigInteger(bitLLength - 1, random).nextProbablePrime();

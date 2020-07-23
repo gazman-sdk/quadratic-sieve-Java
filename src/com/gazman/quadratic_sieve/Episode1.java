@@ -3,10 +3,10 @@ package com.gazman.quadratic_sieve;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class QuadraticSieve extends BaseFact {
+public class Episode1 extends BaseFact {
 
     public static void main(String[] args) {
-        new QuadraticSieve().start(22);
+        new Episode1().start(44);
     }
 
     @Override
