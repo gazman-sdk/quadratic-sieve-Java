@@ -6,19 +6,19 @@ import java.util.Random;
 public class Episode1 extends BaseFact {
 
     public static void main(String[] args) {
-        new Episode1().start(44);
+        new Episode1().stress(30, 1000);
     }
 
     @Override
     protected void solve(BigInteger N) {
         Random random = new Random(123);
 
-        for (int i = 0; i < 10; ) {
-            BigInteger b = new BigInteger(N.bitLength() / 2 + 1, random).abs();
+        while (true){
+            BigInteger b = new BigInteger(N.bitLength() / 2 + random.nextInt(5), random).abs();
             BigInteger a = b.pow(2).subtract(N);
             if(isSquare(a)){
                 log("found it", b.subtract(a.sqrt()));
-                i++;
+                return;
             }
 
         }

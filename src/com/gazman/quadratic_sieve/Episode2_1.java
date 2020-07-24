@@ -5,7 +5,7 @@ import java.math.BigInteger;
 public class Episode2_1 extends BaseFact {
 
     public static void main(String[] args) {
-        new Episode2_1().start(70);
+        new Episode2_1().stress(30, 1000);
     }
 
     @Override
