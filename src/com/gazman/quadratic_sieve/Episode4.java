@@ -1,5 +1,7 @@
 package com.gazman.quadratic_sieve;
 
+import com.gazman.quadratic_sieve.data.BSmooth;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -68,17 +70,5 @@ public class Episode4 extends BaseFact {
             }
         }
         return null;
-    }
-
-    static class BSmooth {
-        final BigInteger a, b;
-        final BitSet vector;
-
-        public BSmooth(BigInteger a, BigInteger b, BitSet vector) {
-            this.a = a;
-            this.b = b;
-            this.vector = vector;
-        }
-
     }
 }
