@@ -5,7 +5,7 @@ import java.util.BitSet;
 
 public class BSmooth {
     public final BigInteger a, b;
-    public final BitSet vector;
+    public BitSet vector;
 
     public BSmooth(BigInteger a, BigInteger b, BitSet vector) {
         this.a = a;
