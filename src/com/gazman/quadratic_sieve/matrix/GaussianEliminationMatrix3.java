@@ -1,6 +1,7 @@
 package com.gazman.quadratic_sieve.matrix;
 
 import com.gazman.quadratic_sieve.data.BSmooth;
+import com.gazman.quadratic_sieve.logger.Logger;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -25,6 +26,10 @@ public class GaussianEliminationMatrix3 {
         }
 
         addEliminator(bSmoothList.size() - 1);
+    }
+
+    public int getSize(){
+        return bSmoothList.size();
     }
 
     private void addToSolutionMatrix() {
@@ -95,11 +100,11 @@ public class GaussianEliminationMatrix3 {
 
         BigInteger maybeSolution = a.add(b.sqrt()).gcd(N);
         if (!maybeSolution.equals(N) && !maybeSolution.equals(BigInteger.ONE)) {
-            System.out.println("Found " + bSmoothList.size() + " bSmooth values");
-            System.out.println("Oh yeah " + maybeSolution);
+            Logger.log("Found " + bSmoothList.size() + " bSmooth values");
+            Logger.log("Oh yeah " + maybeSolution);
             System.exit(0);
         } else {
-            System.out.println(index + " bad luck " + maybeSolution);
+            Logger.log(index + " bad luck " + maybeSolution);
         }
     }
 

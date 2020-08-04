@@ -1,11 +1,11 @@
 package com.gazman.quadratic_sieve;
 
+import com.gazman.quadratic_sieve.logger.Logger;
+
 import java.math.BigInteger;
 import java.util.Random;
 
 public abstract class BaseFact {
-    private static final long startTime = System.nanoTime();
-    private boolean logsAvailable = true;
     private final Random random = new Random(123);
 
     protected void start(int bitLength) {
@@ -23,7 +23,7 @@ public abstract class BaseFact {
     }
 
     public void stress(int bitLength, long timeMillis){
-        logsAvailable = false;
+        Logger.setLogsAvailable(false);
         for (int i = 0; i < 10; i++) {
             start(bitLength);
         }
@@ -33,7 +33,7 @@ public abstract class BaseFact {
             count++;
             start(bitLength);
         }
-        logsAvailable = true;
+        Logger.setLogsAvailable(true);
 
         double speed = count * 1_000_000_000L / (System.nanoTime() - startTime);
         log("count", count, "speed", speed);
@@ -42,17 +42,6 @@ public abstract class BaseFact {
     protected abstract void solve(BigInteger n);
 
     protected void log(Object... objects) {
-        if(!logsAvailable){
-            return;
-        }
-        StringBuilder out = new StringBuilder();
-        for (Object object : objects) {
-            out.append(object).append(" ");
-        }
-
-        long milliseconds = (System.nanoTime() - startTime) / 1_000_000;
-
-        String prefix = milliseconds + "> ";
-        System.out.println(prefix + out);
+        Logger.log(objects);
     }
 }
