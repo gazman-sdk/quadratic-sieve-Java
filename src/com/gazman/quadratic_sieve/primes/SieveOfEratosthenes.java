@@ -1,18 +1,8 @@
 package com.gazman.quadratic_sieve.primes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class SieveOfEratosthenes {
-
-    public static void main(String[] args) {
-        long startingTime = System.nanoTime();
-        List<Integer> primes = findPrimes(1_000_000);
-
-        System.out.println("found " + primes.size() + " primes, in " + (System.nanoTime() - startingTime) / 1_000_000);
-    }
 
     public static List<Integer> findPrimes(int limit) {
         if (limit < 3) {
@@ -52,6 +42,8 @@ public class SieveOfEratosthenes {
                 primes.add(p);
             }
         }
+
+
 
 
         return primes;

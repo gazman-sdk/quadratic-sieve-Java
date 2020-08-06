@@ -1,0 +1,25 @@
+0>      A 443628178365962520416741 
+7>      B 1134314294694386871707429 
+7>      N 503213784249742432953782199244562898863305668889 
+7>      
+7>      Magic numbers 
+7>      
+8>      B-bound 61,016 
+8>      minPrimeSize 68 
+8>      loopsCount 247 
+8>      loopsSize 15,254 
+45>     Prime-base 3,069 
+45>     Max-prime 61,001 
+45>     maxPrimeThreshold 6,100 
+45>     
+1,091>  Completed 5.35% found 156 choosing-polynomial 414 sieving 619 extracting-vector 283 matrix 23 TTD 00:18 
+2,088>  Completed 15.61% found 455 choosing-polynomial 878 sieving 1,140 extracting-vector 587 matrix 45 TTD 00:11 
+3,111>  Completed 26.51% found 773 choosing-polynomial 1,329 sieving 1,716 extracting-vector 900 matrix 99 TTD 00:08 
+4,126>  Completed 37.63% found 1,097 choosing-polynomial 1,771 sieving 2,284 extracting-vector 1,187 matrix 204 TTD 00:06 
+5,130>  Completed 49.87% found 1,454 choosing-polynomial 2,218 sieving 2,847 extracting-vector 1,489 matrix 405 TTD 00:05 
+6,131>  Completed 61.70% found 1,799 choosing-polynomial 2,643 sieving 3,438 extracting-vector 1,792 matrix 680 TTD 00:03 
+7,132>  Completed 73.16% found 2,133 choosing-polynomial 3,066 sieving 4,012 extracting-vector 2,081 matrix 1,087 TTD 00:02 
+8,136>  Completed 85.30% found 2,487 choosing-polynomial 3,490 sieving 4,581 extracting-vector 2,381 matrix 1,653 TTD 00:01 
+9,138>  Completed 96.59% found 2,816 choosing-polynomial 3,954 sieving 5,116 extracting-vector 2,657 matrix 2,332 TTD 00:00 
+9,452>  Found 2848 bSmooth values 
+9,452>  Oh yeah 443628178365962520416741 

@@ -1,0 +1,21 @@
+0>      A 552330951024629792017
+6>      B 792071513649121280077
+6>      N 437485612413337193583034997070105315745309
+6>
+6>      Magic numbers
+7>
+7>      B-bound 30,311
+7>      minPrimeSize 60
+7>      loopsCount 174
+7>      loopsSize 7,577
+28>     Prime-base 1,572
+28>     Max-prime 30,307
+28>     maxPrimeThreshold 3,030
+28>
+1,049>  Completed 18.55% found 277 choosing-polynomial 523 sieving 484 extracting-vector 234 matrix 29 TTD 00:04
+2,036>  Completed 55.98% found 836 choosing-polynomial 1,079 sieving 925 extracting-vector 482 matrix 109 TTD 00:01
+3,037>  Completed 95.29% found 1,423 choosing-polynomial 1,600 sieving 1,399 extracting-vector 728 matrix 378 TTD 00:00
+3,199>  Found 1460 bSmooth values
+3,200>  Oh yeah 792071513649121280077
+
+Process finished with exit code 0

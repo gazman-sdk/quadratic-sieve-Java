@@ -1,0 +1,111 @@
+0>      A 600995393827973415345892387
+7>      B 909354479084453176606653161 
+7>      N 546517853286592550872453484352159086279922636939385307 
+7>      
+7>      Magic numbers 
+8>      
+8>      B-bound 122,824 
+8>      minPrimeSize 76 
+8>      loopsCount 350 
+8>      loopsSize 30,706 
+74>     Prime-base 5,842 
+74>     Max-prime 122,819 
+74>     maxPrimeThreshold 12,281 
+74>     
+1,095>  Completed 0.65% found 36 choosing-polynomial 451 sieving 534 extracting-vector 365 matrix 9 TTD 02:33 
+2,081>  Completed 1.62% found 90 choosing-polynomial 888 sieving 1,067 extracting-vector 700 matrix 14 TTD 02:01 
+3,133>  Completed 2.83% found 157 choosing-polynomial 1,311 sieving 1,682 extracting-vector 1,138 matrix 18 TTD 01:45 
+4,170>  Completed 3.87% found 215 choosing-polynomial 1,695 sieving 2,345 extracting-vector 1,540 matrix 22 TTD 01:41 
+5,242>  Completed 4.88% found 271 choosing-polynomial 2,085 sieving 3,008 extracting-vector 1,958 matrix 26 TTD 01:40 
+6,252>  Completed 5.95% found 330 choosing-polynomial 2,475 sieving 3,641 extracting-vector 2,363 matrix 31 TTD 01:37 
+7,296>  Completed 7.28% found 404 choosing-polynomial 2,860 sieving 4,303 extracting-vector 2,780 matrix 39 TTD 01:31 
+8,296>  Completed 8.67% found 481 choosing-polynomial 3,246 sieving 4,916 extracting-vector 3,195 matrix 48 TTD 01:26 
+9,347>  Completed 9.86% found 547 choosing-polynomial 3,631 sieving 5,573 extracting-vector 3,599 matrix 58 TTD 01:24 
+10,372> Completed 10.87% found 603 choosing-polynomial 4,017 sieving 6,227 extracting-vector 4,003 matrix 69 TTD 01:24 
+11,421> Completed 11.96% found 664 choosing-polynomial 4,402 sieving 6,879 extracting-vector 4,422 matrix 82 TTD 01:23 
+12,467> Completed 13.32% found 739 choosing-polynomial 4,789 sieving 7,543 extracting-vector 4,840 matrix 103 TTD 01:20 
+13,497> Completed 14.41% found 800 choosing-polynomial 5,176 sieving 8,184 extracting-vector 5,235 matrix 121 TTD 01:19 
+14,531> Completed 15.69% found 871 choosing-polynomial 5,562 sieving 8,839 extracting-vector 5,683 matrix 145 TTD 01:17 
+15,575> Completed 16.79% found 932 choosing-polynomial 5,949 sieving 9,497 extracting-vector 6,079 matrix 167 TTD 01:16 
+16,593> Completed 18.02% found 1,000 choosing-polynomial 6,339 sieving 10,118 extracting-vector 6,525 matrix 197 TTD 01:15 
+17,600> Completed 19.46% found 1,080 choosing-polynomial 6,729 sieving 10,732 extracting-vector 6,973 matrix 236 TTD 01:12 
+18,623> Completed 20.59% found 1,143 choosing-polynomial 7,130 sieving 11,354 extracting-vector 7,408 matrix 271 TTD 01:11 
+19,635> Completed 21.77% found 1,208 choosing-polynomial 7,517 sieving 11,985 extracting-vector 7,782 matrix 307 TTD 01:10 
+20,663> Completed 22.92% found 1,272 choosing-polynomial 7,903 sieving 12,617 extracting-vector 8,198 matrix 342 TTD 01:09 
+21,703> Completed 23.93% found 1,328 choosing-polynomial 8,292 sieving 13,280 extracting-vector 8,647 matrix 382 TTD 01:08 
+22,734> Completed 25.12% found 1,394 choosing-polynomial 8,684 sieving 13,915 extracting-vector 9,058 matrix 428 TTD 01:07 
+23,748> Completed 26.20% found 1,454 choosing-polynomial 9,076 sieving 14,534 extracting-vector 9,452 matrix 476 TTD 01:06 
+24,772> Completed 27.17% found 1,508 choosing-polynomial 9,464 sieving 15,177 extracting-vector 9,859 matrix 517 TTD 01:06 
+25,773> Completed 28.25% found 1,568 choosing-polynomial 9,853 sieving 15,779 extracting-vector 10,253 matrix 567 TTD 01:05 
+26,777> Completed 28.88% found 1,603 choosing-polynomial 10,235 sieving 16,457 extracting-vector 10,609 matrix 603 TTD 01:05 
+27,777> Completed 29.96% found 1,663 choosing-polynomial 10,630 sieving 17,012 extracting-vector 10,996 matrix 664 TTD 01:04 
+28,780> Completed 31.32% found 1,738 choosing-polynomial 11,019 sieving 17,611 extracting-vector 11,414 matrix 744 TTD 01:02 
+29,809> Completed 32.11% found 1,782 choosing-polynomial 11,407 sieving 18,282 extracting-vector 11,801 matrix 788 TTD 01:02 
+30,839> Completed 33.10% found 1,837 choosing-polynomial 11,796 sieving 18,896 extracting-vector 12,234 matrix 850 TTD 01:02 
+31,841> Completed 33.95% found 1,884 choosing-polynomial 12,185 sieving 19,525 extracting-vector 12,634 matrix 901 TTD 01:01 
+32,871> Completed 35.08% found 1,947 choosing-polynomial 12,574 sieving 20,217 extracting-vector 13,045 matrix 969 TTD 01:00 
+33,875> Completed 36.07% found 2,002 choosing-polynomial 12,957 sieving 20,778 extracting-vector 13,405 matrix 1,049 TTD 00:59 
+34,907> Completed 37.23% found 2,066 choosing-polynomial 13,347 sieving 21,433 extracting-vector 13,815 matrix 1,137 TTD 00:58 
+35,912> Completed 38.16% found 2,118 choosing-polynomial 13,736 sieving 22,043 extracting-vector 14,236 matrix 1,215 TTD 00:58 
+36,922> Completed 39.05% found 2,167 choosing-polynomial 14,124 sieving 22,718 extracting-vector 14,665 matrix 1,277 TTD 00:57 
+37,927> Completed 40.22% found 2,232 choosing-polynomial 14,511 sieving 23,273 extracting-vector 15,074 matrix 1,368 TTD 00:56 
+38,928> Completed 41.37% found 2,296 choosing-polynomial 14,899 sieving 23,898 extracting-vector 15,483 matrix 1,472 TTD 00:55 
+39,960> Completed 42.70% found 2,370 choosing-polynomial 15,287 sieving 24,595 extracting-vector 15,905 matrix 1,598 TTD 00:53 
+40,961> Completed 43.68% found 2,424 choosing-polynomial 15,673 sieving 25,211 extracting-vector 16,290 matrix 1,676 TTD 00:52 
+41,971> Completed 44.76% found 2,484 choosing-polynomial 16,067 sieving 25,767 extracting-vector 16,711 matrix 1,793 TTD 00:51 
+42,972> Completed 45.93% found 2,549 choosing-polynomial 16,453 sieving 26,437 extracting-vector 17,113 matrix 1,928 TTD 00:50 
+43,979> Completed 46.83% found 2,599 choosing-polynomial 16,840 sieving 26,989 extracting-vector 17,491 matrix 2,038 TTD 00:49 
+44,984> Completed 47.89% found 2,658 choosing-polynomial 17,230 sieving 27,606 extracting-vector 17,925 matrix 2,165 TTD 00:48 
+45,993> Completed 48.88% found 2,713 choosing-polynomial 17,619 sieving 28,284 extracting-vector 18,331 matrix 2,286 TTD 00:48 
+47,062> Completed 49.80% found 2,764 choosing-polynomial 18,035 sieving 28,943 extracting-vector 18,769 matrix 2,409 TTD 00:47 
+48,065> Completed 50.60% found 2,808 choosing-polynomial 18,425 sieving 29,512 extracting-vector 19,138 matrix 2,514 TTD 00:46 
+49,073> Completed 51.64% found 2,866 choosing-polynomial 18,810 sieving 30,115 extracting-vector 19,545 matrix 2,649 TTD 00:45 
+50,074> Completed 52.74% found 2,927 choosing-polynomial 19,196 sieving 30,724 extracting-vector 19,977 matrix 2,808 TTD 00:44 
+51,090> Completed 53.53% found 2,971 choosing-polynomial 19,585 sieving 31,381 extracting-vector 20,370 matrix 2,910 TTD 00:44 
+52,100> Completed 54.76% found 3,039 choosing-polynomial 19,972 sieving 31,981 extracting-vector 20,794 matrix 3,100 TTD 00:42 
+53,106> Completed 55.75% found 3,094 choosing-polynomial 20,359 sieving 32,656 extracting-vector 21,240 matrix 3,250 TTD 00:42 
+54,125> Completed 56.65% found 3,144 choosing-polynomial 20,747 sieving 33,289 extracting-vector 21,667 matrix 3,410 TTD 00:41 
+55,142> Completed 57.84% found 3,210 choosing-polynomial 21,133 sieving 33,903 extracting-vector 22,078 matrix 3,609 TTD 00:40 
+56,154> Completed 59.17% found 3,284 choosing-polynomial 21,565 sieving 34,499 extracting-vector 22,505 matrix 3,828 TTD 00:38 
+57,173> Completed 60.20% found 3,341 choosing-polynomial 21,952 sieving 35,089 extracting-vector 22,918 matrix 4,020 TTD 00:37 
+58,197> Completed 61.24% found 3,399 choosing-polynomial 22,337 sieving 35,756 extracting-vector 23,353 matrix 4,226 TTD 00:36 
+59,200> Completed 62.13% found 3,448 choosing-polynomial 22,724 sieving 36,383 extracting-vector 23,752 matrix 4,401 TTD 00:36 
+60,200> Completed 63.24% found 3,510 choosing-polynomial 23,109 sieving 36,984 extracting-vector 24,164 matrix 4,634 TTD 00:34 
+61,271> Completed 64.27% found 3,567 choosing-polynomial 23,540 sieving 37,599 extracting-vector 24,626 matrix 4,818 TTD 00:34 
+62,283> Completed 65.42% found 3,631 choosing-polynomial 23,925 sieving 38,253 extracting-vector 25,053 matrix 5,066 TTD 00:32 
+63,284> Completed 66.51% found 3,691 choosing-polynomial 24,308 sieving 38,880 extracting-vector 25,454 matrix 5,277 TTD 00:31 
+64,292> Completed 67.32% found 3,736 choosing-polynomial 24,694 sieving 39,499 extracting-vector 25,882 matrix 5,480 TTD 00:31 
+65,297> Completed 68.38% found 3,795 choosing-polynomial 25,083 sieving 40,099 extracting-vector 26,293 matrix 5,738 TTD 00:30 
+66,301> Completed 69.57% found 3,861 choosing-polynomial 25,464 sieving 40,719 extracting-vector 26,699 matrix 6,052 TTD 00:28 
+67,335> Completed 70.52% found 3,914 choosing-polynomial 25,897 sieving 41,319 extracting-vector 27,130 matrix 6,249 TTD 00:28 
+68,348> Completed 71.42% found 3,964 choosing-polynomial 26,285 sieving 41,968 extracting-vector 27,544 matrix 6,497 TTD 00:27 
+69,404> Completed 72.78% found 4,039 choosing-polynomial 26,715 sieving 42,562 extracting-vector 27,984 matrix 6,836 TTD 00:25 
+70,409> Completed 73.80% found 4,096 choosing-polynomial 27,099 sieving 43,172 extracting-vector 28,423 matrix 7,115 TTD 00:24 
+71,414> Completed 75.03% found 4,164 choosing-polynomial 27,485 sieving 43,835 extracting-vector 28,830 matrix 7,490 TTD 00:23 
+72,414> Completed 76.04% found 4,220 choosing-polynomial 27,872 sieving 44,424 extracting-vector 29,252 matrix 7,776 TTD 00:22 
+73,457> Completed 77.19% found 4,284 choosing-polynomial 28,304 sieving 45,024 extracting-vector 29,655 matrix 8,102 TTD 00:21 
+74,463> Completed 78.42% found 4,352 choosing-polynomial 28,687 sieving 45,688 extracting-vector 30,041 matrix 8,465 TTD 00:20 
+75,465> Completed 79.44% found 4,409 choosing-polynomial 29,073 sieving 46,304 extracting-vector 30,439 matrix 8,778 TTD 00:19 
+76,477> Completed 80.31% found 4,457 choosing-polynomial 29,485 sieving 46,905 extracting-vector 30,876 matrix 9,056 TTD 00:18 
+77,480> Completed 81.50% found 4,523 choosing-polynomial 29,868 sieving 47,499 extracting-vector 31,294 matrix 9,430 TTD 00:17 
+78,483> Completed 82.52% found 4,580 choosing-polynomial 30,294 sieving 48,093 extracting-vector 31,710 matrix 9,778 TTD 00:16 
+79,510> Completed 83.42% found 4,630 choosing-polynomial 30,681 sieving 48,693 extracting-vector 32,148 matrix 10,059 TTD 00:15 
+80,522> Completed 84.67% found 4,699 choosing-polynomial 31,109 sieving 49,336 extracting-vector 32,567 matrix 10,434 TTD 00:14 
+81,532> Completed 85.86% found 4,765 choosing-polynomial 31,504 sieving 49,932 extracting-vector 32,977 matrix 10,823 TTD 00:13 
+82,540> Completed 86.90% found 4,823 choosing-polynomial 31,888 sieving 50,526 extracting-vector 33,385 matrix 11,217 TTD 00:12 
+83,556> Completed 88.22% found 4,896 choosing-polynomial 32,271 sieving 51,199 extracting-vector 33,820 matrix 11,678 TTD 00:11 
+84,557> Completed 89.33% found 4,958 choosing-polynomial 32,656 sieving 51,800 extracting-vector 34,225 matrix 12,119 TTD 00:10 
+85,622> Completed 90.45% found 5,020 choosing-polynomial 33,080 sieving 52,408 extracting-vector 34,658 matrix 12,579 TTD 00:09 
+86,629> Completed 91.79% found 5,094 choosing-polynomial 33,461 sieving 53,091 extracting-vector 35,064 matrix 13,081 TTD 00:07 
+87,631> Completed 92.94% found 5,158 choosing-polynomial 33,847 sieving 53,692 extracting-vector 35,469 matrix 13,581 TTD 00:06 
+88,648> Completed 94.16% found 5,226 choosing-polynomial 34,271 sieving 54,298 extracting-vector 35,912 matrix 14,074 TTD 00:05 
+89,677> Completed 95.30% found 5,289 choosing-polynomial 34,659 sieving 54,877 extracting-vector 36,346 matrix 14,581 TTD 00:04 
+90,689> Completed 96.20% found 5,339 choosing-polynomial 35,044 sieving 55,541 extracting-vector 36,767 matrix 15,009 TTD 00:03 
+91,696> Completed 97.23% found 5,396 choosing-polynomial 35,469 sieving 56,125 extracting-vector 37,194 matrix 15,473 TTD 00:02 
+92,706> Completed 98.42% found 5,462 choosing-polynomial 35,853 sieving 56,732 extracting-vector 37,626 matrix 16,037 TTD 00:01 
+94,418> 5513 bad luck 546517853286592550872453484352159086279922636939385307 
+94,419> Completed 99.35% found 5,514 choosing-polynomial 36,564 sieving 57,767 extracting-vector 37,986 matrix 17,351 TTD 00:00 
+95,109> Found 5516 bSmooth values 
+95,110> Oh yeah 909354479084453176606653161 
+
+Process finished with exit code 0
