@@ -61,11 +61,11 @@ public enum Logger {
         Duration timeLeft = Duration.ofMillis(timeMillis);
         if(timeLeft.toDays() > 0) {
             return String.format("%d days, %02d:%02d:%02d",
-                    timeLeft.toDays(), timeLeft.toHours(), timeLeft.toMinutesPart(), timeLeft.toSecondsPart());
+                    timeLeft.toDays(), timeLeft.toHours()  % 24, timeLeft.toMinutesPart(), timeLeft.toSecondsPart());
         }
         if(timeLeft.toHours() > 0){
             return String.format("%02d:%02d:%02d",
-                    timeLeft.toHours() % 24, timeLeft.toMinutesPart(), timeLeft.toSecondsPart());
+                    timeLeft.toHours(), timeLeft.toMinutesPart(), timeLeft.toSecondsPart());
         }
         else{
             return String.format("%02d:%02d",

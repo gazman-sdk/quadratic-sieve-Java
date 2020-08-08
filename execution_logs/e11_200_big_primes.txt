@@ -1,0 +1,136 @@
+C:\Users\godil\.jdks\openjdk-14.0.2\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.1\lib\idea_rt.jar=52987:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.1\bin" -Dfile.encoding=UTF-8 -classpath C:\git\tmp\QuadraticSieve\out\production\QuadraticSieve;C:\Users\godil\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\godil\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\godil\.m2\repository\org\junit\jupiter\junit-jupiter\5.4.2\junit-jupiter-5.4.2.jar;C:\Users\godil\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.4.2\junit-jupiter-api-5.4.2.jar;C:\Users\godil\.m2\repository\org\apiguardian\apiguardian-api\1.0.0\apiguardian-api-1.0.0.jar;C:\Users\godil\.m2\repository\org\opentest4j\opentest4j\1.1.1\opentest4j-1.1.1.jar;C:\Users\godil\.m2\repository\org\junit\platform\junit-platform-commons\1.4.2\junit-platform-commons-1.4.2.jar;C:\Users\godil\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.4.2\junit-jupiter-params-5.4.2.jar;C:\Users\godil\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.4.2\junit-jupiter-engine-5.4.2.jar;C:\Users\godil\.m2\repository\org\junit\platform\junit-platform-engine\1.4.2\junit-platform-engine-1.4.2.jar com.gazman.quadratic_sieve.Episode10
+0>      A 470767470877018544702724242863
+7>      B 1807962164574294517180922502163
+7>      N 851129775657980603340669419119962390332167021192373654812669
+7>
+7>      Magic numbers
+7>
+7>      B-bound 256,046
+7>      minPrimeSize 84
+8>      loopsCount 506
+8>      loopsSize 64,011
+129>    Prime-base 11,321
+129>    Max-prime 256,033
+129>    maxPrimeThreshold 256,033
+129>
+1,286>  Completed 0.24% bSmooth-found 26 big-primes-found 0/273 choosing-polynomial 511 sieving 440 extracting-vector 349 matrix 1 TTD 07:48
+2,274>  Completed 0.82% bSmooth-found 88 big-primes-found 0/1,034 choosing-polynomial 855 sieving 1,126 extracting-vector 983 matrix 3 TTD 04:19
+3,276>  Completed 1.54% bSmooth-found 165 big-primes-found 1/1,791 choosing-polynomial 1,169 sieving 1,799 extracting-vector 1,557 matrix 7 TTD 03:20
+4,332>  Completed 1.98% bSmooth-found 207 big-primes-found 6/2,531 choosing-polynomial 1,458 sieving 2,533 extracting-vector 2,049 matrix 9 TTD 03:27
+5,333>  Completed 2.39% bSmooth-found 251 big-primes-found 6/3,271 choosing-polynomial 1,742 sieving 3,287 extracting-vector 2,540 matrix 11 TTD 03:32
+6,357>  Completed 2.96% bSmooth-found 305 big-primes-found 13/4,130 choosing-polynomial 2,030 sieving 4,173 extracting-vector 3,139 matrix 14 TTD 03:24
+7,371>  Completed 3.64% bSmooth-found 375 big-primes-found 16/4,914 choosing-polynomial 2,321 sieving 4,878 extracting-vector 3,685 matrix 17 TTD 03:11
+8,386>  Completed 4.09% bSmooth-found 418 big-primes-found 22/5,730 choosing-polynomial 2,609 sieving 5,554 extracting-vector 4,240 matrix 18 TTD 03:13
+9,528>  Completed 4.78% bSmooth-found 484 big-primes-found 30/6,531 choosing-polynomial 2,988 sieving 6,248 extracting-vector 4,799 matrix 20 TTD 03:07
+10,533> Completed 5.46% bSmooth-found 551 big-primes-found 36/7,282 choosing-polynomial 3,288 sieving 6,913 extracting-vector 5,327 matrix 22 TTD 03:00
+11,539> Completed 6.22% bSmooth-found 623 big-primes-found 46/8,075 choosing-polynomial 3,567 sieving 7,835 extracting-vector 5,883 matrix 25 TTD 02:51
+12,555> Completed 6.95% bSmooth-found 694 big-primes-found 53/8,926 choosing-polynomial 3,856 sieving 8,490 extracting-vector 6,471 matrix 29 TTD 02:46
+13,588> Completed 7.55% bSmooth-found 751 big-primes-found 61/9,641 choosing-polynomial 4,166 sieving 9,208 extracting-vector 6,988 matrix 32 TTD 02:44
+14,596> Completed 8.16% bSmooth-found 808 big-primes-found 70/10,347 choosing-polynomial 4,470 sieving 9,942 extracting-vector 7,489 matrix 35 TTD 02:42
+15,600> Completed 8.82% bSmooth-found 871 big-primes-found 78/11,159 choosing-polynomial 4,769 sieving 10,612 extracting-vector 8,057 matrix 38 TTD 02:39
+16,616> Completed 9.50% bSmooth-found 936 big-primes-found 86/11,924 choosing-polynomial 5,146 sieving 11,335 extracting-vector 8,578 matrix 42 TTD 02:37
+17,727> Completed 10.16% bSmooth-found 996 big-primes-found 97/12,698 choosing-polynomial 5,433 sieving 11,994 extracting-vector 9,100 matrix 46 TTD 02:35
+18,736> Completed 10.90% bSmooth-found 1,063 big-primes-found 109/13,440 choosing-polynomial 5,712 sieving 12,707 extracting-vector 9,623 matrix 51 TTD 02:32
+19,766> Completed 11.54% bSmooth-found 1,121 big-primes-found 120/14,102 choosing-polynomial 5,997 sieving 13,387 extracting-vector 10,104 matrix 55 TTD 02:30
+20,774> Completed 12.22% bSmooth-found 1,182 big-primes-found 132/14,923 choosing-polynomial 6,287 sieving 14,157 extracting-vector 10,679 matrix 60 TTD 02:28
+21,780> Completed 12.78% bSmooth-found 1,233 big-primes-found 142/15,643 choosing-polynomial 6,573 sieving 14,862 extracting-vector 11,160 matrix 64 TTD 02:27
+22,781> Completed 13.38% bSmooth-found 1,284 big-primes-found 155/16,382 choosing-polynomial 6,851 sieving 15,609 extracting-vector 11,685 matrix 69 TTD 02:26
+23,784> Completed 14.19% bSmooth-found 1,360 big-primes-found 166/17,180 choosing-polynomial 7,136 sieving 16,489 extracting-vector 12,230 matrix 76 TTD 02:23
+24,794> Completed 14.91% bSmooth-found 1,421 big-primes-found 183/17,931 choosing-polynomial 7,429 sieving 17,208 extracting-vector 12,748 matrix 82 TTD 02:20
+25,799> Completed 15.55% bSmooth-found 1,475 big-primes-found 197/18,687 choosing-polynomial 7,717 sieving 17,917 extracting-vector 13,260 matrix 88 TTD 02:19
+26,800> Completed 16.30% bSmooth-found 1,540 big-primes-found 213/19,470 choosing-polynomial 8,005 sieving 18,575 extracting-vector 13,797 matrix 96 TTD 02:16
+27,965> Completed 16.97% bSmooth-found 1,594 big-primes-found 231/20,261 choosing-polynomial 8,385 sieving 19,282 extracting-vector 14,381 matrix 102 TTD 02:16
+28,972> Completed 17.74% bSmooth-found 1,650 big-primes-found 258/21,047 choosing-polynomial 8,681 sieving 19,938 extracting-vector 14,927 matrix 110 TTD 02:13
+29,981> Completed 18.55% bSmooth-found 1,718 big-primes-found 277/21,862 choosing-polynomial 8,974 sieving 20,836 extracting-vector 15,486 matrix 119 TTD 02:11
+30,991> Completed 19.29% bSmooth-found 1,783 big-primes-found 292/22,584 choosing-polynomial 9,261 sieving 21,564 extracting-vector 16,004 matrix 127 TTD 02:09
+31,999> Completed 20.18% bSmooth-found 1,848 big-primes-found 322/23,434 choosing-polynomial 9,548 sieving 22,230 extracting-vector 16,592 matrix 136 TTD 02:06
+33,007> Completed 21.01% bSmooth-found 1,914 big-primes-found 346/24,225 choosing-polynomial 9,925 sieving 22,926 extracting-vector 17,148 matrix 146 TTD 02:03
+34,149> Completed 21.64% bSmooth-found 1,965 big-primes-found 362/24,975 choosing-polynomial 10,221 sieving 23,615 extracting-vector 17,676 matrix 154 TTD 02:03
+35,151> Completed 22.24% bSmooth-found 2,015 big-primes-found 377/25,735 choosing-polynomial 10,504 sieving 24,351 extracting-vector 18,197 matrix 162 TTD 02:02
+36,151> Completed 23.03% bSmooth-found 2,077 big-primes-found 400/26,500 choosing-polynomial 10,800 sieving 25,034 extracting-vector 18,741 matrix 172 TTD 02:00
+37,162> Completed 23.64% bSmooth-found 2,124 big-primes-found 418/27,261 choosing-polynomial 11,093 sieving 25,758 extracting-vector 19,277 matrix 180 TTD 01:59
+38,173> Completed 24.38% bSmooth-found 2,185 big-primes-found 437/28,084 choosing-polynomial 11,389 sieving 26,423 extracting-vector 19,849 matrix 190 TTD 01:58
+39,174> Completed 25.18% bSmooth-found 2,248 big-primes-found 460/28,840 choosing-polynomial 11,680 sieving 27,141 extracting-vector 20,387 matrix 202 TTD 01:56
+40,185> Completed 25.89% bSmooth-found 2,306 big-primes-found 478/29,549 choosing-polynomial 11,987 sieving 27,838 extracting-vector 20,902 matrix 213 TTD 01:54
+41,188> Completed 26.85% bSmooth-found 2,373 big-primes-found 515/30,234 choosing-polynomial 12,268 sieving 28,563 extracting-vector 21,387 matrix 226 TTD 01:51
+42,201> Completed 27.63% bSmooth-found 2,433 big-primes-found 539/31,024 choosing-polynomial 12,571 sieving 29,289 extracting-vector 21,928 matrix 239 TTD 01:50
+43,203> Completed 28.60% bSmooth-found 2,509 big-primes-found 567/31,854 choosing-polynomial 12,869 sieving 30,171 extracting-vector 22,525 matrix 255 TTD 01:47
+44,205> Completed 29.35% bSmooth-found 2,567 big-primes-found 590/32,654 choosing-polynomial 13,167 sieving 30,835 extracting-vector 23,074 matrix 268 TTD 01:46
+45,212> Completed 30.13% bSmooth-found 2,633 big-primes-found 608/33,408 choosing-polynomial 13,465 sieving 31,538 extracting-vector 23,617 matrix 281 TTD 01:44
+46,224> Completed 30.89% bSmooth-found 2,687 big-primes-found 635/34,165 choosing-polynomial 13,753 sieving 32,246 extracting-vector 24,149 matrix 294 TTD 01:43
+47,380> Completed 31.80% bSmooth-found 2,758 big-primes-found 662/34,982 choosing-polynomial 14,150 sieving 32,918 extracting-vector 24,708 matrix 311 TTD 01:41
+48,382> Completed 32.54% bSmooth-found 2,802 big-primes-found 698/35,792 choosing-polynomial 14,442 sieving 33,609 extracting-vector 25,275 matrix 325 TTD 01:40
+49,386> Completed 33.48% bSmooth-found 2,873 big-primes-found 728/36,551 choosing-polynomial 14,748 sieving 34,503 extracting-vector 25,784 matrix 342 TTD 01:37
+50,392> Completed 34.30% bSmooth-found 2,932 big-primes-found 757/37,227 choosing-polynomial 15,054 sieving 34,992 extracting-vector 26,268 matrix 359 TTD 01:36
+51,399> Completed 35.04% bSmooth-found 2,984 big-primes-found 785/37,918 choosing-polynomial 15,351 sieving 35,732 extracting-vector 26,757 matrix 373 TTD 01:35
+52,404> Completed 36.08% bSmooth-found 3,057 big-primes-found 823/38,699 choosing-polynomial 15,645 sieving 36,422 extracting-vector 27,312 matrix 394 TTD 01:32
+53,410> Completed 36.86% bSmooth-found 3,107 big-primes-found 857/39,421 choosing-polynomial 15,949 sieving 37,111 extracting-vector 27,848 matrix 414 TTD 01:31
+54,414> Completed 37.60% bSmooth-found 3,159 big-primes-found 885/40,146 choosing-polynomial 16,249 sieving 37,832 extracting-vector 28,369 matrix 430 TTD 01:30
+55,419> Completed 38.57% bSmooth-found 3,232 big-primes-found 916/40,885 choosing-polynomial 16,557 sieving 38,548 extracting-vector 28,913 matrix 451 TTD 01:28
+56,447> Completed 39.37% bSmooth-found 3,290 big-primes-found 944/41,677 choosing-polynomial 16,860 sieving 39,271 extracting-vector 29,489 matrix 468 TTD 01:26
+57,458> Completed 40.29% bSmooth-found 3,353 big-primes-found 980/42,424 choosing-polynomial 17,153 sieving 39,971 extracting-vector 30,015 matrix 489 TTD 01:24
+58,463> Completed 41.17% bSmooth-found 3,416 big-primes-found 1,012/43,076 choosing-polynomial 17,447 sieving 40,707 extracting-vector 30,495 matrix 509 TTD 01:23
+59,472> Completed 42.00% bSmooth-found 3,466 big-primes-found 1,051/43,908 choosing-polynomial 17,738 sieving 41,406 extracting-vector 31,074 matrix 530 TTD 01:21
+60,487> Completed 42.85% bSmooth-found 3,534 big-primes-found 1,074/44,575 choosing-polynomial 18,051 sieving 42,128 extracting-vector 31,572 matrix 550 TTD 01:20
+61,488> Completed 43.79% bSmooth-found 3,593 big-primes-found 1,117/45,349 choosing-polynomial 18,353 sieving 42,839 extracting-vector 32,124 matrix 573 TTD 01:18
+62,494> Completed 44.67% bSmooth-found 3,645 big-primes-found 1,159/46,130 choosing-polynomial 18,644 sieving 43,520 extracting-vector 32,668 matrix 595 TTD 01:17
+63,498> Completed 45.61% bSmooth-found 3,695 big-primes-found 1,210/46,903 choosing-polynomial 18,937 sieving 44,254 extracting-vector 33,200 matrix 621 TTD 01:15
+64,500> Completed 46.49% bSmooth-found 3,756 big-primes-found 1,244/47,650 choosing-polynomial 19,230 sieving 44,948 extracting-vector 33,746 matrix 645 TTD 01:14
+65,567> Completed 47.33% bSmooth-found 3,811 big-primes-found 1,279/48,393 choosing-polynomial 19,534 sieving 45,721 extracting-vector 34,290 matrix 669 TTD 01:12
+66,582> Completed 48.31% bSmooth-found 3,869 big-primes-found 1,327/49,124 choosing-polynomial 19,842 sieving 46,401 extracting-vector 34,817 matrix 697 TTD 01:11
+67,705> Completed 49.29% bSmooth-found 3,929 big-primes-found 1,372/49,847 choosing-polynomial 20,145 sieving 47,240 extracting-vector 35,365 matrix 728 TTD 01:09
+68,708> Completed 50.38% bSmooth-found 4,006 big-primes-found 1,412/50,615 choosing-polynomial 20,445 sieving 47,951 extracting-vector 35,916 matrix 761 TTD 01:07
+69,716> Completed 51.31% bSmooth-found 4,060 big-primes-found 1,458/51,359 choosing-polynomial 20,747 sieving 48,663 extracting-vector 36,449 matrix 789 TTD 01:06
+70,719> Completed 52.28% bSmooth-found 4,121 big-primes-found 1,502/52,112 choosing-polynomial 21,048 sieving 49,361 extracting-vector 37,002 matrix 819 TTD 01:04
+71,761> Completed 53.35% bSmooth-found 4,193 big-primes-found 1,545/52,834 choosing-polynomial 21,374 sieving 50,080 extracting-vector 37,564 matrix 853 TTD 01:02
+72,781> Completed 54.35% bSmooth-found 4,248 big-primes-found 1,597/53,621 choosing-polynomial 21,678 sieving 50,791 extracting-vector 38,112 matrix 885 TTD 01:01
+73,784> Completed 55.24% bSmooth-found 4,299 big-primes-found 1,642/54,391 choosing-polynomial 21,979 sieving 51,493 extracting-vector 38,670 matrix 915 TTD 00:59
+74,784> Completed 56.27% bSmooth-found 4,355 big-primes-found 1,697/55,177 choosing-polynomial 22,284 sieving 52,195 extracting-vector 39,236 matrix 950 TTD 00:58
+75,794> Completed 57.20% bSmooth-found 4,411 big-primes-found 1,741/55,885 choosing-polynomial 22,586 sieving 52,904 extracting-vector 39,754 matrix 983 TTD 00:56
+76,817> Completed 58.23% bSmooth-found 4,476 big-primes-found 1,787/56,640 choosing-polynomial 22,876 sieving 53,646 extracting-vector 40,290 matrix 1,020 TTD 00:55
+77,836> Completed 59.24% bSmooth-found 4,532 big-primes-found 1,839/57,427 choosing-polynomial 23,172 sieving 54,320 extracting-vector 40,830 matrix 1,061 TTD 00:53
+78,849> Completed 60.06% bSmooth-found 4,585 big-primes-found 1,874/58,099 choosing-polynomial 23,471 sieving 55,049 extracting-vector 41,313 matrix 1,091 TTD 00:52
+79,890> Completed 61.06% bSmooth-found 4,641 big-primes-found 1,926/58,812 choosing-polynomial 23,768 sieving 55,797 extracting-vector 41,833 matrix 1,129 TTD 00:50
+80,902> Completed 61.91% bSmooth-found 4,694 big-primes-found 1,964/59,571 choosing-polynomial 24,076 sieving 56,528 extracting-vector 42,397 matrix 1,164 TTD 00:49
+81,903> Completed 62.85% bSmooth-found 4,752 big-primes-found 2,008/60,371 choosing-polynomial 24,372 sieving 57,230 extracting-vector 42,956 matrix 1,204 TTD 00:48
+82,909> Completed 63.84% bSmooth-found 4,821 big-primes-found 2,045/61,112 choosing-polynomial 24,676 sieving 57,926 extracting-vector 43,482 matrix 1,245 TTD 00:46
+83,987> Completed 64.76% bSmooth-found 4,875 big-primes-found 2,090/61,847 choosing-polynomial 24,988 sieving 58,696 extracting-vector 44,035 matrix 1,285 TTD 00:45
+84,992> Completed 65.85% bSmooth-found 4,944 big-primes-found 2,138/62,618 choosing-polynomial 25,283 sieving 59,402 extracting-vector 44,594 matrix 1,337 TTD 00:44
+86,025> Completed 66.86% bSmooth-found 5,008 big-primes-found 2,183/63,382 choosing-polynomial 25,593 sieving 60,133 extracting-vector 45,179 matrix 1,388 TTD 00:42
+87,035> Completed 67.89% bSmooth-found 5,065 big-primes-found 2,237/64,178 choosing-polynomial 25,896 sieving 60,834 extracting-vector 45,743 matrix 1,441 TTD 00:41
+88,120> Completed 69.04% bSmooth-found 5,134 big-primes-found 2,291/64,949 choosing-polynomial 26,227 sieving 61,579 extracting-vector 46,334 matrix 1,504 TTD 00:39
+89,129> Completed 70.02% bSmooth-found 5,187 big-primes-found 2,344/65,709 choosing-polynomial 26,524 sieving 62,306 extracting-vector 46,879 matrix 1,563 TTD 00:38
+90,180> Completed 71.20% bSmooth-found 5,253 big-primes-found 2,404/66,457 choosing-polynomial 26,840 sieving 63,037 extracting-vector 47,440 matrix 1,642 TTD 00:36
+91,235> Completed 72.27% bSmooth-found 5,311 big-primes-found 2,462/67,226 choosing-polynomial 27,157 sieving 63,772 extracting-vector 48,010 matrix 1,720 TTD 00:34
+92,384> Completed 73.49% bSmooth-found 5,378 big-primes-found 2,526/67,985 choosing-polynomial 27,490 sieving 64,547 extracting-vector 48,584 matrix 1,823 TTD 00:33
+93,389> Completed 74.35% bSmooth-found 5,426 big-primes-found 2,570/68,585 choosing-polynomial 27,788 sieving 65,185 extracting-vector 49,189 matrix 1,922 TTD 00:32
+94,396> Completed 75.12% bSmooth-found 5,474 big-primes-found 2,605/69,136 choosing-polynomial 28,054 sieving 66,150 extracting-vector 49,735 matrix 2,035 TTD 00:31
+95,401> Completed 75.92% bSmooth-found 5,514 big-primes-found 2,651/69,722 choosing-polynomial 28,470 sieving 66,778 extracting-vector 50,266 matrix 2,125 TTD 00:30
+96,461> Completed 76.72% bSmooth-found 5,554 big-primes-found 2,697/70,240 choosing-polynomial 28,735 sieving 67,377 extracting-vector 50,744 matrix 2,234 TTD 00:29
+97,553> Completed 77.57% bSmooth-found 5,609 big-primes-found 2,734/70,970 choosing-polynomial 29,066 sieving 68,153 extracting-vector 51,314 matrix 2,353 TTD 00:28
+98,613> Completed 78.70% bSmooth-found 5,681 big-primes-found 2,783/71,696 choosing-polynomial 29,388 sieving 68,917 extracting-vector 51,854 matrix 2,514 TTD 00:26
+99,692> Completed 79.72% bSmooth-found 5,739 big-primes-found 2,835/72,422 choosing-polynomial 29,707 sieving 69,672 extracting-vector 52,398 matrix 2,646 TTD 00:25
+100,761> Completed 80.76% bSmooth-found 5,793 big-primes-found 2,893/73,210 choosing-polynomial 30,032 sieving 70,406 extracting-vector 52,978 matrix 2,810 TTD 00:23
+101,800> Completed 81.94% bSmooth-found 5,852 big-primes-found 2,961/73,947 choosing-polynomial 30,335 sieving 71,167 extracting-vector 53,519 matrix 3,006 TTD 00:22
+102,885> Completed 83.18% bSmooth-found 5,915 big-primes-found 3,031/74,724 choosing-polynomial 30,654 sieving 71,910 extracting-vector 54,095 matrix 3,235 TTD 00:20
+103,962> Completed 84.28% bSmooth-found 5,979 big-primes-found 3,085/75,462 choosing-polynomial 30,955 sieving 72,682 extracting-vector 54,639 matrix 3,445 TTD 00:19
+105,017> Completed 85.39% bSmooth-found 6,042 big-primes-found 3,142/76,222 choosing-polynomial 31,266 sieving 73,448 extracting-vector 55,193 matrix 3,663 TTD 00:17
+106,064> Completed 86.40% bSmooth-found 6,093 big-primes-found 3,199/76,994 choosing-polynomial 31,563 sieving 74,193 extracting-vector 55,762 matrix 3,867 TTD 00:16
+107,117> Completed 87.46% bSmooth-found 6,159 big-primes-found 3,247/77,711 choosing-polynomial 31,868 sieving 74,942 extracting-vector 56,294 matrix 4,085 TTD 00:15
+108,193> Completed 88.66% bSmooth-found 6,227 big-primes-found 3,308/78,491 choosing-polynomial 32,178 sieving 75,685 extracting-vector 56,878 matrix 4,352 TTD 00:13
+109,242> Completed 89.79% bSmooth-found 6,279 big-primes-found 3,378/79,258 choosing-polynomial 32,493 sieving 76,436 extracting-vector 57,435 matrix 4,598 TTD 00:12
+110,332> Completed 90.91% bSmooth-found 6,342 big-primes-found 3,435/79,994 choosing-polynomial 32,810 sieving 77,210 extracting-vector 57,999 matrix 4,885 TTD 00:11
+111,402> Completed 91.90% bSmooth-found 6,399 big-primes-found 3,485/80,733 choosing-polynomial 33,127 sieving 77,951 extracting-vector 58,550 matrix 5,149 TTD 00:09
+112,481> Completed 92.94% bSmooth-found 6,446 big-primes-found 3,550/81,464 choosing-polynomial 33,437 sieving 78,724 extracting-vector 59,083 matrix 5,412 TTD 00:08
+113,547> Completed 94.35% bSmooth-found 6,512 big-primes-found 3,635/82,209 choosing-polynomial 33,749 sieving 79,492 extracting-vector 59,628 matrix 5,763 TTD 00:06
+114,553> Completed 95.39% bSmooth-found 6,573 big-primes-found 3,686/82,917 choosing-polynomial 34,077 sieving 80,242 extracting-vector 60,166 matrix 6,049 TTD 00:05
+115,557> Completed 96.43% bSmooth-found 6,627 big-primes-found 3,744/83,603 choosing-polynomial 34,397 sieving 81,000 extracting-vector 60,690 matrix 6,339 TTD 00:04
+116,558> Completed 97.44% bSmooth-found 6,681 big-primes-found 3,799/84,314 choosing-polynomial 34,608 sieving 81,779 extracting-vector 61,206 matrix 6,610 TTD 00:03
+117,569> Completed 98.35% bSmooth-found 6,727 big-primes-found 3,851/84,949 choosing-polynomial 34,919 sieving 82,292 extracting-vector 61,694 matrix 6,878 TTD 00:01
+118,571> Completed 99.28% bSmooth-found 6,769 big-primes-found 3,908/85,637 choosing-polynomial 35,245 sieving 83,083 extracting-vector 62,216 matrix 7,156 TTD 00:00
+119,573> Completed 100.27% bSmooth-found 6,829 big-primes-found 3,955/86,284 choosing-polynomial 35,453 sieving 83,889 extracting-vector 62,722 matrix 7,433 TTD 00:-1
+120,740> Completed 101.17% bSmooth-found 6,869 big-primes-found 4,012/86,834 choosing-polynomial 35,782 sieving 84,726 extracting-vector 63,126 matrix 8,078 TTD 00:-2
+126,315> Found 10887 bSmooth values
+126,316> Oh yeah 470767470877018544702724242863
+
+Process finished with exit code 0
