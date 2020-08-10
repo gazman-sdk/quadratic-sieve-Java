@@ -7,9 +7,9 @@ public class Wheel {
     private final long prime;
     private final double log;
 
-    public Wheel(BigInteger prime, long startingPosition) {
+    public Wheel(long prime, long startingPosition) {
         this.startingPosition = startingPosition;
-        this.prime = prime.longValue();
+        this.prime = prime;
         log = Math.log(this.prime);
     }
 

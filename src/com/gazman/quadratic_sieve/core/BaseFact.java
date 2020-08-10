@@ -1,4 +1,4 @@
-package com.gazman.quadratic_sieve;
+package com.gazman.quadratic_sieve.core;
 
 import com.gazman.quadratic_sieve.logger.Logger;
 

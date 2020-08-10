@@ -1,11 +1,10 @@
 package com.gazman.quadratic_sieve.primes;
 
 import com.gazman.quadratic_sieve.data.BSmooth;
-import com.gazman.quadratic_sieve.matrix.GaussianEliminationMatrix4;
+import com.gazman.quadratic_sieve.data.DataQueue;
 
 import java.math.BigInteger;
 import java.util.HashMap;
-import java.util.function.Function;
 
 public class BigPrimes {
 
@@ -23,7 +22,7 @@ public class BigPrimes {
         return usedBigPrimesCount;
     }
 
-    public boolean addBigPrime(BSmooth bSmooth, BigInteger bigPrime, GaussianEliminationMatrix4 matrix) {
+    public boolean addBigPrime(BSmooth bSmooth, BigInteger bigPrime) {
         totalBigPrimes++;
         BSmooth currentValue = bigPrimesMap.putIfAbsent(bigPrime, bSmooth);
         if (currentValue == null) {
@@ -31,7 +30,11 @@ public class BigPrimes {
         }
 
         xor(bSmooth, currentValue);
-        matrix.add(bSmooth);
+        try {
+            DataQueue.bSmooths.put(bSmooth);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         usedBigPrimesCount++;
 
 
@@ -42,5 +45,6 @@ public class BigPrimes {
         bSmooth.a = currentValue.getA().multiply(bSmooth.getA());
         bSmooth.b = currentValue.getB().multiply(bSmooth.getB());
         bSmooth.vector.xor(currentValue.vector);
+        bSmooth.originalVector.xor(currentValue.vector);
     }
 }

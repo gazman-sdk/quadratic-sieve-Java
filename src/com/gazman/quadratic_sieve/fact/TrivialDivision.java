@@ -1,6 +1,6 @@
 package com.gazman.quadratic_sieve.fact;
 
-import com.gazman.quadratic_sieve.BaseFact;
+import com.gazman.quadratic_sieve.core.BaseFact;
 
 import java.math.BigInteger;
 

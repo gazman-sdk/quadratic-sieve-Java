@@ -1,15 +1,22 @@
 package com.gazman.quadratic_sieve.data;
 
+import com.gazman.quadratic_sieve.wheel.Wheel;
+
 import java.math.BigInteger;
+import java.util.List;
 
 public class PolynomialData {
-    public final BigInteger a,b,N;
+    public final BigInteger a;
+    public final BigInteger b;
+    public final BigInteger N;
+    public final List<Wheel> wheels;
 
 
-    public PolynomialData(BigInteger a, BigInteger b, BigInteger N) {
+    public PolynomialData(BigInteger a, BigInteger b, BigInteger N, List<Wheel> wheels) {
         this.a = a;
         this.b = b;
         this.N = N;
+        this.wheels = wheels;
     }
 
 

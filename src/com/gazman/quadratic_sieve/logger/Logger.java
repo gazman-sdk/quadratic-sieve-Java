@@ -3,10 +3,10 @@ package com.gazman.quadratic_sieve.logger;
 import java.time.Duration;
 
 public enum Logger {
-    EXTRACTING_VECTOR,
+    POLY_MINER,
+    SIEVER,
+    VECTOR_EXTRACTOR,
     MATRIX,
-    SIEVING,
-    CHOOSING_POLYNOMIAL
     ;
 
     private static final long startTime = System.nanoTime();
