@@ -1,6 +1,7 @@
 package com.gazman.quadratic_sieve.logger;
 
 import java.time.Duration;
+import java.util.concurrent.atomic.AtomicLong;
 
 public enum Logger {
     POLY_MINER,
@@ -11,20 +12,20 @@ public enum Logger {
 
     private static final long startTime = System.nanoTime();
     private static boolean logsAvailable = true;
-    private long startTimeNano;
-    private long totalTimeNano;
+    private final ThreadLocal<Long> startTimeNano = ThreadLocal.withInitial(System::nanoTime);
+    private final AtomicLong totalTimeNano = new AtomicLong();
     private final String formattedName = name().toLowerCase().replaceAll("_", "-");
 
     public void start(){
-        startTimeNano = System.nanoTime();
+        startTimeNano.set(System.nanoTime());
     }
 
     public void end(){
-        totalTimeNano += System.nanoTime() - startTimeNano;
+        totalTimeNano.addAndGet(System.nanoTime() - startTimeNano.get());
     }
 
     public long getTotalTimeNano() {
-        return totalTimeNano;
+        return totalTimeNano.get();
     }
 
     public static void setLogsAvailable(boolean logsAvailable) {

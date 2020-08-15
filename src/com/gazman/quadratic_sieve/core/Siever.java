@@ -1,5 +1,6 @@
 package com.gazman.quadratic_sieve.core;
 
+import com.gazman.quadratic_sieve.core.poly.WheelPool;
 import com.gazman.quadratic_sieve.data.*;
 import com.gazman.quadratic_sieve.logger.Logger;
 import com.gazman.quadratic_sieve.wheel.Wheel;
@@ -12,14 +13,15 @@ import java.math.BigInteger;
 public class Siever implements Runnable {
 
     public void start() {
-        new Thread(this).start();
+        new Thread(this,"Siever").start();
     }
 
     @Override
     public void run() {
-        double[] logs = new double[MagicNumbers.instance.loopsSize.intValue()];
-        double maxPrime = PrimeBase.instance.maxPrime.doubleValue();
         BigInteger loopsSize = MagicNumbers.instance.loopsSize;
+        double[] logs = new double[loopsSize.intValue()];
+        double maxPrime = PrimeBase.instance.maxPrime.doubleValue();
+        double deltaLog = Math.log(maxPrime * MagicNumbers.instance.maxPrimeThreshold);
         //noinspection InfiniteLoopStatement
         while (true) {
             PolynomialData polynomialData;
@@ -34,8 +36,11 @@ public class Siever implements Runnable {
             BigInteger c = polynomialData.getC();
 
             for (int j = 0; j < MagicNumbers.instance.loopsCount; j++) {
-                double baseLog = Math.log(polynomialData.getSievingValue(x, c).doubleValue()) -
-                        Math.log(maxPrime * MagicNumbers.instance.maxPrimeThreshold);
+                double baseValue = polynomialData.getSievingValue(x, c).doubleValue();
+                if (baseValue < 0) {
+                    baseValue *= -1;
+                }
+                double baseLog = Math.log(baseValue) - deltaLog;
                 for (Wheel wheel : polynomialData.wheels) {
                     wheel.update(logs);
                 }
@@ -53,6 +58,9 @@ public class Siever implements Runnable {
                 }
 
                 x = x.add(loopsSize);
+            }
+            for (Wheel wheel : polynomialData.wheels) {
+                WheelPool.instance.put(wheel);
             }
             Logger.SIEVER.end();
         }

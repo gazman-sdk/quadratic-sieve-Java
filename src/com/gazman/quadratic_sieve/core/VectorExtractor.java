@@ -1,6 +1,7 @@
 package com.gazman.quadratic_sieve.core;
 
 import com.gazman.quadratic_sieve.data.*;
+import com.gazman.quadratic_sieve.core.matrix.*;
 import com.gazman.quadratic_sieve.logger.Logger;
 import com.gazman.quadratic_sieve.primes.BigPrimes;
 
@@ -15,13 +16,12 @@ import static com.gazman.quadratic_sieve.logger.Logger.log;
  */
 public class VectorExtractor implements Runnable{
 
-    public static final VectorExtractor instance = new VectorExtractor();
     private final VectorData bSmoothVectorData = new VectorData(null, null);
-    private final long startTimeNano = System.nanoTime();
-    private long lastUpdateNano;
+    private static final long startTimeNano = System.nanoTime();
+    private static long lastUpdateNano;
 
     public void start() {
-        new Thread(this).start();
+        new Thread(this, "VectorExtractor").start();
     }
 
     @Override
@@ -33,7 +33,6 @@ public class VectorExtractor implements Runnable{
             } catch (InterruptedException e) {
                 return;
             }
-
 
             Logger.VECTOR_EXTRACTOR.start();
             VectorData vectorData = extractVector(workData.polynomialData.getSievingValue(workData.localX, workData.c));
@@ -56,7 +55,7 @@ public class VectorExtractor implements Runnable{
         }
     }
 
-    private void logProgress() {
+    private static void logProgress() {
         if (System.nanoTime() - lastUpdateNano > 1_000_000_000) {
             lastUpdateNano = System.nanoTime();
             int bSmoothFound = Matrix.instance.getSize();
@@ -76,13 +75,24 @@ public class VectorExtractor implements Runnable{
     }
 
     private VectorData extractVector(BigInteger value) {
-        BitSet vector = new BitSet();
-        for (int i = 0; i < PrimeBase.instance.primeBase.size(); i++) {
-            BigInteger p = BigInteger.valueOf(PrimeBase.instance.primeBase.get(i));
-            int count = 0;
-            if (value.mod(p).equals(BigInteger.ZERO)) {
-                while (value.mod(p).equals(BigInteger.ZERO)) {
-                    value = value.divide(p);
+        BitSet vector = new BitSet(PrimeBase.instance.primeBase.size());
+        if(value.compareTo(BigInteger.ZERO) < 0){
+            vector.set(0);
+            value = value.abs();
+        }
+        for (int i = 1; i < PrimeBase.instance.primeBase.size(); i++) {
+            BigInteger p = PrimeBase.instance.primeBaseBigInteger.get(i);
+            int count = 1;
+
+            BigInteger[] results = value.divideAndRemainder(p);
+            if (results[1].equals(BigInteger.ZERO)) {
+                value = results[0];
+                while (true) {
+                    results = value.divideAndRemainder(p);
+                    if(!results[1].equals(BigInteger.ZERO)){
+                        break;
+                    }
+                    value = results[0];
                     count++;
                 }
                 vector.set(i, count % 2 == 1);

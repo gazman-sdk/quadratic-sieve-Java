@@ -1,4 +1,4 @@
-package com.gazman.quadratic_sieve.matrix;
+package com.gazman.quadratic_sieve.core.matrix;
 
 import com.gazman.quadratic_sieve.data.BSmooth;
 import com.gazman.quadratic_sieve.data.PrimeBase;
@@ -16,15 +16,20 @@ public class GaussianEliminationMatrix {
     public void add(BSmooth bSmooth) {
         bSmoothList.add(bSmooth);
         addToSolutionMatrix();
+        int bSmoothIndex = bSmoothList.size() - 1;
 
         for (int i = bSmooth.vector.previousSetBit(bSmooth.vector.size()); i >= 0; i = bSmooth.vector.previousSetBit(i - 1)) {
             Integer eliminatorIndex = eliminatorsMap.get(i);
             if (eliminatorIndex != null) {
-                xor(eliminatorIndex, bSmoothList.size() - 1);
+                xor(eliminatorIndex, bSmoothIndex);
+            }
+            else{
+                eliminatorsMap.put(i, bSmoothIndex);
+                return;
             }
         }
 
-        addEliminator(bSmoothList.size() - 1);
+        extractSolution(solutionMatrix.size() - 1, this.N);
     }
 
     public int getSize() {
@@ -35,16 +40,6 @@ public class GaussianEliminationMatrix {
         BitSet row = new BitSet(bSmoothList.size());
         row.set(bSmoothList.size() - 1);
         solutionMatrix.add(row);
-    }
-
-    private void addEliminator(int eliminatorIndex) {
-        BSmooth eliminator = bSmoothList.get(eliminatorIndex);
-        if (eliminator.vector.isEmpty()) {
-            extractSolution(solutionMatrix.size() - 1, this.N);
-        } else {
-            int eliminatingBitIndex = eliminator.vector.previousSetBit(eliminator.vector.size());
-            eliminatorsMap.put(eliminatingBitIndex, bSmoothList.indexOf(eliminator));
-        }
     }
 
     private void xor(int eliminatorIndex, Integer bSmoothIndex) {

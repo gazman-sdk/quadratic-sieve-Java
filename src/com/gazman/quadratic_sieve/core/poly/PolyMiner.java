@@ -1,4 +1,4 @@
-package com.gazman.quadratic_sieve.core;
+package com.gazman.quadratic_sieve.core.poly;
 
 import com.gazman.quadratic_sieve.data.DataQueue;
 import com.gazman.quadratic_sieve.data.MagicNumbers;
@@ -22,7 +22,7 @@ public class PolyMiner implements Runnable {
 
     public void start(BigInteger N) {
         this.N = N;
-        new Thread(this).start();
+        new Thread(this, "PolyMiner").start();
     }
 
     @Override
@@ -63,8 +63,8 @@ public class PolyMiner implements Runnable {
             BigInteger root = MathUtils.modSqrt(N, prime);
             BigInteger p1 = root.subtract(b).multiply(a.modInverse(prime)).mod(prime);
             BigInteger p2 = prime.subtract(root).subtract(b).multiply(a.modInverse(prime)).mod(prime);
-            wheels.add(new Wheel(p, p1.intValue()));
-            wheels.add(new Wheel(p, p2.intValue()));
+            wheels.add(WheelPool.instance.get(p, p1.intValue()));
+            wheels.add(WheelPool.instance.get(p, p2.intValue()));
         }
 
         return wheels;

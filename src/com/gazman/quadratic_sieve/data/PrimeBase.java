@@ -17,17 +17,21 @@ public class PrimeBase {
     public static final PrimeBase instance = new PrimeBase();
 
     public final List<Integer> primeBase = new ArrayList<>();
+    public final List<BigInteger> primeBaseBigInteger = new ArrayList<>();
     public final Map<BigInteger, Integer> primeBaseMap = new HashMap<>();
     public Integer maxPrime;
     public BigInteger maxPrimeBigInteger;
 
     public void build(BigInteger N){
         List<Integer> primes = SieveOfEratosthenes.findPrimes(MagicNumbers.instance.B);
+        primeBase.add(-1);
+        primeBaseBigInteger.add(BigInteger.valueOf(-1));
         for (int prime : primes) {
             BigInteger p = BigInteger.valueOf(prime);
             if (MathUtils.isRootInQuadraticResidues(N, p)) {
                 primeBaseMap.put(p, primeBase.size());
                 primeBase.add(prime);
+                primeBaseBigInteger.add(BigInteger.valueOf(prime));
             }
         }
 

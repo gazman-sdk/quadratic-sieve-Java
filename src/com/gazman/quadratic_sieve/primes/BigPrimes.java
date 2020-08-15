@@ -14,15 +14,15 @@ public class BigPrimes {
     private int totalBigPrimes;
     private int usedBigPrimesCount;
 
-    public int getTotalBigPrimes() {
+    public synchronized int getTotalBigPrimes() {
         return totalBigPrimes;
     }
 
-    public int getUsedBigPrimesCount() {
+    public synchronized int getUsedBigPrimesCount() {
         return usedBigPrimesCount;
     }
 
-    public boolean addBigPrime(BSmooth bSmooth, BigInteger bigPrime) {
+    public synchronized boolean addBigPrime(BSmooth bSmooth, BigInteger bigPrime) {
         totalBigPrimes++;
         BSmooth currentValue = bigPrimesMap.putIfAbsent(bigPrime, bSmooth);
         if (currentValue == null) {

@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.Random;
 
 public abstract class BaseFact {
-    private final Random random = new Random(123);
+    private final Random random = new Random(1223);
 
     protected void start(int bitLength) {
         bitLength /=2;

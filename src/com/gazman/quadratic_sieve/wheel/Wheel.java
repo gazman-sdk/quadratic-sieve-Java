@@ -1,13 +1,11 @@
 package com.gazman.quadratic_sieve.wheel;
 
-import java.math.BigInteger;
-
 public class Wheel {
     private long startingPosition;
-    private final long prime;
-    private final double log;
+    private long prime;
+    private double log;
 
-    public Wheel(long prime, long startingPosition) {
+    public void init(long prime, long startingPosition) {
         this.startingPosition = startingPosition;
         this.prime = prime;
         log = Math.log(this.prime);
