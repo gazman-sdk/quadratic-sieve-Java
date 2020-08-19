@@ -10,12 +10,12 @@ public class WheelPool {
 
     public static final WheelPool instance = new WheelPool();
 
-    public Wheel get(long prime, long startingPosition) {
+    public Wheel get(long prime, long startingPosition, int primeId) {
         Wheel wheel = wheels.poll();
         if (wheel == null) {
             wheel = new Wheel();
         }
-        wheel.init(prime, startingPosition);
+        wheel.init(prime, startingPosition, primeId);
         return wheel;
     }
 

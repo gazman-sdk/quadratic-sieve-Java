@@ -8,6 +8,7 @@ public enum Logger {
     SIEVER,
     VECTOR_EXTRACTOR,
     MATRIX,
+    TEST,
     ;
 
     private static final long startTime = System.nanoTime();

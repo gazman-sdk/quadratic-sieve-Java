@@ -4,13 +4,13 @@ import java.math.BigInteger;
 import java.util.BitSet;
 
 public class BSmooth {
-    private final BigInteger localX;
+    private final long localX;
     private final PolynomialData polynomialData;
     public BigInteger a, b;
     public final BitSet originalVector;
     public BitSet vector;
 
-    public BSmooth(PolynomialData polynomialData, BigInteger localX, BitSet vector) {
+    public BSmooth(PolynomialData polynomialData, long localX, BitSet vector) {
         this.vector = vector;
         this.polynomialData = polynomialData;
         this.localX = localX;

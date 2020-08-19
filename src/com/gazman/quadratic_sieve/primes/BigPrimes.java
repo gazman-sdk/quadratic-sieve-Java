@@ -3,14 +3,13 @@ package com.gazman.quadratic_sieve.primes;
 import com.gazman.quadratic_sieve.data.BSmooth;
 import com.gazman.quadratic_sieve.data.DataQueue;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 
 public class BigPrimes {
 
     public static final BigPrimes instance = new BigPrimes();
 
-    private final HashMap<BigInteger, BSmooth> bigPrimesMap = new HashMap<>();
+    private final HashMap<Long, BSmooth> bigPrimesMap = new HashMap<>();
     private int totalBigPrimes;
     private int usedBigPrimesCount;
 
@@ -22,7 +21,7 @@ public class BigPrimes {
         return usedBigPrimesCount;
     }
 
-    public synchronized boolean addBigPrime(BSmooth bSmooth, BigInteger bigPrime) {
+    public synchronized boolean addBigPrime(BSmooth bSmooth, long bigPrime) {
         totalBigPrimes++;
         BSmooth currentValue = bigPrimesMap.putIfAbsent(bigPrime, bSmooth);
         if (currentValue == null) {

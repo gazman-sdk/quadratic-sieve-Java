@@ -5,6 +5,5 @@ import java.util.concurrent.BlockingQueue;
 
 public class DataQueue {
     public static BlockingQueue<PolynomialData> polynomialData = new ArrayBlockingQueue<>(4);
-    public static BlockingQueue<VectorWorkData> vectorWorkData = new ArrayBlockingQueue<>(20);
-    public static BlockingQueue<BSmooth> bSmooths = new ArrayBlockingQueue<>(20);
+    public static BlockingQueue<BSmooth> bSmooths = new ArrayBlockingQueue<>(1000);
 }

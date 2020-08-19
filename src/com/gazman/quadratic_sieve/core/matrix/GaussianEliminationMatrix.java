@@ -66,6 +66,10 @@ public class GaussianEliminationMatrix {
                 vectorParts[i]++;
             }
 
+            if(nextB.compareTo(BigInteger.ZERO) < 0){
+                Logger.log("Error extracting solution");
+                return;
+            }
             b = nextB.sqrt().multiply(b).mod(N);
         }
 

@@ -10,6 +10,7 @@ public class PolynomialData {
     public final BigInteger b;
     public final BigInteger N;
     public final List<Wheel> wheels;
+    public final BigInteger c;
 
 
     public PolynomialData(BigInteger a, BigInteger b, BigInteger N, List<Wheel> wheels) {
@@ -17,24 +18,25 @@ public class PolynomialData {
         this.b = b;
         this.N = N;
         this.wheels = wheels;
+        c = b.pow(2).subtract(N).divide(a);
     }
 
-
-    public BigInteger getC(){
-        BigInteger ac = b.pow(2).subtract(N);
-        return ac.divide(a);
+    public int getLoopsSize() {
+        return b.pow(2).subtract(a.multiply(c)).sqrt().add(b).divide(a).multiply(BigInteger.TWO).intValue() /
+                MagicNumbers.instance.loopsCount;
     }
 
-    public BigInteger getSievingValue(BigInteger position, BigInteger c){
-        return a.multiply(position.pow(2)).add(b.multiply(position).multiply(BigInteger.TWO).add(c));
+    public BigInteger getSievingValue(long localX) {
+        BigInteger x = BigInteger.valueOf(localX);
+        return a.multiply(x.pow(2)).add(b.multiply(x).multiply(BigInteger.TWO).add(c));
     }
 
-    public BigInteger getA(BigInteger localX){
-        return a.multiply(localX).add(b);
+    public BigInteger getA(long localX) {
+        return a.multiply(BigInteger.valueOf(localX)).add(b);
     }
 
-    public BigInteger getB(BigInteger localX){
-        return a.multiply(localX).add(b).pow(2).subtract(N);
+    public BigInteger getB(long localX) {
+        return getA(localX).pow(2).subtract(N);
     }
 
 }
