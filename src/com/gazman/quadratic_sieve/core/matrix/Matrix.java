@@ -20,15 +20,14 @@ public class Matrix implements Runnable{
         new Thread(this, "Matrix").start();
     }
 
-    @SuppressWarnings("InfiniteLoopStatement")
     @Override
     public void run() {
         while (true){
-            BSmooth bSmooth = null;
+            BSmooth bSmooth;
             try {
                 bSmooth = DataQueue.bSmooths.take();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                return;
             }
             Logger.MATRIX.start();
             matrix.add(bSmooth);

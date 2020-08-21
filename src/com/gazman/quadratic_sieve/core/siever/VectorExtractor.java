@@ -4,7 +4,6 @@ import com.gazman.quadratic_sieve.core.matrix.Matrix;
 import com.gazman.quadratic_sieve.data.*;
 import com.gazman.quadratic_sieve.logger.Logger;
 import com.gazman.quadratic_sieve.primes.BigPrimes;
-import com.gazman.quadratic_sieve.wheel.Wheel;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -18,118 +17,34 @@ import static com.gazman.quadratic_sieve.logger.Logger.log;
  */
 public class VectorExtractor {
 
+    private final VectorData bSmoothVectorData = new VectorData(null, null);
     private static final long startTimeNano = System.nanoTime();
     private static long lastUpdateNano;
-    private static final double MAX_REMINDER = Math.log(Long.MAX_VALUE);
-    private static final double MINIMUM_LOG = 0.001;
 
+    public void extract(PolynomialData polynomialData, List<BSmoothData> bSmoothList) {
+        for (BSmoothData bSmoothData : bSmoothList) {
+            extract(polynomialData, bSmoothData.localX);
+        }
+    }
 
-    public void extract(PolynomialData polynomialData, List<BSmoothData> bSmoothDataList) {
+    public void extract(PolynomialData polynomialData, long localX) {
         Logger.VECTOR_EXTRACTOR.start();
-        List<Wheel> wheels = polynomialData.wheels;
-        calculateReminder(polynomialData, bSmoothDataList);
-
-        Logger.TEST.start();
-        for (Wheel wheel : wheels) {
-            wheel.update(bSmoothDataList);
-        }
-        Logger.TEST.end();
-
-        for (BSmoothData bSmoothData : bSmoothDataList) {
-            extract(polynomialData, bSmoothData);
-        }
+        VectorData vectorData = extractVector(polynomialData.getSievingValue(localX));
         Logger.VECTOR_EXTRACTOR.end();
-    }
+        if (vectorData == bSmoothVectorData) {
+            BSmooth bSmooth = new BSmooth(polynomialData, localX, vectorData.vector);
+            try {
+                DataQueue.bSmooths.put(bSmooth);
+            } catch (InterruptedException e) {
 
-    private void extract(PolynomialData polynomialData, BSmoothData bSmoothData) {
-        long reminder = bSmoothData.reminder;
-        if (reminder == -1) {
-            return;
-        }
-        BitSet vector = bSmoothData.vector;
-
-        if(bSmoothData.negative){
-            vector.set(0);
-        }
-
-        List<Integer> primeBase = PrimeBase.instance.primeBase;
-        if (reminder == 0) {
-            addBSmooth(polynomialData, bSmoothData, vector);
-            return;
-        }
-        reminder = calculatePrimePowers(reminder, vector, primeBase);
-        if (reminder == 1) {
-            addBSmooth(polynomialData, bSmoothData, vector);
-            return;
-        }
-        reminder = extractSmallPrimes(reminder, vector, primeBase);
-        if(reminder == 1){
-            addBSmooth(polynomialData, bSmoothData, vector);
-            return;
-        }
-        if (!isPrime(reminder)) {
-            return;
-        }
-
-        if (BigPrimes.instance.addBigPrime(new BSmooth(polynomialData, bSmoothData.localX, vector), reminder)) {
+                return;
+            }
             logProgress();
-        }
-    }
+        } else if (vectorData != null) {
+            BSmooth bSmooth = new BSmooth(polynomialData, localX, vectorData.vector);
 
-    private long extractSmallPrimes(long reminder, BitSet vector, List<Integer> primeBase) {
-        for (int i = 1; i < primeBase.size(); i++) {
-            int prime = primeBase.get(i);
-            if(prime >= MagicNumbers.instance.minPrimeSize){
-                return reminder;
-            }
-            int count = 0;
-            while (reminder % prime == 0){
-                reminder /= prime;
-                count++;
-            }
-            if(count % 2 == 1){
-                vector.set(i);
-            }
-        }
-        return reminder;
-    }
-
-    private void addBSmooth(PolynomialData polynomialData, BSmoothData bSmoothData, BitSet vector) {
-        try {
-            DataQueue.bSmooths.put(new BSmooth(polynomialData, bSmoothData.localX, vector));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        logProgress();
-    }
-
-    private long calculatePrimePowers(long reminder, BitSet vector, List<Integer> primeBase) {
-        for (int i = vector.previousSetBit(vector.size()); i >= 0; i = vector.previousSetBit(i - 1)) {
-            int prime = primeBase.get(i);
-            int extras = 0;
-            while (reminder % prime == 0) {
-                reminder = reminder / prime;
-                extras++;
-            }
-            if (extras % 2 == 1) {
-                vector.clear(i);
-            }
-        }
-        return reminder;
-    }
-
-    private void calculateReminder(PolynomialData polynomialData, List<BSmoothData> bSmoothDataList) {
-        for (BSmoothData bSmoothData : bSmoothDataList) {
-            BigInteger b = polynomialData.getSievingValue(bSmoothData.localX);
-            bSmoothData.negative = b.compareTo(BigInteger.ZERO) < 0;
-            double trueLog = Math.log(b.doubleValue());
-            double remainingLog = trueLog - bSmoothData.log;
-            if (remainingLog < MINIMUM_LOG) {
-                bSmoothData.reminder = 0;
-            } else if (remainingLog < MAX_REMINDER) {
-                bSmoothData.reminder = Math.round(Math.exp(remainingLog));
-            } else {
-                bSmoothData.reminder = -1;
+            if (BigPrimes.instance.addBigPrime(bSmooth, vectorData.bigPrime.longValue())) {
+                logProgress();
             }
         }
 
@@ -152,6 +67,62 @@ public class VectorExtractor {
                     Arrays.asList(Logger.values()),
                     "TTD", Logger.formatTime((long) ((totalBSmoothValues - bSmoothFound) / speedInMilliseconds)));
         }
+    }
+
+    private VectorData extractVector(BigInteger value) {
+        BitSet vector = new BitSet(PrimeBase.instance.primeBase.size());
+        if(value.compareTo(BigInteger.ZERO) < 0){
+            vector.set(0);
+            value = value.abs();
+        }
+        value = extractPower2(value, vector);
+        for (int i = 2; i < PrimeBase.instance.primeBase.size(); i++) {
+            BigInteger p = PrimeBase.instance.primeBaseBigInteger.get(i);
+            int count = 1;
+
+            BigInteger[] results = value.divideAndRemainder(p);
+            if (results[1].equals(BigInteger.ZERO)) {
+                value = results[0];
+                while (true) {
+                    results = value.divideAndRemainder(p);
+                    if(!results[1].equals(BigInteger.ZERO)){
+                        break;
+                    }
+                    value = results[0];
+                    count++;
+                }
+                if(count % 2 == 1) {
+                    vector.set(i);
+                }
+
+                if (value.equals(BigInteger.ONE)) {
+                    bSmoothVectorData.vector = vector;
+                    return bSmoothVectorData;
+                } else if (value.compareTo(PrimeBase.instance.maxPrimeBigInteger) <= 0) {
+                    int index = PrimeBase.instance.primeBaseMap.get(value);
+                    vector.set(index);
+                    bSmoothVectorData.vector = vector;
+                    return bSmoothVectorData;
+                } else if (value.bitLength() / 2 < p.bitLength()) {
+                    if (isPrime(value.longValue())) {
+                        return new VectorData(vector, value);
+                    }
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    private BigInteger extractPower2(BigInteger value, BitSet vector) {
+        int lowestSetBit = value.getLowestSetBit();
+        if(lowestSetBit > 0){
+            value = value.shiftRight(lowestSetBit);
+            if(lowestSetBit % 2 == 1){
+                vector.set(1);
+            }
+        }
+        return value;
     }
 
     private boolean isPrime(long n) {

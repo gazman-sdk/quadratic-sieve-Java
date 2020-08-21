@@ -8,28 +8,27 @@ import static com.gazman.quadratic_sieve.logger.Logger.log;
 
 public class MagicNumbers {
 
-
-    public int B;
     public int minPrimeSize;
     public int loopsCount;
-    public BigInteger loopsSize;
+    public int loopsSize;
     public int maxPrimeThreshold;
+    public int primeBaseSize;
 
     public static final MagicNumbers instance = new MagicNumbers();
 
-    public void init(BigInteger N){
-        B = (int) (234.375 * Math.pow(1.0356, N.bitLength()));
-        minPrimeSize = (int) Math.pow(Math.log(N.doubleValue()), 0.9);
-        loopsCount = (int) (Math.sqrt(B));
-        loopsSize = BigInteger.valueOf(B / 4);
-        log("B-bound", Logger.formatLong(B));
-        log("minPrimeSize", Logger.formatLong(minPrimeSize));
-        log("loopsCount", Logger.formatLong(loopsCount));
-        log("loopsSize", Logger.formatLong(loopsSize.longValue()));
+    public void initN(BigInteger N) {
+        primeBaseSize = (int) (6.71 * Math.pow(1.0356, N.bitLength()) );
     }
 
-    public void initMaxPrimeThreshold(int maxPrime){
-        maxPrimeThreshold = (int) (maxPrime * 0.1);
+    public void init() {
+        maxPrimeThreshold = (int) (primeBaseSize * 1.01);
+        minPrimeSize = (int) (primeBaseSize * 0.008);
+        loopsSize = primeBaseSize * 5;
+        loopsCount = (int) (Math.sqrt(loopsSize));
+        log("primeBaseSize", primeBaseSize);
+        log("minPrimeSize", Logger.formatLong(minPrimeSize));
+        log("loopsCount", Logger.formatLong(loopsCount));
+        log("loopsSize", Logger.formatLong(loopsSize));
         log("maxPrimeThreshold", maxPrimeThreshold);
     }
 }

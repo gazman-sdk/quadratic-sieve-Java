@@ -1,6 +1,6 @@
 package com.gazman.quadratic_sieve;
 
-import com.gazman.quadratic_sieve.core.*;
+import com.gazman.quadratic_sieve.core.BaseFact;
 import com.gazman.quadratic_sieve.core.matrix.Matrix;
 import com.gazman.quadratic_sieve.core.poly.PolyMiner;
 import com.gazman.quadratic_sieve.core.siever.Siever;
@@ -17,12 +17,14 @@ public class QuadraticSieve extends BaseFact {
 
     @Override
     protected void solve(BigInteger N) {
-        MagicNumbers.instance.init(N);
+        MagicNumbers.instance.initN(N);
         PrimeBase.instance.build(N);
-        MagicNumbers.instance.initMaxPrimeThreshold(PrimeBase.instance.maxPrime);
+        MagicNumbers.instance.init();
+
         PolyMiner.instance.start(N);
-        new Siever().start();
-        new Siever().start();
+        for (int i = 0; i < Runtime.getRuntime().availableProcessors() * 2; i++) {
+            new Siever().start();
+        }
         Matrix.instance.start(N);
     }
 }

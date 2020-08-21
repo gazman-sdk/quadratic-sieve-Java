@@ -1,0 +1,13 @@
+0>      A 463405665940583672213
+7>      B 1552154369582955943339
+7>      N 719277129279176528372502305956190176739207
+23>     Prime-base 898
+24>     Max-prime 14,197
+24>     primeBaseSize 898
+24>     minPrimeSize 7
+24>     loopsCount 67
+24>     loopsSize 4,490
+24>     maxPrimeThreshold 906
+436>    Completed 0.00% bSmooth-found 0 big-primes-found 0/428 [poly-miner 248, siever(22) 605, vector-extractor 1,345, matrix 1, test 16] TTD 106751991167 days, 07:12:55
+897>    Found 871 bSmooth values
+898>    Oh yeah 463405665940583672213

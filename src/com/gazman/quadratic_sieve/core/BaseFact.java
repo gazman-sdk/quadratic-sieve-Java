@@ -9,6 +9,10 @@ public abstract class BaseFact {
     private final Random random = new Random(1223);
 
     protected void start(int bitLength) {
+        solve(generateN(bitLength));
+    }
+
+    public BigInteger generateN(int bitLength) {
         bitLength /=2;
 
         BigInteger A = new BigInteger(bitLength - 1, random).nextProbablePrime();
@@ -18,8 +22,7 @@ public abstract class BaseFact {
         log("A", A);
         log("B", B);
         log("N", N);
-
-        solve(N);
+        return N;
     }
 
     public void stress(int bitLength, long timeMillis){

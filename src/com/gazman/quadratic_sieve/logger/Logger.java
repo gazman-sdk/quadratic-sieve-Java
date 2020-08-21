@@ -16,6 +16,7 @@ public enum Logger {
     private final ThreadLocal<Long> startTimeNano = ThreadLocal.withInitial(System::nanoTime);
     private final AtomicLong totalTimeNano = new AtomicLong();
     private final String formattedName = name().toLowerCase().replaceAll("_", "-");
+    private Object extraInfo;
 
     public void start(){
         startTimeNano.set(System.nanoTime());
@@ -23,6 +24,10 @@ public enum Logger {
 
     public void end(){
         totalTimeNano.addAndGet(System.nanoTime() - startTimeNano.get());
+    }
+
+    public void setExtraInfo(Object extraInfo) {
+        this.extraInfo = extraInfo;
     }
 
     public long getTotalTimeNano() {
@@ -77,6 +82,10 @@ public enum Logger {
 
     @Override
     public String toString() {
-        return formattedName + " " + formatLong(getTotalTimeNano() / 1_000_000);
+        String totalTimeMillis = formatLong(getTotalTimeNano() / 1_000_000);
+        if(extraInfo != null){
+            return formattedName + "(" + extraInfo + ") " + totalTimeMillis;
+        }
+        return formattedName + " " + totalTimeMillis;
     }
 }

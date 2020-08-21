@@ -1,0 +1,31 @@
+0>      A 88836279653563848389923472419
+7>      B 1914617930602803606116686684867
+7>      N 170087533912758362256307841150653124618753508478402219183273
+99>     Prime-base 6,600
+99>     Max-prime 141,671
+99>     primeBaseSize 6600
+99>     minPrimeSize 52
+99>     loopsCount 181
+99>     loopsSize 33,000
+99>     maxPrimeThreshold 6666
+759>    Completed 0.00% bSmooth-found 0 big-primes-found 0/6 [poly-miner 595, siever(11) 2,409, vector-extractor 45, matrix 0, test 1] TTD 106751991167 days, 07:12:55
+1,668>  Completed 2.42% bSmooth-found 147 big-primes-found 5/1,429 [poly-miner 1,544, siever(34) 5,951, vector-extractor 3,932, matrix 2, test 7] TTD 01:02
+2,670>  Completed 5.23% bSmooth-found 312 big-primes-found 16/3,041 [poly-miner 2,547, siever(69) 8,677, vector-extractor 6,452, matrix 4, test 8] TTD 00:46
+3,674>  Completed 9.06% bSmooth-found 517 big-primes-found 51/5,019 [poly-miner 3,547, siever(112) 11,878, vector-extractor 8,541, matrix 7, test 10] TTD 00:35
+4,678>  Completed 14.32% bSmooth-found 798 big-primes-found 100/7,161 [poly-miner 4,542, siever(159) 14,889, vector-extractor 10,628, matrix 10, test 11] TTD 00:27
+5,682>  Completed 19.47% bSmooth-found 1,035 big-primes-found 186/9,570 [poly-miner 5,539, siever(212) 18,053, vector-extractor 12,647, matrix 14, test 13] TTD 00:23
+6,687>  Completed 25.25% bSmooth-found 1,309 big-primes-found 274/11,841 [poly-miner 6,552, siever(262) 21,204, vector-extractor 14,760, matrix 19, test 14] TTD 00:19
+7,688>  Completed 31.47% bSmooth-found 1,584 big-primes-found 390/14,169 [poly-miner 7,555, siever(310) 24,497, vector-extractor 16,872, matrix 22, test 15] TTD 00:16
+8,689>  Completed 37.45% bSmooth-found 1,819 big-primes-found 529/16,580 [poly-miner 8,548, siever(361) 27,822, vector-extractor 18,689, matrix 26, test 16] TTD 00:14
+9,691>  Completed 44.66% bSmooth-found 2,121 big-primes-found 679/18,930 [poly-miner 9,537, siever(411) 30,958, vector-extractor 20,471, matrix 31, test 18] TTD 00:11
+10,694> Completed 51.08% bSmooth-found 2,355 big-primes-found 848/21,271 [poly-miner 10,557, siever(462) 34,264, vector-extractor 22,348, matrix 37, test 19] TTD 00:10
+11,695> Completed 58.77% bSmooth-found 2,635 big-primes-found 1,050/23,648 [poly-miner 11,552, siever(512) 37,678, vector-extractor 24,343, matrix 64, test 20] TTD 00:08
+12,696> Completed 66.24% bSmooth-found 2,880 big-primes-found 1,273/26,008 [poly-miner 12,546, siever(561) 41,036, vector-extractor 26,119, matrix 95, test 22] TTD 00:06
+13,697> Completed 73.86% bSmooth-found 3,148 big-primes-found 1,483/28,189 [poly-miner 13,540, siever(611) 44,553, vector-extractor 27,937, matrix 149, test 23] TTD 00:04
+14,697> Completed 81.31% bSmooth-found 3,399 big-primes-found 1,699/30,409 [poly-miner 14,546, siever(660) 48,149, vector-extractor 29,891, matrix 278, test 24] TTD 00:03
+15,703> Completed 89.09% bSmooth-found 3,662 big-primes-found 1,924/32,600 [poly-miner 15,545, siever(708) 52,042, vector-extractor 31,886, matrix 442, test 26] TTD 00:01
+16,703> Completed 97.40% bSmooth-found 3,926 big-primes-found 2,181/34,722 [poly-miner 16,554, siever(755) 55,938, vector-extractor 33,845, matrix 713, test 27] TTD 00:00
+17,393> 6391 bad luck 170087533912758362256307841150653124618753508478402219183273
+17,497> 6393 bad luck 1
+17,615> Found 6398 bSmooth values
+17,616> Oh yeah 1914617930602803606116686684867

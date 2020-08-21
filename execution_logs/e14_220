@@ -1,0 +1,133 @@
+0>      A 509519918078952435362554439783639
+8>      B 2437253512184878083864807914765767
+9>      N 1241829209866078182513729428437360429739181821435041680608843886113
+196>    Prime-base 14,756
+196>    Max-prime 341,813
+196>    primeBaseSize 14756
+196>    minPrimeSize 118
+196>    loopsCount 271
+196>    loopsSize 73,780
+196>    maxPrimeThreshold 14903
+1,363>  Completed 0.00% bSmooth-found 0 big-primes-found 0/17 [poly-miner 1,053, siever(9) 3,171, vector-extractor 418, matrix 0, test 3,326] TTD 106751991167 days, 07:12:55
+2,300>  Completed 0.46% bSmooth-found 64 big-primes-found 0/885 [poly-miner 2,017, siever(16) 8,117, vector-extractor 5,913, matrix 1, test 7,539] TTD 07:37
+3,309>  Completed 0.78% bSmooth-found 108 big-primes-found 1/1,788 [poly-miner 2,988, siever(25) 11,933, vector-extractor 10,428, matrix 2, test 11,290] TTD 06:36
+4,329>  Completed 1.25% bSmooth-found 172 big-primes-found 3/2,851 [poly-miner 4,036, siever(37) 15,844, vector-extractor 14,617, matrix 3, test 15,144] TTD 05:26
+5,389>  Completed 1.85% bSmooth-found 254 big-primes-found 6/4,193 [poly-miner 4,979, siever(51) 20,789, vector-extractor 18,765, matrix 5, test 20,017] TTD 04:34
+6,391>  Completed 2.53% bSmooth-found 342 big-primes-found 12/5,383 [poly-miner 6,078, siever(64) 25,028, vector-extractor 22,776, matrix 6, test 24,200] TTD 03:58
+7,461>  Completed 3.09% bSmooth-found 413 big-primes-found 20/6,639 [poly-miner 7,152, siever(78) 29,688, vector-extractor 26,797, matrix 7, test 28,820] TTD 03:47
+8,461>  Completed 3.63% bSmooth-found 486 big-primes-found 23/7,915 [poly-miner 8,121, siever(90) 34,261, vector-extractor 31,103, matrix 8, test 33,307] TTD 03:39
+9,464>  Completed 4.33% bSmooth-found 578 big-primes-found 29/9,118 [poly-miner 9,056, siever(103) 38,684, vector-extractor 35,215, matrix 9, test 37,684] TTD 03:24
+10,498> Completed 4.97% bSmooth-found 659 big-primes-found 38/10,326 [poly-miner 10,090, siever(118) 43,656, vector-extractor 39,468, matrix 11, test 42,613] TTD 03:16
+11,490> Completed 5.69% bSmooth-found 744 big-primes-found 53/11,633 [poly-miner 11,116, siever(130) 48,383, vector-extractor 43,950, matrix 12, test 47,280] TTD 03:07
+12,496> Completed 6.33% bSmooth-found 824 big-primes-found 63/12,837 [poly-miner 12,125, siever(143) 52,491, vector-extractor 47,690, matrix 13, test 51,329] TTD 03:02
+13,503> Completed 6.89% bSmooth-found 890 big-primes-found 76/14,009 [poly-miner 13,082, siever(157) 56,949, vector-extractor 51,408, matrix 14, test 55,731] TTD 02:59
+14,503> Completed 7.60% bSmooth-found 978 big-primes-found 87/15,251 [poly-miner 14,071, siever(169) 61,659, vector-extractor 55,587, matrix 15, test 60,379] TTD 02:53
+15,510> Completed 8.25% bSmooth-found 1,056 big-primes-found 100/16,451 [poly-miner 15,040, siever(182) 66,089, vector-extractor 59,275, matrix 16, test 64,737] TTD 02:50
+16,514> Completed 8.93% bSmooth-found 1,134 big-primes-found 118/17,537 [poly-miner 15,998, siever(194) 70,368, vector-extractor 63,226, matrix 18, test 68,979] TTD 02:46
+17,543> Completed 9.64% bSmooth-found 1,213 big-primes-found 139/18,778 [poly-miner 17,062, siever(208) 75,646, vector-extractor 67,932, matrix 19, test 74,209] TTD 02:42
+18,548> Completed 10.29% bSmooth-found 1,291 big-primes-found 152/19,994 [poly-miner 18,088, siever(222) 80,721, vector-extractor 72,378, matrix 21, test 79,147] TTD 02:39
+19,557> Completed 10.85% bSmooth-found 1,354 big-primes-found 167/21,173 [poly-miner 19,078, siever(235) 85,638, vector-extractor 76,658, matrix 22, test 83,953] TTD 02:39
+20,557> Completed 11.66% bSmooth-found 1,442 big-primes-found 192/22,413 [poly-miner 20,074, siever(247) 91,272, vector-extractor 81,714, matrix 23, test 89,518] TTD 02:34
+21,579> Completed 12.38% bSmooth-found 1,515 big-primes-found 220/23,696 [poly-miner 21,054, siever(259) 95,696, vector-extractor 86,192, matrix 25, test 93,877] TTD 02:31
+22,590> Completed 13.05% bSmooth-found 1,585 big-primes-found 244/24,857 [poly-miner 22,087, siever(272) 100,413, vector-extractor 90,663, matrix 26, test 98,516] TTD 02:29
+23,594> Completed 13.68% bSmooth-found 1,654 big-primes-found 264/25,990 [poly-miner 23,065, siever(284) 105,109, vector-extractor 94,730, matrix 27, test 103,176] TTD 02:27
+24,602> Completed 14.50% bSmooth-found 1,741 big-primes-found 291/27,177 [poly-miner 24,051, siever(296) 109,608, vector-extractor 99,028, matrix 29, test 107,567] TTD 02:23
+25,602> Completed 15.22% bSmooth-found 1,817 big-primes-found 317/28,411 [poly-miner 24,953, siever(309) 114,225, vector-extractor 103,397, matrix 30, test 112,145] TTD 02:21
+26,628> Completed 15.96% bSmooth-found 1,894 big-primes-found 344/29,594 [poly-miner 25,982, siever(321) 119,028, vector-extractor 107,397, matrix 32, test 116,870] TTD 02:19
+27,629> Completed 16.75% bSmooth-found 1,970 big-primes-found 378/30,717 [poly-miner 26,947, siever(334) 123,833, vector-extractor 111,547, matrix 33, test 121,644] TTD 02:16
+28,642> Completed 17.61% bSmooth-found 2,060 big-primes-found 408/31,915 [poly-miner 27,976, siever(346) 128,401, vector-extractor 115,945, matrix 35, test 126,179] TTD 02:13
+29,660> Completed 18.33% bSmooth-found 2,127 big-primes-found 443/33,084 [poly-miner 28,985, siever(359) 132,963, vector-extractor 120,029, matrix 36, test 130,669] TTD 02:11
+30,663> Completed 19.10% bSmooth-found 2,204 big-primes-found 474/34,237 [poly-miner 29,965, siever(370) 138,041, vector-extractor 124,396, matrix 37, test 135,683] TTD 02:08
+31,670> Completed 19.82% bSmooth-found 2,283 big-primes-found 495/35,375 [poly-miner 30,937, siever(382) 142,294, vector-extractor 128,379, matrix 39, test 139,908] TTD 02:07
+32,685> Completed 20.52% bSmooth-found 2,358 big-primes-found 519/36,495 [poly-miner 31,988, siever(395) 147,218, vector-extractor 132,237, matrix 40, test 144,659] TTD 02:05
+33,705> Completed 21.16% bSmooth-found 2,420 big-primes-found 546/37,644 [poly-miner 32,962, siever(408) 152,239, vector-extractor 136,459, matrix 57, test 149,643] TTD 02:04
+34,709> Completed 22.04% bSmooth-found 2,507 big-primes-found 582/38,784 [poly-miner 33,920, siever(419) 156,624, vector-extractor 140,324, matrix 59, test 153,998] TTD 02:02
+35,713> Completed 22.72% bSmooth-found 2,571 big-primes-found 614/39,839 [poly-miner 34,876, siever(432) 162,144, vector-extractor 144,714, matrix 60, test 159,365] TTD 02:00
+36,739> Completed 23.43% bSmooth-found 2,643 big-primes-found 641/41,082 [poly-miner 35,911, siever(444) 167,291, vector-extractor 149,469, matrix 61, test 164,380] TTD 01:59
+37,746> Completed 24.10% bSmooth-found 2,709 big-primes-found 670/42,256 [poly-miner 36,975, siever(455) 171,965, vector-extractor 153,637, matrix 62, test 169,002] TTD 01:58
+38,747> Completed 24.77% bSmooth-found 2,778 big-primes-found 695/43,338 [poly-miner 37,901, siever(468) 176,897, vector-extractor 157,470, matrix 64, test 173,885] TTD 01:57
+39,748> Completed 25.57% bSmooth-found 2,859 big-primes-found 726/44,455 [poly-miner 38,929, siever(480) 181,815, vector-extractor 161,550, matrix 65, test 178,764] TTD 01:55
+40,797> Completed 26.27% bSmooth-found 2,917 big-primes-found 766/45,609 [poly-miner 39,960, siever(491) 186,536, vector-extractor 165,619, matrix 66, test 183,458] TTD 01:53
+41,800> Completed 27.09% bSmooth-found 2,993 big-primes-found 804/46,703 [poly-miner 40,857, siever(503) 191,503, vector-extractor 169,747, matrix 68, test 188,354] TTD 01:51
+42,836> Completed 27.96% bSmooth-found 3,072 big-primes-found 848/47,809 [poly-miner 41,938, siever(517) 196,593, vector-extractor 173,815, matrix 69, test 193,404] TTD 01:49
+43,837> Completed 28.66% bSmooth-found 3,129 big-primes-found 889/48,899 [poly-miner 42,952, siever(528) 200,869, vector-extractor 177,405, matrix 71, test 197,587] TTD 01:48
+44,852> Completed 29.58% bSmooth-found 3,211 big-primes-found 935/50,059 [poly-miner 43,966, siever(540) 205,631, vector-extractor 181,677, matrix 72, test 202,317] TTD 01:46
+45,873> Completed 30.25% bSmooth-found 3,271 big-primes-found 970/51,103 [poly-miner 44,936, siever(552) 210,752, vector-extractor 185,579, matrix 74, test 207,370] TTD 01:45
+46,873> Completed 31.07% bSmooth-found 3,342 big-primes-found 1,014/52,284 [poly-miner 45,977, siever(565) 215,473, vector-extractor 189,619, matrix 75, test 212,023] TTD 01:43
+47,874> Completed 31.83% bSmooth-found 3,407 big-primes-found 1,055/53,391 [poly-miner 46,962, siever(575) 219,775, vector-extractor 193,410, matrix 76, test 216,257] TTD 01:42
+48,882> Completed 32.74% bSmooth-found 3,491 big-primes-found 1,099/54,382 [poly-miner 47,948, siever(589) 224,878, vector-extractor 196,912, matrix 78, test 221,215] TTD 01:39
+49,899> Completed 33.78% bSmooth-found 3,576 big-primes-found 1,159/55,612 [poly-miner 49,022, siever(599) 229,595, vector-extractor 201,852, matrix 80, test 225,884] TTD 01:37
+50,900> Completed 34.57% bSmooth-found 3,648 big-primes-found 1,198/56,638 [poly-miner 49,953, siever(611) 234,641, vector-extractor 205,281, matrix 81, test 230,866] TTD 01:35
+51,901> Completed 35.41% bSmooth-found 3,718 big-primes-found 1,246/57,834 [poly-miner 50,938, siever(622) 239,339, vector-extractor 209,754, matrix 83, test 235,505] TTD 01:34
+52,905> Completed 36.30% bSmooth-found 3,795 big-primes-found 1,294/58,854 [poly-miner 51,889, siever(634) 243,806, vector-extractor 213,586, matrix 84, test 239,943] TTD 01:32
+53,910> Completed 37.25% bSmooth-found 3,865 big-primes-found 1,357/60,007 [poly-miner 52,913, siever(646) 248,898, vector-extractor 218,373, matrix 86, test 244,916] TTD 01:30
+54,911> Completed 38.09% bSmooth-found 3,931 big-primes-found 1,409/61,104 [poly-miner 53,937, siever(658) 253,543, vector-extractor 222,285, matrix 88, test 249,529] TTD 01:28
+55,913> Completed 38.94% bSmooth-found 4,002 big-primes-found 1,457/62,093 [poly-miner 54,852, siever(670) 258,683, vector-extractor 226,442, matrix 89, test 254,626] TTD 01:27
+56,954> Completed 39.84% bSmooth-found 4,085 big-primes-found 1,500/63,200 [poly-miner 55,875, siever(681) 263,109, vector-extractor 230,623, matrix 90, test 259,016] TTD 01:25
+57,966> Completed 40.53% bSmooth-found 4,137 big-primes-found 1,544/64,246 [poly-miner 56,866, siever(693) 268,244, vector-extractor 234,624, matrix 91, test 264,055] TTD 01:24
+58,973> Completed 41.43% bSmooth-found 4,203 big-primes-found 1,605/65,364 [poly-miner 57,909, siever(703) 273,005, vector-extractor 239,140, matrix 93, test 268,726] TTD 01:23
+59,978> Completed 42.24% bSmooth-found 4,264 big-primes-found 1,657/66,426 [poly-miner 58,874, siever(716) 278,598, vector-extractor 243,007, matrix 94, test 274,260] TTD 01:21
+60,979> Completed 43.17% bSmooth-found 4,329 big-primes-found 1,722/67,619 [poly-miner 59,870, siever(726) 283,089, vector-extractor 247,543, matrix 95, test 278,627] TTD 01:20
+61,989> Completed 44.03% bSmooth-found 4,402 big-primes-found 1,770/68,630 [poly-miner 60,804, siever(738) 287,606, vector-extractor 251,227, matrix 97, test 283,061] TTD 01:18
+63,001> Completed 44.91% bSmooth-found 4,485 big-primes-found 1,811/69,692 [poly-miner 61,893, siever(749) 292,652, vector-extractor 255,214, matrix 99, test 288,013] TTD 01:17
+64,016> Completed 45.89% bSmooth-found 4,564 big-primes-found 1,869/70,730 [poly-miner 62,859, siever(761) 297,694, vector-extractor 259,095, matrix 100, test 292,933] TTD 01:15
+65,016> Completed 46.86% bSmooth-found 4,634 big-primes-found 1,935/71,765 [poly-miner 63,875, siever(771) 302,885, vector-extractor 263,443, matrix 138, test 298,045] TTD 01:13
+66,023> Completed 47.79% bSmooth-found 4,709 big-primes-found 1,990/72,843 [poly-miner 64,821, siever(784) 307,496, vector-extractor 267,263, matrix 139, test 302,599] TTD 01:11
+67,038> Completed 48.72% bSmooth-found 4,771 big-primes-found 2,059/73,958 [poly-miner 65,821, siever(794) 312,030, vector-extractor 271,223, matrix 141, test 307,101] TTD 01:10
+68,040> Completed 49.55% bSmooth-found 4,841 big-primes-found 2,105/75,016 [poly-miner 66,645, siever(806) 316,606, vector-extractor 275,026, matrix 142, test 311,619] TTD 01:09
+69,048> Completed 50.46% bSmooth-found 4,914 big-primes-found 2,160/76,110 [poly-miner 67,767, siever(818) 321,481, vector-extractor 278,895, matrix 144, test 316,465] TTD 01:07
+70,051> Completed 51.38% bSmooth-found 4,980 big-primes-found 2,222/77,154 [poly-miner 68,720, siever(828) 326,183, vector-extractor 282,335, matrix 145, test 321,116] TTD 01:06
+71,054> Completed 52.22% bSmooth-found 5,031 big-primes-found 2,289/78,244 [poly-miner 69,752, siever(841) 330,999, vector-extractor 286,450, matrix 146, test 325,888] TTD 01:04
+72,058> Completed 53.17% bSmooth-found 5,099 big-primes-found 2,354/79,325 [poly-miner 70,734, siever(853) 335,640, vector-extractor 290,418, matrix 148, test 330,461] TTD 01:03
+73,066> Completed 54.13% bSmooth-found 5,170 big-primes-found 2,418/80,330 [poly-miner 71,751, siever(864) 340,886, vector-extractor 294,457, matrix 150, test 335,648] TTD 01:01
+74,095> Completed 55.00% bSmooth-found 5,231 big-primes-found 2,479/81,404 [poly-miner 72,712, siever(876) 346,035, vector-extractor 298,739, matrix 152, test 340,738] TTD 01:00
+75,097> Completed 56.08% bSmooth-found 5,312 big-primes-found 2,549/82,548 [poly-miner 73,707, siever(887) 351,461, vector-extractor 303,929, matrix 154, test 346,069] TTD 00:58
+76,115> Completed 57.00% bSmooth-found 5,374 big-primes-found 2,617/83,628 [poly-miner 74,721, siever(899) 356,299, vector-extractor 307,794, matrix 157, test 350,877] TTD 00:57
+77,127> Completed 58.00% bSmooth-found 5,440 big-primes-found 2,690/84,727 [poly-miner 75,740, siever(909) 361,339, vector-extractor 312,061, matrix 159, test 355,878] TTD 00:55
+78,137> Completed 58.89% bSmooth-found 5,501 big-primes-found 2,754/85,871 [poly-miner 76,715, siever(919) 366,069, vector-extractor 316,590, matrix 162, test 360,572] TTD 00:54
+79,167> Completed 59.84% bSmooth-found 5,573 big-primes-found 2,815/86,919 [poly-miner 77,706, siever(932) 371,348, vector-extractor 320,743, matrix 165, test 365,792] TTD 00:53
+80,169> Completed 60.74% bSmooth-found 5,648 big-primes-found 2,866/87,924 [poly-miner 78,625, siever(944) 377,345, vector-extractor 325,675, matrix 168, test 371,638] TTD 00:51
+81,176> Completed 61.73% bSmooth-found 5,710 big-primes-found 2,943/89,058 [poly-miner 79,682, siever(954) 382,478, vector-extractor 330,242, matrix 171, test 376,681] TTD 00:50
+82,186> Completed 62.55% bSmooth-found 5,769 big-primes-found 2,999/90,052 [poly-miner 80,747, siever(966) 387,239, vector-extractor 333,796, matrix 212, test 381,366] TTD 00:49
+83,186> Completed 63.50% bSmooth-found 5,842 big-primes-found 3,060/91,119 [poly-miner 81,650, siever(975) 392,020, vector-extractor 338,050, matrix 217, test 386,097] TTD 00:47
+84,186> Completed 64.39% bSmooth-found 5,906 big-primes-found 3,120/92,128 [poly-miner 82,709, siever(988) 396,684, vector-extractor 341,702, matrix 221, test 390,674] TTD 00:46
+85,195> Completed 65.44% bSmooth-found 5,985 big-primes-found 3,189/93,177 [poly-miner 83,686, siever(999) 401,579, vector-extractor 345,531, matrix 229, test 395,541] TTD 00:44
+86,196> Completed 66.45% bSmooth-found 6,060 big-primes-found 3,255/94,288 [poly-miner 84,719, siever(1009) 406,594, vector-extractor 349,863, matrix 239, test 400,480] TTD 00:43
+87,210> Completed 67.36% bSmooth-found 6,111 big-primes-found 3,331/95,332 [poly-miner 85,643, siever(1021) 411,898, vector-extractor 354,232, matrix 251, test 405,708] TTD 00:42
+88,211> Completed 68.37% bSmooth-found 6,176 big-primes-found 3,408/96,448 [poly-miner 86,704, siever(1032) 416,534, vector-extractor 358,461, matrix 302, test 410,307] TTD 00:40
+89,267> Completed 69.45% bSmooth-found 6,254 big-primes-found 3,481/97,544 [poly-miner 87,754, siever(1041) 421,543, vector-extractor 362,430, matrix 324, test 415,217] TTD 00:39
+90,271> Completed 70.46% bSmooth-found 6,321 big-primes-found 3,556/98,576 [poly-miner 88,730, siever(1053) 426,000, vector-extractor 366,145, matrix 380, test 419,643] TTD 00:37
+91,277> Completed 71.44% bSmooth-found 6,397 big-primes-found 3,618/99,541 [poly-miner 89,713, siever(1066) 431,491, vector-extractor 370,170, matrix 478, test 425,073] TTD 00:36
+92,279> Completed 72.53% bSmooth-found 6,477 big-primes-found 3,691/100,633 [poly-miner 90,682, siever(1077) 436,269, vector-extractor 374,396, matrix 523, test 429,773] TTD 00:34
+93,305> Completed 73.40% bSmooth-found 6,535 big-primes-found 3,755/101,632 [poly-miner 91,717, siever(1088) 441,444, vector-extractor 378,175, matrix 567, test 434,909] TTD 00:33
+94,323> Completed 74.57% bSmooth-found 6,615 big-primes-found 3,838/102,749 [poly-miner 92,699, siever(1098) 446,263, vector-extractor 382,626, matrix 629, test 439,639] TTD 00:32
+95,326> Completed 75.49% bSmooth-found 6,678 big-primes-found 3,904/103,729 [poly-miner 93,653, siever(1110) 451,945, vector-extractor 386,589, matrix 691, test 445,291] TTD 00:30
+96,336> Completed 76.59% bSmooth-found 6,756 big-primes-found 3,980/104,856 [poly-miner 94,650, siever(1121) 456,728, vector-extractor 390,949, matrix 769, test 450,042] TTD 00:29
+97,339> Completed 77.60% bSmooth-found 6,817 big-primes-found 4,061/105,846 [poly-miner 95,671, siever(1132) 461,516, vector-extractor 394,865, matrix 874, test 454,792] TTD 00:28
+98,339> Completed 78.58% bSmooth-found 6,880 big-primes-found 4,135/106,877 [poly-miner 96,604, siever(1144) 467,420, vector-extractor 399,219, matrix 981, test 460,593] TTD 00:26
+99,347> Completed 79.61% bSmooth-found 6,952 big-primes-found 4,208/107,916 [poly-miner 97,687, siever(1155) 472,600, vector-extractor 403,184, matrix 1,122, test 465,714] TTD 00:25
+100,348> Completed 80.71% bSmooth-found 7,024 big-primes-found 4,290/108,977 [poly-miner 98,684, siever(1165) 477,780, vector-extractor 407,596, matrix 1,238, test 470,788] TTD 00:23
+101,350> Completed 81.72% bSmooth-found 7,088 big-primes-found 4,368/109,928 [poly-miner 99,618, siever(1177) 483,212, vector-extractor 411,885, matrix 1,388, test 476,127] TTD 00:22
+102,366> Completed 82.79% bSmooth-found 7,164 big-primes-found 4,441/110,921 [poly-miner 100,633, siever(1188) 489,551, vector-extractor 416,369, matrix 1,585, test 482,405] TTD 00:21
+103,364> Completed 83.88% bSmooth-found 7,229 big-primes-found 4,529/112,000 [poly-miner 101,656, siever(1199) 495,025, vector-extractor 421,112, matrix 1,729, test 487,790] TTD 00:19
+104,378> Completed 85.00% bSmooth-found 7,302 big-primes-found 4,614/113,024 [poly-miner 102,571, siever(1209) 501,117, vector-extractor 425,487, matrix 1,966, test 493,729] TTD 00:18
+105,394> Completed 86.05% bSmooth-found 7,363 big-primes-found 4,700/114,061 [poly-miner 103,615, siever(1221) 506,541, vector-extractor 430,086, matrix 2,131, test 499,083] TTD 00:17
+106,395> Completed 87.20% bSmooth-found 7,435 big-primes-found 4,789/115,126 [poly-miner 104,622, siever(1231) 511,520, vector-extractor 434,273, matrix 2,323, test 503,998] TTD 00:15
+107,400> Completed 88.33% bSmooth-found 7,506 big-primes-found 4,876/116,102 [poly-miner 105,653, siever(1242) 516,524, vector-extractor 438,257, matrix 2,641, test 508,948] TTD 00:14
+108,402> Completed 89.51% bSmooth-found 7,586 big-primes-found 4,961/117,056 [poly-miner 106,656, siever(1254) 522,126, vector-extractor 442,452, matrix 2,936, test 514,467] TTD 00:12
+109,402> Completed 90.72% bSmooth-found 7,660 big-primes-found 5,057/118,108 [poly-miner 107,644, siever(1263) 527,494, vector-extractor 447,056, matrix 3,346, test 519,651] TTD 00:11
+110,406> Completed 91.76% bSmooth-found 7,711 big-primes-found 5,152/119,117 [poly-miner 108,560, siever(1273) 532,782, vector-extractor 451,277, matrix 3,554, test 524,887] TTD 00:09
+111,406> Completed 92.74% bSmooth-found 7,780 big-primes-found 5,220/120,004 [poly-miner 109,570, siever(1287) 539,959, vector-extractor 455,438, matrix 3,808, test 531,969] TTD 00:08
+112,406> Completed 93.98% bSmooth-found 7,868 big-primes-found 5,306/121,117 [poly-miner 110,589, siever(1295) 546,367, vector-extractor 461,354, matrix 4,258, test 538,278] TTD 00:07
+113,408> Completed 94.98% bSmooth-found 7,935 big-primes-found 5,380/122,062 [poly-miner 111,568, siever(1307) 552,199, vector-extractor 465,373, matrix 4,639, test 544,049] TTD 00:05
+114,410> Completed 96.17% bSmooth-found 8,008 big-primes-found 5,474/123,073 [poly-miner 112,515, siever(1317) 558,220, vector-extractor 470,410, matrix 5,022, test 549,883] TTD 00:04
+115,420> Completed 97.22% bSmooth-found 8,075 big-primes-found 5,553/124,129 [poly-miner 113,527, siever(1327) 563,235, vector-extractor 475,367, matrix 5,406, test 554,713] TTD 00:03
+116,427> Completed 98.32% bSmooth-found 8,147 big-primes-found 5,635/125,140 [poly-miner 114,597, siever(1337) 568,497, vector-extractor 479,476, matrix 5,806, test 559,910] TTD 00:01
+117,441> Completed 99.37% bSmooth-found 8,211 big-primes-found 5,719/126,162 [poly-miner 115,598, siever(1348) 573,831, vector-extractor 483,685, matrix 6,192, test 565,176] TTD 00:00
+118,444> Completed 100.39% bSmooth-found 8,281 big-primes-found 5,792/127,225 [poly-miner 116,522, siever(1357) 578,829, vector-extractor 488,187, matrix 6,568, test 570,066] TTD 00:-1
+119,445> Completed 101.44% bSmooth-found 8,354 big-primes-found 5,866/128,111 [poly-miner 117,575, siever(1369) 584,626, vector-extractor 492,354, matrix 7,042, test 575,800] TTD 00:-2
+120,495> Completed 102.13% bSmooth-found 8,359 big-primes-found 5,958/129,071 [poly-miner 118,540, siever(1379) 590,385, vector-extractor 496,439, matrix 7,294, test 581,458] TTD 00:-3
+120,724> Found 14317 bSmooth values
+120,725> Oh yeah 2437253512184878083864807914765767
+
+Process finished with exit code 0

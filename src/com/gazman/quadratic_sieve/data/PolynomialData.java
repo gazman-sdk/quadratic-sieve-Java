@@ -8,17 +8,19 @@ import java.util.List;
 public class PolynomialData {
     public final BigInteger a;
     public final BigInteger b;
-    public final BigInteger N;
-    public final List<Wheel> wheels;
     public final BigInteger c;
+    public final BigInteger N;
+    public List<Wheel> wheels;
+    public final int delta;
+    public double scale;
 
 
-    public PolynomialData(BigInteger a, BigInteger b, BigInteger N, List<Wheel> wheels) {
+    public PolynomialData(BigInteger a, BigInteger b, BigInteger c, int delta, BigInteger N) {
         this.a = a;
         this.b = b;
+        this.c = c;
         this.N = N;
-        this.wheels = wheels;
-        c = b.pow(2).subtract(N).divide(a);
+        this.delta = delta;
     }
 
     public int getLoopsSize() {

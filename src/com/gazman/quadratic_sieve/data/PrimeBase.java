@@ -21,12 +21,14 @@ public class PrimeBase {
     public final Map<BigInteger, Integer> primeBaseMap = new HashMap<>();
     public Integer maxPrime;
     public BigInteger maxPrimeBigInteger;
+    public int minPrime;
 
     public void build(BigInteger N){
-        List<Integer> primes = SieveOfEratosthenes.findPrimes(MagicNumbers.instance.B);
+        List<Integer> primes = SieveOfEratosthenes.findPrimes(MagicNumbers.instance.primeBaseSize * 30);
         primeBase.add(-1);
         primeBaseBigInteger.add(BigInteger.valueOf(-1));
-        for (int prime : primes) {
+        for (int i = 0; primeBase.size() < MagicNumbers.instance.primeBaseSize; i++) {
+            int prime = primes.get(i);
             BigInteger p = BigInteger.valueOf(prime);
             if (MathUtils.isRootInQuadraticResidues(N, p)) {
                 primeBaseMap.put(p, primeBase.size());
@@ -34,6 +36,18 @@ public class PrimeBase {
                 primeBaseBigInteger.add(BigInteger.valueOf(prime));
             }
         }
+
+        int minPrime = 0;
+        for (Integer prime : primes) {
+            if(prime < MagicNumbers.instance.minPrimeSize){
+                minPrime = prime;
+            }
+            else{
+                break;
+            }
+        }
+
+        this.minPrime = minPrime;
 
         log("Prime-base", Logger.formatLong(primeBase.size()));
         maxPrime = primeBase.get(primeBase.size() - 1);

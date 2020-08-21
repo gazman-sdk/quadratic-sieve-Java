@@ -32,7 +32,8 @@ public class BigPrimes {
         try {
             DataQueue.bSmooths.put(bSmooth);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+
+            return false;
         }
         usedBigPrimesCount++;
 
