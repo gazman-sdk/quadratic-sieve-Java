@@ -10,7 +10,6 @@ import com.gazman.quadratic_sieve.wheel.Wheel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Responsible for sieving
@@ -18,7 +17,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Siever implements Runnable {
 
     private final VectorExtractor vectorExtractor = new VectorExtractor();
-    private static final AtomicInteger polynomialsCounter = new AtomicInteger();
 
     public void start() {
         new Thread(this, "Siever").start();
@@ -30,53 +28,76 @@ public class Siever implements Runnable {
         final double deltaLog = Math.log(maxPrime * MagicNumbers.instance.maxPrimeThreshold);
         final byte[] logs = new byte[MagicNumbers.instance.loopsSize];
         final List<BSmoothData> bSmoothList = new ArrayList<>();
+        PolynomialData polynomialData = null;
         while (true) {
-            PolynomialData polynomialData;
-            try {
-                polynomialData = DataQueue.polynomialData.take();
-            } catch (InterruptedException e) {
-                return;
+            // it takes time for the queue to fill up, so don't run statistics before the first item
+            if(polynomialData != null) {
+                Logger.SIEVER_TOTAL.start();
+                try {
+                    Logger.SIEVE_QUEUE_OUT.start();
+                    polynomialData = DataQueue.polynomialData.take();
+                    Logger.SIEVE_QUEUE_OUT.end();
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+            else{
+                try {
+                    polynomialData = DataQueue.polynomialData.take();
+                } catch (InterruptedException e) {
+                    return;
+                }
+                Logger.SIEVER_TOTAL.start();
             }
 
-            polynomialsCounter.getAndIncrement();
             long x = polynomialData.delta;
 
             for (int j = 0; j < MagicNumbers.instance.loopsCount; j++) {
-                Logger.SIEVER.start();
-                double baseValue = polynomialData.getSievingValue(x).doubleValue();
-                if (baseValue < 0) {
-                    baseValue *= -1;
-                }
-                byte baseLog = (byte) Math.round((Math.log(baseValue) - deltaLog) * polynomialData.scale);
-                Logger.TEST.start();
+                byte baseLog = calculateBaseLog(deltaLog, polynomialData, x);
+                Logger.SIEVE_CORE.start();
                 for (Wheel wheel : polynomialData.wheels) {
                     wheel.update(logs);
                 }
+                Logger.SIEVE_CORE.end();
+                Logger.SIEVE_COLLECT.start();
                 for (int i = 0; i < logs.length; i++) {
                     if (logs[i] >= baseLog) {
-                        bSmoothList.add(BSmoothDataPool.instance.get(x + i, logs[i]));
+                        bSmoothList.add(BSmoothDataPool.instance.get(i));
                     }
                     logs[i] = 0;
                 }
-                Logger.TEST.end();
+                Logger.SIEVE_COLLECT.end();
 
                 x += logs.length;
-                Logger.SIEVER.end();
             }
 
-            Logger.SIEVER.setExtraInfo(polynomialsCounter.get());
+//            x = polynomialData.delta;
+//            for (int j = 0; j < MagicNumbers.instance.loopsCount; j++) {
+//                for (Wheel wheel : polynomialData.wheels) {
+//                    wheel.update(logs);
+//                }
+//
+//                x += logs.length;
+//            }
 
+
+            Logger.SIEVER_TOTAL.end();
+
+            Logger.VE_TOTAL.start();
             vectorExtractor.extract(polynomialData, bSmoothList);
+            Logger.VE_TOTAL.end();
             bSmoothList.clear();
-            Logger.SIEVER.start();
-            returnTheWheels(polynomialData);
-            Logger.SIEVER.end();
+            Logger.SIEVER_TOTAL.start();
+            WheelPool.instance.put(polynomialData.wheels);
+            Logger.SIEVER_TOTAL.end();
         }
     }
 
-    private void returnTheWheels(PolynomialData polynomialData) {
-        for (Wheel wheel : polynomialData.wheels) {
-            WheelPool.instance.put(wheel);
+    private byte calculateBaseLog(double deltaLog, PolynomialData polynomialData, long x) {
+        double baseValue = polynomialData.getSievingValue(x).doubleValue();
+        if (baseValue < 0) {
+            baseValue *= -1;
         }
+        return (byte) Math.round((Math.log(baseValue) - deltaLog) * polynomialData.scale);
     }
 }

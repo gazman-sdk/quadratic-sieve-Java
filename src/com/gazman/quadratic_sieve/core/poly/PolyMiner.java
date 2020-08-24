@@ -88,24 +88,42 @@ public class PolyMiner implements Runnable {
     }
 
     private List<Wheel> buildWheels(BigInteger a, BigInteger b, int delta, double scale) {
-        List<Wheel> wheels = new ArrayList<>();
+        boolean create = false;
+        List<Wheel> wheels = WheelPool.instance.get();
+        if (wheels == null) {
+            create = true;
+            wheels = new ArrayList<>();
+        }
         List<Integer> primeBase = PrimeBase.instance.primeBase;
+        int wheelIndex = 0;
         for (int p : primeBase) {
             if (p < MagicNumbers.instance.minPrimeSize) {
                 continue;
             }
             if (p == 2) {
-                wheels.add(WheelPool.instance.get(p, b.mod(BigInteger.TWO).intValue() == 0 ? 1 : 0, delta, scale));
+                int startingPosition = b.mod(BigInteger.TWO).intValue() == 0 ? 1 : 0;
+                if (create) {
+                    wheels.add(new Wheel(p, startingPosition, delta, scale));
+                } else {
+                    wheels.get(wheelIndex).reset(startingPosition, delta);
+                    wheelIndex++;
+                }
                 continue;
             }
             BigInteger prime = BigInteger.valueOf(p);
             BigInteger root = map.computeIfAbsent(prime, x -> MathUtils.modSqrt(N, x));
             BigInteger aModInversePrime = a.modInverse(prime);
 
-            BigInteger p1 = root.subtract(b).multiply(aModInversePrime).mod(prime);
-            BigInteger p2 = prime.subtract(root).subtract(b).multiply(aModInversePrime).mod(prime);
-            wheels.add(WheelPool.instance.get(p, p1.intValue(), delta, scale));
-            wheels.add(WheelPool.instance.get(p, p2.intValue(), delta, scale));
+            int p1 = root.subtract(b).multiply(aModInversePrime).mod(prime).intValue();
+            int p2 = prime.subtract(root).subtract(b).multiply(aModInversePrime).mod(prime).intValue();
+            if (create) {
+                wheels.add(new Wheel(p, p1, delta, scale));
+                wheels.add(new Wheel(p, p2, delta, scale));
+            } else {
+                wheels.get(wheelIndex).reset(p1, delta);
+                wheels.get(wheelIndex + 1).reset(p2, delta);
+                wheelIndex += 2;
+            }
         }
         return wheels;
     }

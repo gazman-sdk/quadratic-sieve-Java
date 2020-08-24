@@ -11,8 +11,15 @@ import java.math.BigInteger;
 
 public class QuadraticSieve extends BaseFact {
 
+    public static final boolean DEBUG = true;
+
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
         new QuadraticSieve().start(200);
+        if(!DEBUG) {
+            Runtime.getRuntime().addShutdownHook(new Thread(() ->
+                    System.out.println("Completed in " + (System.nanoTime() - startTime) / 1_000_000), "Shutdown-thread"));
+        }
     }
 
     @Override
@@ -22,7 +29,7 @@ public class QuadraticSieve extends BaseFact {
         MagicNumbers.instance.init();
 
         PolyMiner.instance.start(N);
-        for (int i = 0; i < Runtime.getRuntime().availableProcessors() * 2; i++) {
+        for (int i = 0; i < Runtime.getRuntime().availableProcessors() ; i++) {
             new Siever().start();
         }
         Matrix.instance.start(N);

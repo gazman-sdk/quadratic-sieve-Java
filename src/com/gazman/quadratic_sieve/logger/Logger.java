@@ -3,12 +3,20 @@ package com.gazman.quadratic_sieve.logger;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static com.gazman.quadratic_sieve.QuadraticSieve.DEBUG;
+
 public enum Logger {
     POLY_MINER,
-    SIEVER,
-    VECTOR_EXTRACTOR,
+    SIEVER_TOTAL,
+    SIEVE_CORE,
+    SIEVE_COLLECT,
+    SIEVE_QUEUE_OUT,
+    VE_TOTAL,
+    VE_PRIME,
+    VE_POWERS,
+    VE_DIVIDE,
+    VE_TEST_END,
     MATRIX,
-    TEST,
     ;
 
     private static final long startTime = System.nanoTime();
@@ -19,10 +27,16 @@ public enum Logger {
     private Object extraInfo;
 
     public void start(){
+        if(!DEBUG){
+            return;
+        }
         startTimeNano.set(System.nanoTime());
     }
 
     public void end(){
+        if(!DEBUG){
+            return;
+        }
         totalTimeNano.addAndGet(System.nanoTime() - startTimeNano.get());
     }
 
@@ -39,6 +53,9 @@ public enum Logger {
     }
 
     public static void log(Object...objects) {
+        if(!DEBUG){
+            return;
+        }
         if(!logsAvailable){
             return;
         }

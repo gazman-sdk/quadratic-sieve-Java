@@ -8,13 +8,12 @@ public class BSmoothDataPool {
 
     public static final BSmoothDataPool instance = new BSmoothDataPool();
 
-    public BSmoothData get(long localX, double log) {
+    public BSmoothData get(long localX) {
         BSmoothData bSmoothData = this.bSmoothData.poll();
         if (bSmoothData == null) {
             bSmoothData = new BSmoothData();
         }
         bSmoothData.localX = localX;
-        bSmoothData.log = log;
         return bSmoothData;
     }
 
