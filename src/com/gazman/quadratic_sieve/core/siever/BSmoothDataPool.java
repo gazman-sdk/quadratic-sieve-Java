@@ -13,6 +13,9 @@ public class BSmoothDataPool {
         if (bSmoothData == null) {
             bSmoothData = new BSmoothData();
         }
+        else{
+            bSmoothData.reset();
+        }
         bSmoothData.localX = localX;
         return bSmoothData;
     }

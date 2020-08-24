@@ -5,9 +5,10 @@ import com.gazman.quadratic_sieve.data.DataQueue;
 import com.gazman.quadratic_sieve.data.MagicNumbers;
 import com.gazman.quadratic_sieve.data.PolynomialData;
 import com.gazman.quadratic_sieve.data.PrimeBase;
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.logger.Analytics;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +33,11 @@ public class Siever implements Runnable {
         while (true) {
             // it takes time for the queue to fill up, so don't run statistics before the first item
             if(polynomialData != null) {
-                Logger.SIEVER_TOTAL.start();
+                Analytics.SIEVER_TOTAL.start();
                 try {
-                    Logger.SIEVE_QUEUE_OUT.start();
+                    Analytics.SIEVE_QUEUE_OUT.start();
                     polynomialData = DataQueue.polynomialData.take();
-                    Logger.SIEVE_QUEUE_OUT.end();
+                    Analytics.SIEVE_QUEUE_OUT.end();
                 } catch (InterruptedException e) {
                     return;
                 }
@@ -47,49 +48,58 @@ public class Siever implements Runnable {
                 } catch (InterruptedException e) {
                     return;
                 }
-                Logger.SIEVER_TOTAL.start();
+                Analytics.SIEVER_TOTAL.start();
             }
 
             long x = polynomialData.delta;
 
             for (int j = 0; j < MagicNumbers.instance.loopsCount; j++) {
                 byte baseLog = calculateBaseLog(deltaLog, polynomialData, x);
-                Logger.SIEVE_CORE.start();
+                Analytics.SIEVE_CORE.start();
                 for (Wheel wheel : polynomialData.wheels) {
                     wheel.update(logs);
                 }
-                Logger.SIEVE_CORE.end();
-                Logger.SIEVE_COLLECT.start();
+                Analytics.SIEVE_CORE.end();
+                Analytics.SIEVE_COLLECT.start();
                 for (int i = 0; i < logs.length; i++) {
                     if (logs[i] >= baseLog) {
-                        bSmoothList.add(BSmoothDataPool.instance.get(i));
+                        bSmoothList.add(BSmoothDataPool.instance.get(x + i));
                     }
                     logs[i] = 0;
                 }
-                Logger.SIEVE_COLLECT.end();
+                Analytics.SIEVE_COLLECT.end();
 
                 x += logs.length;
             }
 
-//            x = polynomialData.delta;
-//            for (int j = 0; j < MagicNumbers.instance.loopsCount; j++) {
-//                for (Wheel wheel : polynomialData.wheels) {
-//                    wheel.update(logs);
-//                }
-//
-//                x += logs.length;
-//            }
+            Analytics.SIEVE_RE_SIEVE.start();
+            for (Wheel wheel : polynomialData.wheels) {
+                wheel.updateSmooth(bSmoothList);
+            }
+
+            for (BSmoothData bSmoothData : bSmoothList) {
+                BigInteger sievingValue = polynomialData.getSievingValue(bSmoothData.localX);
+                if(!sievingValue.mod(bSmoothData.bigValue.abs()).equals(BigInteger.ZERO)){
+                    throw new Error("Oops " + bSmoothData.value);
+                }
+                BigInteger reminder = sievingValue.divide(bSmoothData.bigValue);
+                if(reminder.bitLength() > 64){
+                    throw new Error("Oops");
+                }
+                bSmoothData.reminder = reminder.longValue();
+            }
+            Analytics.SIEVE_RE_SIEVE.end();
 
 
-            Logger.SIEVER_TOTAL.end();
+            Analytics.SIEVER_TOTAL.end();
 
-            Logger.VE_TOTAL.start();
+            Analytics.VE_TOTAL.start();
             vectorExtractor.extract(polynomialData, bSmoothList);
-            Logger.VE_TOTAL.end();
+            Analytics.VE_TOTAL.end();
             bSmoothList.clear();
-            Logger.SIEVER_TOTAL.start();
+            Analytics.SIEVER_TOTAL.start();
             WheelPool.instance.put(polynomialData.wheels);
-            Logger.SIEVER_TOTAL.end();
+            Analytics.SIEVER_TOTAL.end();
         }
     }
 

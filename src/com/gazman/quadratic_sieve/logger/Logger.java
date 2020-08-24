@@ -5,44 +5,11 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static com.gazman.quadratic_sieve.QuadraticSieve.DEBUG;
 
-public enum Logger {
-    POLY_MINER,
-    SIEVER_TOTAL,
-    SIEVE_CORE,
-    SIEVE_COLLECT,
-    SIEVE_QUEUE_OUT,
-    VE_TOTAL,
-    VE_PRIME,
-    VE_POWERS,
-    VE_DIVIDE,
-    VE_TEST_END,
-    MATRIX,
-    ;
+public final class Logger {
 
     private static final long startTime = System.nanoTime();
     private static boolean logsAvailable = true;
-    private final ThreadLocal<Long> startTimeNano = ThreadLocal.withInitial(System::nanoTime);
     private final AtomicLong totalTimeNano = new AtomicLong();
-    private final String formattedName = name().toLowerCase().replaceAll("_", "-");
-    private Object extraInfo;
-
-    public void start(){
-        if(!DEBUG){
-            return;
-        }
-        startTimeNano.set(System.nanoTime());
-    }
-
-    public void end(){
-        if(!DEBUG){
-            return;
-        }
-        totalTimeNano.addAndGet(System.nanoTime() - startTimeNano.get());
-    }
-
-    public void setExtraInfo(Object extraInfo) {
-        this.extraInfo = extraInfo;
-    }
 
     public long getTotalTimeNano() {
         return totalTimeNano.get();
@@ -95,14 +62,5 @@ public enum Logger {
             return String.format("%02d:%02d",
                     timeLeft.toMinutesPart(), timeLeft.toSecondsPart());
         }
-    }
-
-    @Override
-    public String toString() {
-        String totalTimeMillis = formatLong(getTotalTimeNano() / 1_000_000);
-        if(extraInfo != null){
-            return formattedName + "(" + extraInfo + ") " + totalTimeMillis;
-        }
-        return formattedName + " " + totalTimeMillis;
     }
 }

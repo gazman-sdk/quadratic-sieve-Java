@@ -4,7 +4,7 @@ import com.gazman.quadratic_sieve.data.DataQueue;
 import com.gazman.quadratic_sieve.data.MagicNumbers;
 import com.gazman.quadratic_sieve.data.PolynomialData;
 import com.gazman.quadratic_sieve.data.PrimeBase;
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.logger.Analytics;
 import com.gazman.quadratic_sieve.utils.MathUtils;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
@@ -35,7 +35,7 @@ public class PolyMiner implements Runnable {
         BigInteger Q = N.multiply(BigInteger.TWO).sqrt().divide(m).sqrt();
         BigInteger v = BigInteger.ZERO;
         while (true) {
-            Logger.POLY_MINER.start();
+            Analytics.POLY_MINER.start();
             BigInteger q;
             while (true) {
                 v = v.add(BigInteger.ONE);
@@ -72,7 +72,7 @@ public class PolyMiner implements Runnable {
             polynomialData.wheels = buildWheels(a, b, delta, polynomialData.scale);
 
 
-            Logger.POLY_MINER.end();
+            Analytics.POLY_MINER.end();
             try {
                 DataQueue.polynomialData.put(polynomialData);
             } catch (InterruptedException e) {
@@ -96,14 +96,15 @@ public class PolyMiner implements Runnable {
         }
         List<Integer> primeBase = PrimeBase.instance.primeBase;
         int wheelIndex = 0;
-        for (int p : primeBase) {
+        for (int i = 0, primeBaseSize = primeBase.size(); i < primeBaseSize; i++) {
+            int p = primeBase.get(i);
             if (p < MagicNumbers.instance.minPrimeSize) {
                 continue;
             }
             if (p == 2) {
                 int startingPosition = b.mod(BigInteger.TWO).intValue() == 0 ? 1 : 0;
                 if (create) {
-                    wheels.add(new Wheel(p, startingPosition, delta, scale));
+                    wheels.add(new Wheel(p,i, startingPosition, delta, scale));
                 } else {
                     wheels.get(wheelIndex).reset(startingPosition, delta);
                     wheelIndex++;
@@ -117,8 +118,8 @@ public class PolyMiner implements Runnable {
             int p1 = root.subtract(b).multiply(aModInversePrime).mod(prime).intValue();
             int p2 = prime.subtract(root).subtract(b).multiply(aModInversePrime).mod(prime).intValue();
             if (create) {
-                wheels.add(new Wheel(p, p1, delta, scale));
-                wheels.add(new Wheel(p, p2, delta, scale));
+                wheels.add(new Wheel(p, i, p1, delta, scale));
+                wheels.add(new Wheel(p, i, p2, delta, scale));
             } else {
                 wheels.get(wheelIndex).reset(p1, delta);
                 wheels.get(wheelIndex + 1).reset(p2, delta);

@@ -2,7 +2,7 @@ package com.gazman.quadratic_sieve.core.matrix;
 
 import com.gazman.quadratic_sieve.data.BSmooth;
 import com.gazman.quadratic_sieve.data.DataQueue;
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.logger.Analytics;
 
 import java.math.BigInteger;
 
@@ -29,9 +29,9 @@ public class Matrix implements Runnable{
             } catch (InterruptedException e) {
                 return;
             }
-            Logger.MATRIX.start();
+            Analytics.MATRIX.start();
             matrix.add(bSmooth);
-            Logger.MATRIX.end();
+            Analytics.MATRIX.end();
         }
     }
 
