@@ -1,6 +1,6 @@
 package com.gazman.quadratic_sieve.core;
 
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.debug.Logger;
 
 import java.math.BigInteger;
 import java.util.Random;

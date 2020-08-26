@@ -2,22 +2,25 @@ package com.gazman.quadratic_sieve.primes;
 
 import com.gazman.quadratic_sieve.data.BSmooth;
 import com.gazman.quadratic_sieve.data.DataQueue;
+import com.gazman.quadratic_sieve.debug.Analytics;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BigPrimes {
 
     public static final BigPrimes instance = new BigPrimes();
 
-    private final HashMap<Long, BSmooth> bigPrimesMap = new HashMap<>();
-    private int totalBigPrimes;
+    private final Map<Long, BSmooth> bigPrimesMap = new ConcurrentHashMap<>();
+    private final AtomicInteger totalBigPrimes = new AtomicInteger();
 
-    public synchronized int getTotalBigPrimes() {
-        return totalBigPrimes;
+    public int getTotalBigPrimes() {
+        return totalBigPrimes.get();
     }
 
-    public synchronized void addBigPrime(BSmooth bSmooth, long bigPrime) {
-        totalBigPrimes++;
+    public void addBigPrime(BSmooth bSmooth, long bigPrime) {
+        totalBigPrimes.getAndIncrement();
         BSmooth currentValue = bigPrimesMap.putIfAbsent(bigPrime, bSmooth);
         if (currentValue == null) {
             return;
@@ -26,9 +29,11 @@ public class BigPrimes {
         xor(bSmooth, currentValue);
         try {
             bSmooth.bigPrime = true;
+            Analytics.VECTOR_EXTRACTOR_QUEUE.start();
             DataQueue.bSmooths.put(bSmooth);
-        } catch (InterruptedException ignore) {
-
+            Analytics.VECTOR_EXTRACTOR_QUEUE.end();
+        } catch (InterruptedException e) {
+            throw new Error(e);
         }
     }
 

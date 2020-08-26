@@ -4,6 +4,7 @@ import com.gazman.quadratic_sieve.data.BSmooth;
 import com.gazman.quadratic_sieve.data.DataQueue;
 import com.gazman.quadratic_sieve.data.PolynomialData;
 import com.gazman.quadratic_sieve.data.PrimeBase;
+import com.gazman.quadratic_sieve.debug.Analytics;
 import com.gazman.quadratic_sieve.primes.BigPrimes;
 
 import java.util.List;
@@ -45,7 +46,9 @@ public class VectorExtractor {
             BSmooth bSmooth = new BSmooth(polynomialData, bSmoothData.localX, bSmoothData.vector);
             if (bSmoothData.reminder == 1) {
                 try {
+                    Analytics.VECTOR_EXTRACTOR_QUEUE.start();
                     DataQueue.bSmooths.put(bSmooth);
+                    Analytics.VECTOR_EXTRACTOR_QUEUE.end();
                 } catch (InterruptedException e) {
                     return;
                 }

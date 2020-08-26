@@ -1,8 +1,9 @@
 package com.gazman.quadratic_sieve.core.matrix;
 
+import com.gazman.quadratic_sieve.QuadraticSieve;
 import com.gazman.quadratic_sieve.data.BSmooth;
 import com.gazman.quadratic_sieve.data.PrimeBase;
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.debug.Logger;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -84,8 +85,7 @@ public class GaussianEliminationMatrix {
         BigInteger maybeSolution = a.add(b).gcd(N);
         if (!maybeSolution.equals(N) && !maybeSolution.equals(BigInteger.ONE)) {
             Logger.logProgress(true);
-            Logger.log("Oh yeah " + maybeSolution);
-            System.exit(0);
+            QuadraticSieve.shutDown(maybeSolution);
         } else {
             Logger.log(index + " bad luck " + maybeSolution);
         }

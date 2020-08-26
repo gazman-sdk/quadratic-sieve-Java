@@ -2,8 +2,8 @@ package com.gazman.quadratic_sieve.core.matrix;
 
 import com.gazman.quadratic_sieve.data.BSmooth;
 import com.gazman.quadratic_sieve.data.DataQueue;
-import com.gazman.quadratic_sieve.logger.Analytics;
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.debug.Analytics;
+import com.gazman.quadratic_sieve.debug.Logger;
 
 import java.math.BigInteger;
 

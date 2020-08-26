@@ -1,10 +1,10 @@
 package com.gazman.quadratic_sieve.data;
 
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.debug.Logger;
 
 import java.math.BigInteger;
 
-import static com.gazman.quadratic_sieve.logger.Logger.log;
+import static com.gazman.quadratic_sieve.debug.Logger.log;
 
 public class MagicNumbers {
 

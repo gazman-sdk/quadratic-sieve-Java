@@ -6,21 +6,22 @@ import com.gazman.quadratic_sieve.core.poly.PolyMiner;
 import com.gazman.quadratic_sieve.core.siever.Siever;
 import com.gazman.quadratic_sieve.data.MagicNumbers;
 import com.gazman.quadratic_sieve.data.PrimeBase;
-import com.gazman.quadratic_sieve.logger.Logger;
+import com.gazman.quadratic_sieve.debug.Logger;
 
 import java.math.BigInteger;
 
 public class QuadraticSieve extends BaseFact {
 
-    public static final boolean DEBUG = true;
+    private static long startTime;
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
+        startTime = System.nanoTime();
         new QuadraticSieve().start(200);
-        if (!DEBUG) {
-            Runtime.getRuntime().addShutdownHook(new Thread(() ->
-                    System.out.println("Completed in " + Logger.formatLong((System.nanoTime() - startTime) / 1_000_000)), "Shutdown-thread"));
-        }
+    }
+
+    public static void shutDown(BigInteger solution){
+        System.out.println("Oh yeah " + solution + "\nCompleted in " + Logger.formatLong((System.nanoTime() - startTime) / 1_000_000));
+        System.exit(0);
     }
 
     @Override

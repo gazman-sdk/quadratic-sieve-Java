@@ -5,7 +5,7 @@ import com.gazman.quadratic_sieve.data.DataQueue;
 import com.gazman.quadratic_sieve.data.MagicNumbers;
 import com.gazman.quadratic_sieve.data.PolynomialData;
 import com.gazman.quadratic_sieve.data.PrimeBase;
-import com.gazman.quadratic_sieve.logger.Analytics;
+import com.gazman.quadratic_sieve.debug.Analytics;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
 import java.math.BigInteger;
@@ -33,7 +33,6 @@ public class Siever implements Runnable {
         while (true) {
             // it takes time for the queue to fill up, so don't run statistics before the first item
             if (polynomialData != null) {
-                Analytics.SIEVER_TOTAL.start();
                 try {
                     Analytics.SIEVE_QUEUE_OUT.start();
                     polynomialData = DataQueue.polynomialData.take();
@@ -47,15 +46,17 @@ public class Siever implements Runnable {
                 } catch (InterruptedException e) {
                     return;
                 }
-                Analytics.SIEVER_TOTAL.start();
             }
 
             long x = polynomialData.delta;
 
+            Analytics.SIEVER_WHEELS.start();
+            List<Wheel> wheels = polynomialData.buildWheels();
+            Analytics.SIEVER_WHEELS.end();
             for (int j = 0; j < MagicNumbers.instance.loopsCount; j++) {
                 byte baseLog = calculateBaseLog(deltaLog, polynomialData, x);
                 Analytics.SIEVE_CORE.start();
-                for (Wheel wheel : polynomialData.wheels) {
+                for (Wheel wheel : wheels) {
                     wheel.update(logs);
                 }
                 Analytics.SIEVE_CORE.end();
@@ -72,7 +73,7 @@ public class Siever implements Runnable {
             }
 
             Analytics.SIEVE_RE_SIEVE.start();
-            for (Wheel wheel : polynomialData.wheels) {
+            for (Wheel wheel : wheels) {
                 wheel.updateSmooth(bSmoothList);
             }
 
@@ -84,15 +85,11 @@ public class Siever implements Runnable {
             Analytics.SIEVE_RE_SIEVE.end();
 
 
-            Analytics.SIEVER_TOTAL.end();
-
-            Analytics.VE_TOTAL.start();
+            Analytics.VECTOR_EXTRACTOR_TOTAL.start();
             vectorExtractor.extract(polynomialData, bSmoothList);
-            Analytics.VE_TOTAL.end();
+            Analytics.VECTOR_EXTRACTOR_TOTAL.end();
             bSmoothList.clear();
-            Analytics.SIEVER_TOTAL.start();
-            WheelPool.instance.put(polynomialData.wheels);
-            Analytics.SIEVER_TOTAL.end();
+            WheelPool.instance.put(wheels);
         }
     }
 

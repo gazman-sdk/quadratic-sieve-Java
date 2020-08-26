@@ -1,8 +1,10 @@
 package com.gazman.quadratic_sieve.data;
 
+import com.gazman.quadratic_sieve.core.poly.WheelPool;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PolynomialData {
@@ -10,22 +12,18 @@ public class PolynomialData {
     public final BigInteger b;
     public final BigInteger c;
     public final BigInteger N;
-    public List<Wheel> wheels;
     public final int delta;
+    private final List<BigInteger> primeModSquares;
     public double scale;
 
 
-    public PolynomialData(BigInteger a, BigInteger b, BigInteger c, int delta, BigInteger N) {
+    public PolynomialData(BigInteger a, BigInteger b, BigInteger c, int delta, BigInteger N, List<BigInteger> primeModSquares) {
         this.a = a;
         this.b = b;
         this.c = c;
         this.N = N;
         this.delta = delta;
-    }
-
-    public int getLoopsSize() {
-        return b.pow(2).subtract(a.multiply(c)).sqrt().add(b).divide(a).multiply(BigInteger.TWO).intValue() /
-                MagicNumbers.instance.loopsCount;
+        this.primeModSquares = primeModSquares;
     }
 
     public BigInteger getSievingValue(long localX) {
@@ -39,6 +37,49 @@ public class PolynomialData {
 
     public BigInteger getB(long localX) {
         return getA(localX).pow(2).subtract(N);
+    }
+
+    public List<Wheel> buildWheels() {
+        boolean create = false;
+        List<Wheel> wheels = WheelPool.instance.get();
+        if (wheels == null) {
+            create = true;
+            wheels = new ArrayList<>();
+        }
+        List<Integer> primeBase = PrimeBase.instance.primeBase;
+        int wheelIndex = 0;
+        for (int i = 0, primeBaseSize = primeBase.size(), modSquareIndex = 0; i < primeBaseSize; i++) {
+            int p = primeBase.get(i);
+            if (p < MagicNumbers.instance.minPrimeSize) {
+                continue;
+            }
+            if (p == 2) {
+                int startingPosition = b.mod(BigInteger.TWO).intValue() == 0 ? 1 : 0;
+                if (create) {
+                    wheels.add(new Wheel(p, i, startingPosition, delta, scale));
+                } else {
+                    wheels.get(wheelIndex).reset(startingPosition, delta);
+                    wheelIndex++;
+                }
+                continue;
+            }
+            BigInteger prime = BigInteger.valueOf(p);
+            BigInteger root = primeModSquares.get(modSquareIndex);
+            modSquareIndex++;
+            BigInteger aModInversePrime = a.modInverse(prime);
+
+            int p1 = root.subtract(b).multiply(aModInversePrime).mod(prime).intValue();
+            int p2 = prime.subtract(root).subtract(b).multiply(aModInversePrime).mod(prime).intValue();
+            if (create) {
+                wheels.add(new Wheel(p, i, p1, delta, scale));
+                wheels.add(new Wheel(p, i, p2, delta, scale));
+            } else {
+                wheels.get(wheelIndex).reset(p1, delta);
+                wheels.get(wheelIndex + 1).reset(p2, delta);
+                wheelIndex += 2;
+            }
+        }
+        return wheels;
     }
 
 }

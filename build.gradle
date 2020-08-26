@@ -31,7 +31,7 @@ jar {
     }
 }
 
-task myProguardTask(type: ProGuardTask) {
+task optimize(type: ProGuardTask) {
     configuration 'proguard.conf'
 
     injars 'build/libs/QuadraticSieve-1.0.jar'

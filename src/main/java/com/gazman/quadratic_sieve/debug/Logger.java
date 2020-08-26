@@ -1,4 +1,4 @@
-package com.gazman.quadratic_sieve.logger;
+package com.gazman.quadratic_sieve.debug;
 
 import com.gazman.quadratic_sieve.core.matrix.Matrix;
 import com.gazman.quadratic_sieve.data.PrimeBase;
@@ -6,8 +6,6 @@ import com.gazman.quadratic_sieve.primes.BigPrimes;
 
 import java.time.Duration;
 import java.util.Arrays;
-
-import static com.gazman.quadratic_sieve.QuadraticSieve.DEBUG;
 
 public final class Logger {
 
@@ -21,9 +19,6 @@ public final class Logger {
     }
 
     public static void log(Object... objects) {
-        if (!DEBUG) {
-            return;
-        }
         if (!logsAvailable) {
             return;
         }
@@ -46,9 +41,6 @@ public final class Logger {
     }
 
     public static void logProgress(boolean force) {
-        if (!DEBUG) {
-            return;
-        }
         if (force || System.nanoTime() - lastUpdateNano > 1_000_000_000) {
             lastUpdateNano = System.nanoTime();
             int bSmoothFound = Matrix.instance.getTotal();
