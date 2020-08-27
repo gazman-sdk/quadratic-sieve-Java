@@ -14,6 +14,7 @@ public class MagicNumbers {
     public int maxPrimeThreshold;
     public int primeBaseSize;
     public double longRoundingError;
+    public int maxWheelPrime;
 
     public static final MagicNumbers instance = new MagicNumbers();
 
@@ -28,10 +29,29 @@ public class MagicNumbers {
         loopsCount = (int) (Math.sqrt(loopsSize));
         longRoundingError = loopsCount;
 
+        int loopSize = 1;
+        int maxWheelPrime = 1;
+        for (int prime : PrimeBase.instance.primeBase) {
+            if (prime < minPrimeSize) {
+                continue;
+            }
+            if (loopSize < MagicNumbers.instance.loopsSize) {
+                loopSize *= prime;
+                maxWheelPrime = prime;
+            } else {
+                break;
+            }
+        }
+        this.maxWheelPrime = maxWheelPrime;
+        this.loopsCount = this.loopsSize * this.loopsCount / loopSize;
+        this.loopsSize = loopSize;
+
+
         log("primeBaseSize", primeBaseSize);
         log("minPrimeSize", Logger.formatLong(minPrimeSize));
         log("loopsCount", Logger.formatLong(loopsCount));
         log("loopsSize", Logger.formatLong(loopsSize));
         log("maxPrimeThreshold", maxPrimeThreshold);
+        log("maxWheelPrime", maxWheelPrime);
     }
 }

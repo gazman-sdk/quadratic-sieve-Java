@@ -3,6 +3,7 @@ package com.gazman.quadratic_sieve.wheel;
 import com.gazman.quadratic_sieve.core.siever.BSmoothData;
 import com.gazman.quadratic_sieve.data.MagicNumbers;
 import com.gazman.quadratic_sieve.debug.AssertUtils;
+import com.gazman.quadratic_sieve.utils.ByteArray;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class Wheel {
     private int currentPosition;
     private int startingPosition;
-    private final int prime;
+    public final int prime;
     private final int primeIndex;
     private final int delta;
     private final byte log;
@@ -32,12 +33,17 @@ public class Wheel {
         this.currentPosition = this.startingPosition;
     }
 
-    public void update(byte[] logs) {
-        for (; currentPosition < logs.length; currentPosition += prime) {
-            logs[currentPosition] += log;
+    public void update(ByteArray logs) {
+        int length = logs.capacity;
+        int currentPosition = this.currentPosition;
+        byte log = this.log;
+        int prime = this.prime;
+        while (currentPosition < length) {
+            logs.add(currentPosition, log);
+            currentPosition += prime;
         }
 
-        this.currentPosition -= logs.length;
+        this.currentPosition = currentPosition - length;
     }
 
     public void updateSmooth(List<BSmoothData> bSmoothList) {
@@ -48,7 +54,7 @@ public class Wheel {
                 if (bSmoothData.bigValue == null) {
                     if (bSmoothData.log < longMaxLog) {
                         bSmoothData.value *= prime;
-                        AssertUtils.assertTrue("Long overflow", ()-> bSmoothData.value > 0);
+                        AssertUtils.assertTrue("Long overflow", () -> bSmoothData.value > 0);
                     } else {
                         bSmoothData.bigValue = BigInteger.valueOf(bSmoothData.value)
                                 .multiply(BigInteger.valueOf(prime));

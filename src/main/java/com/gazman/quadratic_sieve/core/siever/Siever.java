@@ -6,6 +6,7 @@ import com.gazman.quadratic_sieve.data.MagicNumbers;
 import com.gazman.quadratic_sieve.data.PolynomialData;
 import com.gazman.quadratic_sieve.data.PrimeBase;
 import com.gazman.quadratic_sieve.debug.Analytics;
+import com.gazman.quadratic_sieve.utils.ByteArray;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
 import java.math.BigInteger;
@@ -27,15 +28,23 @@ public class Siever implements Runnable {
     public void run() {
         final double maxPrime = PrimeBase.instance.maxPrime.doubleValue();
         final double deltaLog = Math.log(maxPrime * MagicNumbers.instance.maxPrimeThreshold);
-        final byte[] logs = new byte[MagicNumbers.instance.loopsSize];
+
+        int loopSize = MagicNumbers.instance.loopsSize;
+        final ByteArray baseLogs = new ByteArray(loopSize);
+        final ByteArray logs = new ByteArray(loopSize);
+
+        int loopsCount = MagicNumbers.instance.loopsCount * MagicNumbers.instance.loopsSize / loopSize;
+
         final List<BSmoothData> bSmoothList = new ArrayList<>();
         PolynomialData polynomialData = null;
+        byte baseLog = 0;
         while (true) {
             // it takes time for the queue to fill up, so don't run statistics before the first item
             if (polynomialData != null) {
                 try {
                     Analytics.SIEVE_QUEUE_OUT.start();
                     polynomialData = DataQueue.polynomialData.take();
+                    baseLogs.clear();
                     Analytics.SIEVE_QUEUE_OUT.end();
                 } catch (InterruptedException e) {
                     return;
@@ -52,24 +61,41 @@ public class Siever implements Runnable {
 
             Analytics.SIEVER_WHEELS.start();
             List<Wheel> wheels = polynomialData.buildWheels();
+            int wheelStartingPosition = 0;
+
+            for (Wheel wheel : wheels) {
+                if (wheel.prime > MagicNumbers.instance.maxWheelPrime) {
+                    break;
+                }
+                wheel.update(baseLogs);
+                wheelStartingPosition++;
+            }
+
+            logs.clear(baseLogs);
+
             Analytics.SIEVER_WHEELS.end();
-            for (int j = 0; j < MagicNumbers.instance.loopsCount; j++) {
-                byte baseLog = calculateBaseLog(deltaLog, polynomialData, x);
+
+
+            if (baseLog == 0) {
+                baseLog = calculateBaseLog(deltaLog, polynomialData, x);
+            }
+            for (int j = 0; j < loopsCount; j++) {
                 Analytics.SIEVE_CORE.start();
-                for (Wheel wheel : wheels) {
+                for (int i = wheelStartingPosition, wheelsSize = wheels.size(); i < wheelsSize; i++) {
+                    Wheel wheel = wheels.get(i);
                     wheel.update(logs);
                 }
                 Analytics.SIEVE_CORE.end();
                 Analytics.SIEVE_COLLECT.start();
-                for (int i = 0; i < logs.length; i++) {
-                    if (logs[i] >= baseLog) {
+                for (int i = 0; i < loopSize; i++) {
+                    if (logs.getByte(i) >= baseLog) {
                         bSmoothList.add(BSmoothDataPool.instance.get(x + i));
                     }
-                    logs[i] = 0;
                 }
+                logs.clear(baseLogs);
                 Analytics.SIEVE_COLLECT.end();
 
-                x += logs.length;
+                x += loopSize;
             }
 
             Analytics.SIEVE_RE_SIEVE.start();
