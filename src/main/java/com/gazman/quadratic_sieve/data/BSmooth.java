@@ -8,7 +8,7 @@ public class BSmooth {
     private final PolynomialData polynomialData;
     public BigInteger a, b;
     public final BitSet originalVector;
-    public BitSet vector;
+    public final BitSet vector;
     public boolean bigPrime;
 
     public BSmooth(PolynomialData polynomialData, long localX, BitSet vector) {

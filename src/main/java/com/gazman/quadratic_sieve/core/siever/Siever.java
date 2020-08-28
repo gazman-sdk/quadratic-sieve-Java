@@ -10,7 +10,9 @@ import com.gazman.quadratic_sieve.utils.ByteArray;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 /**
@@ -38,6 +40,7 @@ public class Siever implements Runnable {
         final List<BSmoothData> bSmoothList = new ArrayList<>();
         PolynomialData polynomialData = null;
         byte baseLog = 0;
+        long mask = 0;
         while (true) {
             // it takes time for the queue to fill up, so don't run statistics before the first item
             if (polynomialData != null) {
@@ -78,18 +81,27 @@ public class Siever implements Runnable {
 
             if (baseLog == 0) {
                 baseLog = calculateBaseLog(deltaLog, polynomialData, x);
+                byte byteMask = (byte) Integer.highestOneBit(baseLog);
+                byteMask |= byteMask << 1;
+
+                mask = ByteBuffer.wrap(new byte[]{byteMask,
+                        byteMask, byteMask, byteMask, byteMask, byteMask, byteMask, byteMask}).getLong();
             }
+            BitSet vector = polynomialData.aData.vector;
             for (int j = 0; j < loopsCount; j++) {
                 Analytics.SIEVE_CORE.start();
                 for (int i = wheelStartingPosition, wheelsSize = wheels.size(); i < wheelsSize; i++) {
-                    Wheel wheel = wheels.get(i);
-                    wheel.update(logs);
+                    wheels.get(i).update(logs);
                 }
                 Analytics.SIEVE_CORE.end();
                 Analytics.SIEVE_COLLECT.start();
-                for (int i = 0; i < loopSize; i++) {
-                    if (logs.getByte(i) >= baseLog) {
-                        bSmoothList.add(BSmoothDataPool.instance.get(x + i));
+                for (int i = 0; i < loopSize; i += 8) {
+                    if ((logs.getLong(i) & mask) > 0) {
+                        for (int k = 0; k < 8; k++) {
+                            if (logs.getByte(i + k) >= baseLog) {
+                                bSmoothList.add(new BSmoothData(x + i + k, vector));
+                            }
+                        }
                     }
                 }
                 logs.clear(baseLogs);
@@ -115,7 +127,7 @@ public class Siever implements Runnable {
             vectorExtractor.extract(polynomialData, bSmoothList);
             Analytics.VECTOR_EXTRACTOR_TOTAL.end();
             bSmoothList.clear();
-            WheelPool.instance.put(wheels);
+            WheelPool.instance.put(polynomialData, wheels);
         }
     }
 

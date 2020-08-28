@@ -86,9 +86,8 @@ public class GaussianEliminationMatrix {
         if (!maybeSolution.equals(N) && !maybeSolution.equals(BigInteger.ONE)) {
             Logger.logProgress(true);
             QuadraticSieve.shutDown(maybeSolution);
-        } else {
-            Logger.log(index + " bad luck " + maybeSolution);
-        }
+        }  //            Logger.log(index + " bad luck " + maybeSolution);
+
     }
 
 

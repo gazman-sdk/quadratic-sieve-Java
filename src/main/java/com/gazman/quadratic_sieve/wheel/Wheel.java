@@ -47,9 +47,11 @@ public class Wheel {
     }
 
     public void updateSmooth(List<BSmoothData> bSmoothList) {
-        for (BSmoothData bSmoothData : bSmoothList) {
+
+        for (int i = 0, bSmoothListSize = bSmoothList.size(); i < bSmoothListSize; i++) {
+            BSmoothData bSmoothData = bSmoothList.get(i);
             if ((bSmoothData.localX - delta) % prime == startingPosition) {
-                bSmoothData.vector.set(primeIndex);
+                bSmoothData.vector.flip(primeIndex);
                 bSmoothData.log += log;
                 if (bSmoothData.bigValue == null) {
                     if (bSmoothData.log < longMaxLog) {

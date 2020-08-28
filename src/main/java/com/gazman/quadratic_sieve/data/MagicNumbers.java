@@ -23,10 +23,10 @@ public class MagicNumbers {
     }
 
     public void init() {
-        maxPrimeThreshold = (int) (primeBaseSize * 1.01);
+        maxPrimeThreshold = (int) (primeBaseSize * 4.1);
         minPrimeSize = (int) (primeBaseSize * 0.008);
-        loopsSize = primeBaseSize * 5;
-        loopsCount = (int) (Math.sqrt(loopsSize));
+        loopsSize = primeBaseSize;
+        loopsCount = (int) (Math.sqrt(loopsSize * 50));
         longRoundingError = loopsCount;
 
         int loopSize = 1;
