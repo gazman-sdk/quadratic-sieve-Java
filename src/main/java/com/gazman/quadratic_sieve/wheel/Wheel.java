@@ -1,11 +1,9 @@
 package com.gazman.quadratic_sieve.wheel;
 
 import com.gazman.quadratic_sieve.core.siever.BSmoothData;
-import com.gazman.quadratic_sieve.data.MagicNumbers;
-import com.gazman.quadratic_sieve.debug.AssertUtils;
+import com.gazman.quadratic_sieve.data.PrimeBase;
 import com.gazman.quadratic_sieve.utils.ByteArray;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public class Wheel {
@@ -13,22 +11,19 @@ public class Wheel {
     private int startingPosition;
     public final int prime;
     private final int primeIndex;
-    private final int delta;
+    private int delta;
     private final byte log;
-    private static byte longMaxLog = -1;
+    private final long maxLong = Long.MAX_VALUE / PrimeBase.instance.maxPrime;
 
     public Wheel(int prime, int primeIndex, int startingPosition, int delta, double scale) {
         this.prime = prime;
         this.primeIndex = primeIndex;
-        this.delta = delta;
         reset(startingPosition, delta);
         log = (byte) Math.round(Math.log(prime) * scale);
-        if (longMaxLog == -1) {
-            longMaxLog = (byte) Math.round(Math.log(Long.MAX_VALUE / MagicNumbers.instance.longRoundingError) * scale);
-        }
     }
 
     public void reset(int startingPosition, int delta) {
+        this.delta = delta;
         this.startingPosition = (startingPosition + prime - delta % prime) % prime;
         this.currentPosition = this.startingPosition;
     }
@@ -47,23 +42,15 @@ public class Wheel {
     }
 
     public void updateSmooth(List<BSmoothData> bSmoothList) {
-
         for (int i = 0, bSmoothListSize = bSmoothList.size(); i < bSmoothListSize; i++) {
             BSmoothData bSmoothData = bSmoothList.get(i);
             if ((bSmoothData.localX - delta) % prime == startingPosition) {
                 bSmoothData.vector.flip(primeIndex);
-                bSmoothData.log += log;
-                if (bSmoothData.bigValue == null) {
-                    if (bSmoothData.log < longMaxLog) {
-                        bSmoothData.value *= prime;
-                        AssertUtils.assertTrue("Long overflow", () -> bSmoothData.value > 0);
-                    } else {
-                        bSmoothData.bigValue = BigInteger.valueOf(bSmoothData.value)
-                                .multiply(BigInteger.valueOf(prime));
-                    }
-                } else {
-                    bSmoothData.bigValue = bSmoothData.bigValue.multiply(BigInteger.valueOf(prime));
+
+                if (bSmoothData.value[bSmoothData.valueIndex] > maxLong) {
+                    bSmoothData.valueIndex++;
                 }
+                bSmoothData.value[bSmoothData.valueIndex] *= prime;
             }
         }
     }

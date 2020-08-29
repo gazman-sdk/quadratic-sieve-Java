@@ -45,10 +45,10 @@ public class Siever implements Runnable {
             // it takes time for the queue to fill up, so don't run statistics before the first item
             if (polynomialData != null) {
                 try {
-                    Analytics.SIEVE_QUEUE_OUT.start();
+                    Analytics.SIEVE_QUEUE_POLY.start();
                     polynomialData = DataQueue.polynomialData.take();
                     baseLogs.clear();
-                    Analytics.SIEVE_QUEUE_OUT.end();
+                    Analytics.SIEVE_QUEUE_POLY.end();
                 } catch (InterruptedException e) {
                     return;
                 }
@@ -62,21 +62,24 @@ public class Siever implements Runnable {
 
             long x = polynomialData.delta;
 
-            Analytics.SIEVER_WHEELS.start();
+            Analytics.SIEVER_BUILD_WHEELS.start();
             List<Wheel> wheels = polynomialData.buildWheels();
-            int wheelStartingPosition = 0;
+            Analytics.SIEVER_BUILD_WHEELS.end();
 
-            for (Wheel wheel : wheels) {
-                if (wheel.prime > MagicNumbers.instance.maxWheelPrime) {
+            Analytics.SIEVER_STATIC_WHEELS.start();
+            int wheelStartingPosition = 0;
+            int maxWheelPrime = MagicNumbers.instance.maxWheelPrime;
+            for (int i = 0, wheelsSize = wheels.size(); i < wheelsSize; i++) {
+                Wheel wheel = wheels.get(i);
+                if (wheel.prime > maxWheelPrime) {
                     break;
                 }
                 wheel.update(baseLogs);
                 wheelStartingPosition++;
             }
+            Analytics.SIEVER_STATIC_WHEELS.end();
 
             logs.clear(baseLogs);
-
-            Analytics.SIEVER_WHEELS.end();
 
 
             if (baseLog == 0) {
@@ -110,22 +113,26 @@ public class Siever implements Runnable {
                 x += loopSize;
             }
 
-            Analytics.SIEVE_RE_SIEVE.start();
-            for (Wheel wheel : wheels) {
-                wheel.updateSmooth(bSmoothList);
+            Analytics.SIEVE_RE_SIEVE_1.start();
+            for (int i = 0, wheelsSize = wheels.size(); i < wheelsSize; i++) {
+                wheels.get(i).updateSmooth(bSmoothList);
             }
+            Analytics.SIEVE_RE_SIEVE_1.end();
 
+            Analytics.SIEVE_RE_SIEVE_2.start();
             for (BSmoothData bSmoothData : bSmoothList) {
                 BigInteger sievingValue = polynomialData.getSievingValue(bSmoothData.localX);
-                BigInteger reminder = sievingValue.divide(bSmoothData.bigValue);
+                BigInteger v0 = BigInteger.valueOf(bSmoothData.value[0]);
+                BigInteger v1 = BigInteger.valueOf(bSmoothData.value[1]);
+                BigInteger v2 = BigInteger.valueOf(bSmoothData.value[2]);
+                BigInteger reminder = sievingValue.divide(v0.multiply(v1).multiply(v2));
                 bSmoothData.reminder = reminder.longValue();
             }
-            Analytics.SIEVE_RE_SIEVE.end();
+            Analytics.SIEVE_RE_SIEVE_2.end();
 
-
-            Analytics.VECTOR_EXTRACTOR_TOTAL.start();
+            Analytics.SIEVE_VECTOR_EXTRACTOR.start();
             vectorExtractor.extract(polynomialData, bSmoothList);
-            Analytics.VECTOR_EXTRACTOR_TOTAL.end();
+            Analytics.SIEVE_VECTOR_EXTRACTOR.end();
             bSmoothList.clear();
             WheelPool.instance.put(polynomialData, wheels);
         }

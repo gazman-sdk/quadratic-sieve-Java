@@ -6,14 +6,16 @@ import static com.gazman.quadratic_sieve.debug.Logger.formatLong;
 
 public enum Analytics {
     POLY_MINER_TOTAL(-1),
-    SIEVER_WHEELS(0),
+    MATRIX(-1),
+    SIEVER_BUILD_WHEELS(0),
+    SIEVER_STATIC_WHEELS(0),
     SIEVE_CORE(0),
     SIEVE_COLLECT(0),
-    SIEVE_RE_SIEVE(0),
-    SIEVE_QUEUE_OUT(0),
-    VECTOR_EXTRACTOR_TOTAL(0),
-    MATRIX(-1),
-    VECTOR_EXTRACTOR_QUEUE(0);
+    SIEVE_RE_SIEVE_1(0),
+    SIEVE_RE_SIEVE_2(0),
+    SIEVE_VECTOR_EXTRACTOR(0),
+    SIEVE_QUEUE_POLY(0),
+    SIEVE_QUEUE_B_SMOOTH(0);
 
     private final int group;
 

@@ -75,10 +75,9 @@ public class PolynomialData {
             }
             if (filteredPrimesIndex != -1 && i == aData.primesIndexes.get(filteredPrimesIndex)) {
                 modSquareIndex++;
-                if(filteredPrimesIndex < aData.primesIndexes.size() - 1) {
+                if (filteredPrimesIndex < aData.primesIndexes.size() - 1) {
                     filteredPrimesIndex++;
-                }
-                else{
+                } else {
                     filteredPrimesIndex = -1;
                 }
                 continue;

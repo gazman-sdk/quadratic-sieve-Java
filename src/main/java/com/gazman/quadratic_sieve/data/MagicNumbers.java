@@ -13,7 +13,6 @@ public class MagicNumbers {
     public int loopsSize;
     public int maxPrimeThreshold;
     public int primeBaseSize;
-    public double longRoundingError;
     public int maxWheelPrime;
 
     public static final MagicNumbers instance = new MagicNumbers();
@@ -27,7 +26,6 @@ public class MagicNumbers {
         minPrimeSize = (int) (primeBaseSize * 0.008);
         loopsSize = primeBaseSize;
         loopsCount = (int) (Math.sqrt(loopsSize * 50));
-        longRoundingError = loopsCount;
 
         int loopSize = 1;
         int maxWheelPrime = 1;

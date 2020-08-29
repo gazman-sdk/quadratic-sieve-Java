@@ -29,9 +29,9 @@ public class BigPrimes {
         xor(bSmooth, currentValue);
         try {
             bSmooth.bigPrime = true;
-            Analytics.VECTOR_EXTRACTOR_QUEUE.start();
+            Analytics.SIEVE_QUEUE_B_SMOOTH.start();
             DataQueue.bSmooths.put(bSmooth);
-            Analytics.VECTOR_EXTRACTOR_QUEUE.end();
+            Analytics.SIEVE_QUEUE_B_SMOOTH.end();
         } catch (InterruptedException e) {
             throw new Error(e);
         }
