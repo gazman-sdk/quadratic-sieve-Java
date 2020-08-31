@@ -1,0 +1,26 @@
+0>      Seed 123
+17>     A 470767470877018544702724242863
+17>     B 1807962164574294517180922502163
+28>     N 851129775657980603340669419119962390332167021192373654812669(200)
+84>     Prime-base 4,979
+84>     Max-prime 104,459
+84>
+84>     Specific settings
+85>     primeBaseSize 4979
+85>     desiredLoopSize 208,918
+85>     loopsCount 10
+85>     maxPrimeThreshold 10,355
+86>     maxBigPrimeSize 3,346,798
+86>
+86>     Implicit settings
+86>     loopsSize 228,271
+86>     minPrimeSize 48
+86>     maxWheelPrime 73
+1,031>  Completed 8.44% bSmooth-found 387 big-primes-found 12/1,411 [poly-miner-total 7, matrix 1, siever-build-wheels 1,933(30.07%), siever-static-wheels 107(1.67%), sieve-core 3,289(50.73%), sieve-collect 559(8.64%), sieve-re-sieve-1 479(7.40%), sieve-re-sieve-2 12(0.20%), sieve-vector-extractor 45(0.70%), sieve-queue-poly 12(0.19%), sieve-queue-b-smooth 12(0.19%)] TTD 00:10
+2,010>  Completed 25.03% bSmooth-found 1,044 big-primes-found 140/3,855 [poly-miner-total 13, matrix 31, siever-build-wheels 4,283(29.94%), siever-static-wheels 153(1.07%), sieve-core 7,477(52.27%), sieve-collect 1,071(7.49%), sieve-re-sieve-1 1,186(8.30%), sieve-re-sieve-2 24(0.17%), sieve-vector-extractor 55(0.39%), sieve-queue-poly 35(0.25%), sieve-queue-b-smooth 18(0.13%)] TTD 00:06
+3,012>  Completed 44.78% bSmooth-found 1,720 big-primes-found 398/6,543 [poly-miner-total 20, matrix 35, siever-build-wheels 6,656(29.88%), siever-static-wheels 203(0.91%), sieve-core 11,753(52.76%), sieve-collect 1,577(7.08%), sieve-re-sieve-1 1,910(8.57%), sieve-re-sieve-2 34(0.15%), sieve-vector-extractor 63(0.29%), sieve-queue-poly 49(0.22%), sieve-queue-b-smooth 28(0.13%)] TTD 00:03
+4,015>  Completed 69.28% bSmooth-found 2,482 big-primes-found 795/9,252 [poly-miner-total 26, matrix 73, siever-build-wheels 8,989(29.69%), siever-static-wheels 264(0.87%), sieve-core 16,070(53.08%), sieve-collect 2,087(6.90%), sieve-re-sieve-1 2,628(8.68%), sieve-re-sieve-2 43(0.14%), sieve-vector-extractor 71(0.24%), sieve-queue-poly 78(0.26%), sieve-queue-b-smooth 40(0.13%)] TTD 00:01
+5,017>  Completed 94.73% bSmooth-found 3,218 big-primes-found 1,263/11,861 [poly-miner-total 33, matrix 308, siever-build-wheels 11,273(29.47%), siever-static-wheels 328(0.86%), sieve-core 20,437(53.41%), sieve-collect 2,577(6.74%), sieve-re-sieve-1 3,316(8.67%), sieve-re-sieve-2 53(0.14%), sieve-vector-extractor 82(0.22%), sieve-queue-poly 117(0.31%), sieve-queue-b-smooth 75(0.20%)] TTD 00:00
+5,492>  Completed 102.90% bSmooth-found 3,429 big-primes-found 1,438/12,846 [poly-miner-total 35, matrix 623, siever-build-wheels 12,129(29.26%), siever-static-wheels 346(0.83%), sieve-core 22,078(53.26%), sieve-collect 2,791(6.73%), sieve-re-sieve-1 3,622(8.74%), sieve-re-sieve-2 56(0.14%), sieve-vector-extractor 86(0.21%), sieve-queue-poly 121(0.29%), sieve-queue-b-smooth 221(0.54%)] TTD 00:-1
+Oh yeah 1807962164574294517180922502163
+Completed in 5,514

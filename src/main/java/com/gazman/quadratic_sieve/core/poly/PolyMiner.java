@@ -14,11 +14,10 @@ import java.util.*;
  * Responsible for generating multiple polynomial of the form (ax+b)^2-N
  */
 public class PolyMiner implements Runnable {
+    public static final PolyMiner instance = new PolyMiner();
+    private List<BigInteger> primeModSquares;
     private BigInteger N;
     private int delta = Integer.MIN_VALUE;
-    private final List<BigInteger> primeModSquares = new ArrayList<>();
-
-    public static final PolyMiner instance = new PolyMiner();
 
     public void start(BigInteger N) {
         this.N = N;
@@ -41,17 +40,22 @@ public class PolyMiner implements Runnable {
         }
     }
 
-    private List<Integer> generateA(List<Integer> primeBase, BigInteger targetA, int minPrimeIndex, Random random) {
+    private static List<Integer> generateA(List<Integer> primeBase, BigInteger targetA, int minPrimeIndex, Random random) {
         BigInteger a = BigInteger.ONE;
-        ArrayList<Integer> list = new ArrayList<>();
-        HashSet<Integer> indexes = new HashSet<>();
-        while (a.compareTo(targetA) < 0) {
-            int i = random.nextInt(2000) + minPrimeIndex;
-            if (!indexes.add(i)) {
-                continue;
+        ArrayList<Integer> list = new ArrayList<>(6);
+        HashSet<Integer> indexes = new HashSet<>(128);
+        while (true) {
+            int compare = a.compareTo(targetA);
+            if (compare < 0) {
+                int i = random.nextInt(Math.min(primeBase.size() - minPrimeIndex, 2000)) + minPrimeIndex;
+                if (!indexes.add(i)) {
+                    continue;
+                }
+                a = a.multiply(BigInteger.valueOf(primeBase.get(i)));
+                list.add(i);
+            } else {
+                break;
             }
-            a = a.multiply(BigInteger.valueOf(primeBase.get(i)));
-            list.add(i);
         }
 
         for (int i = 0; i < 10; i++) {
@@ -74,7 +78,9 @@ public class PolyMiner implements Runnable {
                 if (j == primeBase.size()) {
                     j--;
                 }
-                while (indexes.contains(j)){
+                while (true) {
+                    boolean contains = indexes.contains(j);
+                    if (!contains) break;
                     j--;
                 }
                 a = a.multiply(BigInteger.valueOf(primeBase.get(j)));
@@ -88,7 +94,10 @@ public class PolyMiner implements Runnable {
     }
 
     private void initModSquaresCache() {
-        for (int p : PrimeBase.instance.primeBase) {
+        primeModSquares = new ArrayList<>(PrimeBase.instance.primeBase.size());
+        List<Integer> primeBase = PrimeBase.instance.primeBase;
+        for (int i = 0, primeBaseSize = primeBase.size(); i < primeBaseSize; i++) {
+            int p = primeBase.get(i);
             if (p < MagicNumbers.instance.minPrimeSize || p == 2) {
                 continue;
             }
@@ -104,9 +113,9 @@ public class PolyMiner implements Runnable {
         buildPolynomials(aData, a, bParts, limit);
     }
 
-    public List<BigInteger> buildAModInverseList(AData aData, BigInteger a) {
-        List<BigInteger> aModInverseList = new ArrayList<>();
+    public static List<BigInteger> buildAModInverseList(AData aData, BigInteger a) {
         List<Integer> primeBase = PrimeBase.instance.primeBase;
+        List<BigInteger> aModInverseList = new ArrayList<>(primeBase.size());
         for (int i = 0, filteredPrimes = 0, primeBaseSize = primeBase.size(); i < primeBaseSize; i++) {
             int p = primeBase.get(i);
             if (p < MagicNumbers.instance.minPrimeSize || p == 2) {
@@ -131,9 +140,9 @@ public class PolyMiner implements Runnable {
 
 
         for (int i = 0; i < limit; i++) {
-            Analytics.POLY_MINER_TOTAL.start();
+            Analytics.start();
             BigInteger b = BigInteger.ZERO;
-            for (int j = 0; j < bParts.size(); j++) {
+            for (int j = 0, size = bParts.size(); j < size; j++) {
                 if ((i & (1 << (j))) == 0) {
                     b = b.add(bParts.get(j));
                 } else {
@@ -164,7 +173,7 @@ public class PolyMiner implements Runnable {
     }
 
     private List<BigInteger> extractBParts(AData aData, BigInteger a) {
-        List<BigInteger> list = new ArrayList<>();
+        List<BigInteger> list = new ArrayList<>(aData.primesIndexes.size());
         for (int i : aData.primesIndexes) {
             BigInteger b = BigInteger.valueOf(PrimeBase.instance.primeBase.get(i));
             BigInteger mod = MathUtils.modSqrt(N, b);
@@ -180,7 +189,7 @@ public class PolyMiner implements Runnable {
         return list;
     }
 
-    private BigInteger extractA(AData aData) {
+    private static BigInteger extractA(AData aData) {
         BigInteger a = BigInteger.ONE;
         for (int i : aData.primesIndexes) {
             a = BigInteger.valueOf(PrimeBase.instance.primeBase.get(i)).multiply(a);
@@ -188,7 +197,7 @@ public class PolyMiner implements Runnable {
         return a;
     }
 
-    private int calculateDelta(BigInteger a, BigInteger b, BigInteger c) {
+    private static int calculateDelta(BigInteger a, BigInteger b, BigInteger c) {
         int loopSize = b.pow(2).subtract(a.multiply(c)).sqrt().subtract(b).divide(a).intValue();
         return loopSize - MagicNumbers.instance.loopsSize * MagicNumbers.instance.loopsCount / 2;
     }

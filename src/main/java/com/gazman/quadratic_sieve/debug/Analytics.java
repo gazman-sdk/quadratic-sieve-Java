@@ -17,18 +17,18 @@ public enum Analytics {
     SIEVE_QUEUE_POLY(0),
     SIEVE_QUEUE_B_SMOOTH(0);
 
+    private static final AtomicLong[] groups = {new AtomicLong(), new AtomicLong()};
     private final int group;
+    @SuppressWarnings("DynamicRegexReplaceableByCompiledPattern")
+    private final String formattedName = super.toString().toLowerCase().replaceAll("_", "-");
+    private static final ThreadLocal<Long> startTimeNano = ThreadLocal.withInitial(System::nanoTime);
+    private final AtomicLong totalTimeNano = new AtomicLong();
 
     Analytics(int group) {
         this.group = group;
     }
 
-    private final String formattedName = super.toString().toLowerCase().replaceAll("_", "-");
-    private final ThreadLocal<Long> startTimeNano = ThreadLocal.withInitial(System::nanoTime);
-    private final AtomicLong totalTimeNano = new AtomicLong();
-    private static final AtomicLong[] groups = {new AtomicLong(), new AtomicLong()};
-
-    public void start() {
+    public static void start() {
         startTimeNano.set(System.nanoTime());
     }
 

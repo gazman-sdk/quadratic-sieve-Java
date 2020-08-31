@@ -32,9 +32,6 @@ public class MathUtils {
      * @see "https://www.programcreek.com/java-api-examples/?code=google%2Fwycheproof%2Fwycheproof-master%2Fjava%2Fcom%2Fgoogle%2Fsecurity%2Fwycheproof%2FEcUtil.java"
      */
     public static BigInteger modSqrt(BigInteger x, BigInteger p) {
-//        if (p.signum() != 1) {
-//            throw new GeneralSecurityException("p must be positive");
-//        }
         x = x.mod(p);
         BigInteger squareRoot = null;
         // Special case for x == 0.

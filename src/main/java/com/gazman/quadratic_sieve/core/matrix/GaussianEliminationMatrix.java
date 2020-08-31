@@ -9,9 +9,9 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class GaussianEliminationMatrix {
-    private final List<BitSet> solutionMatrix = new ArrayList<>();
-    private final Map<Integer, Integer> eliminatorsMap = new HashMap<>();
-    private final List<BSmooth> bSmoothList = new ArrayList<>();
+    private final List<BitSet> solutionMatrix = new ArrayList<>(PrimeBase.instance.primeBase.size());
+    private final Map<Integer, Integer> eliminatorsMap = new HashMap<>(PrimeBase.instance.primeBase.size());
+    private final List<BSmooth> bSmoothList = new ArrayList<>(PrimeBase.instance.primeBase.size());
     private BigInteger N;
 
     public void add(BSmooth bSmooth) {
@@ -73,7 +73,7 @@ public class GaussianEliminationMatrix {
             b = nextB.sqrt().multiply(b).mod(N);
         }
 
-        for (int i = 0; i < vectorParts.length; i++) {
+        for (int i = 0, length = vectorParts.length; i < length; i++) {
             if (vectorParts[i] == 0) {
                 continue;
             }
@@ -91,11 +91,11 @@ public class GaussianEliminationMatrix {
     }
 
 
-    private List<BSmooth> extractSolution(List<BitSet> solutionMatrix, List<BSmooth> bSmoothList,
-                                          int bSmoothIndex) {
-        List<BSmooth> solution = new ArrayList<>();
+    private static List<BSmooth> extractSolution(List<BitSet> solutionMatrix, List<BSmooth> bSmoothList,
+                                                 int bSmoothIndex) {
+        List<BSmooth> solution = new ArrayList<>(256);
         BitSet bitSet = solutionMatrix.get(bSmoothIndex);
-        for (int i = 0; i < bSmoothList.size(); i++) {
+        for (int i = 0, size = bSmoothList.size(); i < size; i++) {
             if (bitSet.get(i)) {
                 solution.add(bSmoothList.get(i));
             }

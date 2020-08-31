@@ -12,8 +12,12 @@ import java.util.List;
  */
 public class VectorExtractor {
 
-    public void extract(PolynomialData polynomialData, List<BSmoothData> bSmoothList) {
-        for (BSmoothData bSmoothData : bSmoothList) {
+    public static void extract(PolynomialData polynomialData, List<BSmoothData> bSmoothList) {
+        for (int j = 0, bSmoothListSize = bSmoothList.size(); j < bSmoothListSize; j++) {
+            BSmoothData bSmoothData = bSmoothList.get(j);
+            if (bSmoothData.ignore) {
+                continue;
+            }
             List<Integer> primeBase = PrimeBase.instance.primeBase;
 
             BitSet vector = bSmoothData.vector;
@@ -31,9 +35,10 @@ public class VectorExtractor {
             }
             bSmoothData.reminder >>= powerTwo;
 
-            for (int i = 2; i < primeBase.size(); i++) {
+            int primeBaseSize = primeBase.size();
+            for (int i = 2; i < primeBaseSize; i++) {
                 int prime = primeBase.get(i);
-                if(prime > MagicNumbers.instance.minPrimeSize){
+                if (prime >= MagicNumbers.instance.minPrimeSize) {
                     break;
                 }
                 checkPrime(bSmoothData, vector, i, prime);
@@ -42,19 +47,26 @@ public class VectorExtractor {
             BSmooth bSmooth = new BSmooth(polynomialData, bSmoothData.localX, vector);
             if (bSmoothData.reminder == 1) {
                 try {
-                    Analytics.SIEVE_QUEUE_B_SMOOTH.start();
+                    Analytics.start();
                     DataQueue.bSmooths.put(bSmooth);
                     Analytics.SIEVE_QUEUE_B_SMOOTH.end();
                 } catch (InterruptedException e) {
                     return;
                 }
             } else {
-                BigPrimes.instance.addBigPrime(bSmooth, bSmoothData.reminder);
+                if (bSmoothData.reminder < MagicNumbers.instance.maxBigPrimeSize) {
+                    BigPrimes.instance.addBigPrime(bSmooth, bSmoothData.reminder);
+                }
             }
+        }
+
+        for (int i = 0, bSmoothListSize = bSmoothList.size(); i < bSmoothListSize; i++) {
+            BSmoothData bSmoothData = bSmoothList.get(i);
+            BSmoothDataPool.put(bSmoothData);
         }
     }
 
-    private void checkPrime(BSmoothData bSmoothData, BitSet vector, int primeIndex, int prime) {
+    private static void checkPrime(BSmoothData bSmoothData, BitSet vector, int primeIndex, int prime) {
         if (bSmoothData.reminder % prime == 0) {
             int count = 0;
             do {

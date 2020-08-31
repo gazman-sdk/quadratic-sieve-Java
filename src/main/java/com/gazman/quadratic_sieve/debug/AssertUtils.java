@@ -5,13 +5,13 @@ package com.gazman.quadratic_sieve.debug;
  */
 public class AssertUtils {
 
-    public static void assertTrue(String errorMessage, Tester tester){
-        if(!tester.test()){
+    public static void assertTrue(String errorMessage, Tester tester) {
+        if (!tester.test()) {
             throw new Error(errorMessage);
         }
     }
 
-    public interface Tester{
+    public interface Tester {
         boolean test();
     }
 }

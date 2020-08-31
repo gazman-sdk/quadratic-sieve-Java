@@ -28,20 +28,20 @@ public class SieveOfEratosthenes {
         boolean[] booleans = new boolean[limit / 2 + 1];
         int size = (int) Math.sqrt(limit);
         size += size % 2;
-        List<Integer> primes = new ArrayList<>();
+        List<Integer> primes = new ArrayList<>(limit / 6);
         primes.add(2);
         for (int prime = 3; prime < size; prime += 2) {
             if (booleans[prime / 2 + 1]) {
                 continue;
             }
             primes.add(prime);
-            for (int i = prime / 2 + 1; i < booleans.length; i += prime) {
+            for (int i = prime / 2 + 1, length = booleans.length; i < length; i += prime) {
                 booleans[i] = true;
             }
         }
-        for (int i = size / 2; i < booleans.length; i++) {
+        for (int i = size / 2, length = booleans.length; i < length; i++) {
             if (!booleans[i]) {
-                int p = i * 2 - 1;
+                int p = (i << 1) - 1;
                 primes.add(p);
             }
         }

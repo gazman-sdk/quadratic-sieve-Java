@@ -10,19 +10,11 @@ import java.util.Arrays;
 public final class Logger {
 
     private static final long startTime = System.nanoTime();
-    private static boolean logsAvailable = true;
     private static final long startTimeNano = System.nanoTime();
     private static long lastUpdateNano = System.nanoTime();
 
-    public static void setLogsAvailable(boolean logsAvailable) {
-        Logger.logsAvailable = logsAvailable;
-    }
-
     public static void log(Object... objects) {
-        if (!logsAvailable) {
-            return;
-        }
-        StringBuilder out = new StringBuilder();
+        StringBuilder out = new StringBuilder(objects.length << 3);
         for (Object object : objects) {
             out.append(object).append(" ");
         }
@@ -30,7 +22,9 @@ public final class Logger {
         long milliseconds = (System.nanoTime() - startTime) / 1_000_000;
 
         StringBuilder prefix = new StringBuilder(formatLong(milliseconds) + "> ");
-        while (prefix.length() < 8) {
+        while (true) {
+            int length = prefix.length();
+            if (!(length < 8)) break;
             prefix.append(" ");
         }
         System.out.println(prefix.toString() + out);
@@ -61,6 +55,7 @@ public final class Logger {
     }
 
     public static String formatDouble(double value, int spaces) {
+        //noinspection StringConcatenationMissingWhitespace,StringConcatenationInFormatCall,StringConcatenationInFormatCall
         return String.format("%." + spaces + "f", value);
     }
 

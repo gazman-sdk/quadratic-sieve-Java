@@ -6,7 +6,9 @@ import java.lang.reflect.Field;
 
 public class ByteArray {
 
+    public static final byte ZERO_BYTE = (byte) 0;
     private static final Unsafe UNSAFE;
+
     static {
         try {
             Field f = Unsafe.class.getDeclaredField("theUnsafe");
@@ -17,9 +19,8 @@ public class ByteArray {
         }
     }
 
-    public static final byte ZERO_BYTE = (byte) 0;
-    private final long address;
     public final int capacity;
+    private final long address;
 
     public ByteArray(int capacity) {
         this.capacity = capacity;

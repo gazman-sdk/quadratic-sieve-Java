@@ -1,23 +1,21 @@
 package com.gazman.quadratic_sieve.core.poly;
 
-import com.gazman.quadratic_sieve.data.PolynomialData;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
-import java.util.*;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class WheelPool {
-    private final Map<PolynomialData, Queue<List<Wheel>>> wheelMap = Collections.synchronizedMap(new HashMap<>());
-
     public static final WheelPool instance = new WheelPool();
+    private final Queue<List<Wheel>> wheelLists = new ConcurrentLinkedDeque<>();
 
-    public List<Wheel> get(PolynomialData polynomialData) {
-        Queue<List<Wheel>> wheelLists = wheelMap.get(polynomialData);
-        return wheelLists != null ? wheelLists.poll() : null;
+    public List<Wheel> get() {
+        return wheelLists.poll();
     }
 
-    public void put(PolynomialData polynomialData, List<Wheel> wheels) {
-        wheelMap.computeIfAbsent(polynomialData, x -> new ConcurrentLinkedDeque<>()).add(wheels);
+    public void put(List<Wheel> wheels) {
+        wheelLists.add(wheels);
     }
 
 }

@@ -50,10 +50,10 @@ public class PolynomialData {
 
     public List<Wheel> buildWheels() {
         boolean create = false;
-        List<Wheel> wheels = WheelPool.instance.get(this);
+        List<Wheel> wheels = WheelPool.instance.get();
         if (wheels == null) {
             create = true;
-            wheels = new ArrayList<>();
+            wheels = new ArrayList<>(PrimeBase.instance.primeBase.size());
         }
         List<Integer> primeBase = PrimeBase.instance.primeBase;
         int wheelIndex = 0;
@@ -80,6 +80,19 @@ public class PolynomialData {
                 } else {
                     filteredPrimesIndex = -1;
                 }
+                if (create) {
+                    Wheel wheel1 = new Wheel(p, i, 0, delta, scale);
+                    Wheel wheel2 = new Wheel(p, i, 0, delta, scale);
+                    wheels.add(wheel1);
+                    wheels.add(wheel2);
+                    wheel1.ignore = true;
+                    wheel2.ignore = true;
+                } else {
+                    wheels.get(wheelIndex).ignore = true;
+                    wheels.get(wheelIndex + 1).ignore = true;
+                    wheelIndex += 2;
+                }
+
                 continue;
             }
             BigInteger prime = BigInteger.valueOf(p);
