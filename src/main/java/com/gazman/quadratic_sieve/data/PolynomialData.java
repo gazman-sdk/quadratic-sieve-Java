@@ -1,7 +1,5 @@
 package com.gazman.quadratic_sieve.data;
 
-import com.gazman.quadratic_sieve.core.poly.AData;
-import com.gazman.quadratic_sieve.core.poly.WheelPool;
 import com.gazman.quadratic_sieve.wheel.Wheel;
 
 import java.math.BigInteger;
@@ -9,110 +7,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PolynomialData {
-    public final BigInteger a;
-    public final BigInteger b;
-    public final BigInteger c;
+
     public final BigInteger N;
-    public final int delta;
-    public final AData aData;
-    private final List<BigInteger> aModInverseList;
-    private final List<BigInteger> primeModSquares;
+    public final BigInteger a;
+    public final BigInteger c;
+    public final BigInteger x;
+    public final BigInteger iStart;
+    public final double scale;
 
-    public double scale;
+    private final BigInteger xMinusN;
+    private final BigInteger cPlusIStart;
 
-
-    public PolynomialData(BigInteger a, BigInteger b, BigInteger c,
-                          int delta, BigInteger N, List<BigInteger> primeModSquares,
-                          AData aData, List<BigInteger> aModInverseList) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
+    public PolynomialData(BigInteger N, BigInteger a, BigInteger c, BigInteger x, BigInteger iStart, double scale) {
         this.N = N;
-        this.delta = delta;
-        this.primeModSquares = primeModSquares;
-        this.aData = aData;
-        this.aModInverseList = aModInverseList;
+        this.a = a;
+        this.c = c;
+        this.x = x;
+        this.iStart = iStart;
+        this.scale = scale;
+
+        xMinusN = x.subtract(N);
+        cPlusIStart = c.add(iStart);
     }
 
-
-    public BigInteger getSievingValue(long localX) {
-        BigInteger x = BigInteger.valueOf(localX);
-        return a.multiply(x.pow(2)).add(b.multiply(x).multiply(BigInteger.TWO).add(c));
+    /**
+     * ia + x`- N
+     */
+    public BigInteger getSievingValueA(int localX) {
+        return iStart.add(BigInteger.valueOf(localX)).multiply(a).add(xMinusN);
     }
 
-    public BigInteger getA(long localX) {
-        return a.multiply(BigInteger.valueOf(localX)).add(b);
-    }
-
-    public BigInteger getB(long localX) {
-        return getA(localX).pow(2).subtract(N);
+    /**
+     * c + i
+     */
+    public BigInteger getSievingValueB(int localX) {
+        return cPlusIStart.add(BigInteger.valueOf(localX));
     }
 
     public List<Wheel> buildWheels() {
-        boolean create = false;
-        List<Wheel> wheels = WheelPool.instance.get();
-        if (wheels == null) {
-            create = true;
-            wheels = new ArrayList<>(PrimeBase.instance.primeBase.size());
-        }
+        List<Wheel> wheels = new ArrayList<>(PrimeBase.instance.primeBase.size());
+
         List<Integer> primeBase = PrimeBase.instance.primeBase;
-        int wheelIndex = 0;
-        int aModInverseIndex = 0;
-        for (int i = 0, primeBaseSize = primeBase.size(), modSquareIndex = 0, filteredPrimesIndex = 0; i < primeBaseSize; i++) {
-            int p = primeBase.get(i);
-            if (p < MagicNumbers.instance.minPrimeSize) {
-                continue;
-            }
-            if (p == 2) {
-                int startingPosition = b.mod(BigInteger.TWO).intValue() == 0 ? 1 : 0;
-                if (create) {
-                    wheels.add(new Wheel(p, i, startingPosition, delta, scale));
-                } else {
-                    wheels.get(wheelIndex).reset(startingPosition, delta);
-                    wheelIndex++;
-                }
-                continue;
-            }
-            if (filteredPrimesIndex != -1 && i == aData.primesIndexes.get(filteredPrimesIndex)) {
-                modSquareIndex++;
-                if (filteredPrimesIndex < aData.primesIndexes.size() - 1) {
-                    filteredPrimesIndex++;
-                } else {
-                    filteredPrimesIndex = -1;
-                }
-                if (create) {
-                    Wheel wheel1 = new Wheel(p, i, 0, delta, scale);
-                    Wheel wheel2 = new Wheel(p, i, 0, delta, scale);
-                    wheels.add(wheel1);
-                    wheels.add(wheel2);
-                    wheel1.ignore = true;
-                    wheel2.ignore = true;
-                } else {
-                    wheels.get(wheelIndex).ignore = true;
-                    wheels.get(wheelIndex + 1).ignore = true;
-                    wheelIndex += 2;
-                }
 
-                continue;
-            }
-            BigInteger prime = BigInteger.valueOf(p);
-            BigInteger root = primeModSquares.get(modSquareIndex);
-            BigInteger aModInversePrime = aModInverseList.get(aModInverseIndex);
-            modSquareIndex++;
-            aModInverseIndex++;
+        BigInteger aStart = getSievingValueA(0);
+        BigInteger bStart = getSievingValueB(0);
 
-            int p1 = root.subtract(b).multiply(aModInversePrime).mod(prime).intValue();
-            int p2 = prime.subtract(root).subtract(b).multiply(aModInversePrime).mod(prime).intValue();
-            if (create) {
-                wheels.add(new Wheel(p, i, p1, delta, scale));
-                wheels.add(new Wheel(p, i, p2, delta, scale));
-            } else {
-                wheels.get(wheelIndex).reset(p1, delta);
-                wheels.get(wheelIndex + 1).reset(p2, delta);
-                wheelIndex += 2;
-            }
+        for (int i = 0, primeBaseSize = primeBase.size(); i < primeBaseSize; i++) {
+            int prime = primeBase.get(i);
+            BigInteger p = BigInteger.valueOf(prime);
+
+            int a = p.subtract(aStart.mod(p)).intValue();
+            int b = p.subtract(bStart.mod(p)).intValue();
+
+            wheels.add(new Wheel(a,b, prime,i, scale));
         }
         return wheels;
     }
 
+
+    public BigInteger getA(int localX) {
+        return x.add(a.multiply(BigInteger.valueOf(localX)));
+    }
+
+    public BigInteger getB(int localX) {
+        return getSievingValueA(localX).multiply(getSievingValueB(localX)).multiply(a);
+    }
 }

@@ -6,24 +6,28 @@ import java.util.BitSet;
 public class BSmoothData {
     public int localX;
     public BitSet vector;
-    public final long[] value = {1, 1, 1};
-    public long reminder;
-    public int valueIndex = 0;
-    public boolean ignore;
+    public final long[] valueA = {1, 1, 1};
+    public final long[] valueB = {1, 1, 1};
+    public long reminderA;
+    public long reminderB;
+    public int valueAIndex = 0;
+    public int valueBIndex = 0;
+    public boolean ignoreA;
+    public boolean ignoreB;
 
-    public BSmoothData(int localX, BitSet baseVector) {
+    public BSmoothData(int localX) {
         this.localX = localX;
-        vector = new BitSet(baseVector.size());
-        vector.xor(baseVector);
+        vector = new BitSet();
     }
 
-    public void init(int localX, BitSet baseVector){
+    public void init(int localX){
         this.localX = localX;
-        vector = new BitSet(baseVector.size());
-        vector.xor(baseVector);
-        Arrays.fill(value, 1);
-        valueIndex = 0;
-        ignore = false;
-        reminder = 0;
+        vector = new BitSet();
+
+        Arrays.fill(valueA, 1);
+        Arrays.fill(valueB, 1);
+        valueAIndex = valueBIndex = 0;
+        reminderA = reminderB = 0;
+        ignoreA = ignoreB = false;
     }
 }

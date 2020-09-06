@@ -6,12 +6,12 @@ import java.util.BitSet;
 public class BSmooth {
     public final BitSet originalVector;
     public final BitSet vector;
-    private final long localX;
+    private final int localX;
     private final PolynomialData polynomialData;
     public BigInteger a, b;
     public boolean bigPrime;
 
-    public BSmooth(PolynomialData polynomialData, long localX, BitSet vector) {
+    public BSmooth(PolynomialData polynomialData, int localX, BitSet vector) {
         this.vector = vector;
         this.polynomialData = polynomialData;
         this.localX = localX;

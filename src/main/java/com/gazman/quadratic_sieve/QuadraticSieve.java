@@ -17,13 +17,13 @@ public class QuadraticSieve{
     private static long startTime;
 
     public static void main(String[] args) {
-        solve(generateN(MagicNumbers.DEMO_BIT_SIZE));
+        solve(generateN(MagicNumbers.DEMO_BIT_SIZE, MagicNumbers.DEMO_SEED));
     }
 
     private static void solve(BigInteger N) {
         startTime = System.nanoTime();
         MagicNumbers.instance.initN(N);
-        PrimeBase.instance.build(N);
+        PrimeBase.instance.build(N, MagicNumbers.instance.primeBaseSize);
         MagicNumbers.instance.init();
 
         PolyMiner.instance.start(N);
@@ -41,16 +41,15 @@ public class QuadraticSieve{
     }
 
     @SuppressWarnings("ObjectAllocationInLoop")
-    public static BigInteger generateN(int bitLength) {
+    public static BigInteger generateN(int bitLength, long inputSeed) {
         bitLength /= 2;
 
         long seed;
-        //noinspection ConstantConditions
-        if (MagicNumbers.DEMO_SEED == -1) {
+        if (inputSeed == -1) {
             Random random = new Random();
             seed = random.nextLong();
         } else {
-            seed = MagicNumbers.DEMO_SEED;
+            seed = inputSeed;
         }
 
         Random random = new Random(seed);

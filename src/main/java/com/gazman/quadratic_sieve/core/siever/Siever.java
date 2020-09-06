@@ -12,7 +12,6 @@ import com.gazman.quadratic_sieve.wheel.Wheel;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 
 /**
@@ -31,7 +30,6 @@ public class Siever implements Runnable {
 
         int loopSize = MagicNumbers.instance.loopsSize;
         int loopsCount = MagicNumbers.instance.loopsCount;
-        final ByteArray baseLogs = new ByteArray(loopSize);
         final ByteArray logs = new ByteArray(loopSize);
 
 
@@ -40,37 +38,28 @@ public class Siever implements Runnable {
         byte baseLog = 0;
         long mask = 0;
         while (true) {
-            polynomialData = next(baseLogs, polynomialData);
+            polynomialData = next(polynomialData);
             if (polynomialData == null) {
                 return;
             }
 
             List<Wheel> wheels = buildWheels(polynomialData);
-            int wheelStartingPosition = precomputeWheels(baseLogs, wheels);
+
+            logs.clear();
 
 
-            logs.clear(baseLogs);
-
-
-            int x = polynomialData.delta;
             if (baseLog == 0) {
-                baseLog = calculateBaseLog(deltaLog, polynomialData, x);
+                baseLog = calculateBaseLog(deltaLog, polynomialData, 0);
                 mask = buildMask(baseLog);
             }
-            BitSet baseVector = polynomialData.aData.vector;
-            for (int j = 0; j < loopsCount; j++) {
+            for (int j = 0, x = 0; j < loopsCount; j++, x += loopSize) {
                 Analytics.start();
-                for (int i = wheelStartingPosition, wheelsSize = wheels.size(); i < wheelsSize; i++) {
+                for (int i = 0, wheelsSize = wheels.size(); i < wheelsSize; i++) {
                     Wheel wheel = wheels.get(i);
-                    if (wheel.ignore) {
-                        continue;
-                    }
                     wheel.update(logs);
                 }
                 Analytics.SIEVE_CORE.end();
-                collect(loopSize, baseLogs, logs, bSmoothList, baseLog, mask, x, baseVector);
-
-                x += loopSize;
+                collect(loopSize, logs, bSmoothList, baseLog, mask, x);
             }
 
             receive(bSmoothList, polynomialData, wheels);
@@ -91,41 +80,52 @@ public class Siever implements Runnable {
         Analytics.start();
         for (int i = 0, wheelsSize = wheels.size(); i < wheelsSize; i++) {
             Wheel wheel = wheels.get(i);
-            if (wheel.ignore) {
-                continue;
-            }
             wheel.updateSmooth(bSmoothList);
         }
         Analytics.SIEVE_RE_SIEVE_1.end();
 
         Analytics.start();
         for (BSmoothData bSmoothData : bSmoothList) {
-            BigInteger sievingValue = polynomialData.getSievingValue(bSmoothData.localX);
-            BigInteger v0 = BigInteger.valueOf(bSmoothData.value[0]);
-            BigInteger v1 = BigInteger.valueOf(bSmoothData.value[1]);
-            BigInteger v2 = BigInteger.valueOf(bSmoothData.value[2]);
-            BigInteger reminder = sievingValue.divide(v0.multiply(v1).multiply(v2));
-            if (reminder.bitLength() < 62) {
-                bSmoothData.reminder = reminder.longValue();
+            BigInteger sievingValue, reminder;
+
+            sievingValue = polynomialData.getSievingValueA(bSmoothData.localX);
+            reminder = calculateReminder(bSmoothData.valueA, sievingValue);
+            if (reminder.bitLength() < 64) {
+                bSmoothData.reminderA = reminder.longValue();
             } else {
-                bSmoothData.ignore = true;
+                bSmoothData.ignoreA = true;
+            }
+
+            sievingValue = polynomialData.getSievingValueB(bSmoothData.localX);
+            reminder = calculateReminder(bSmoothData.valueB, sievingValue);
+            if (reminder.bitLength() < 64) {
+                bSmoothData.reminderB = reminder.longValue();
+            } else {
+                bSmoothData.ignoreB = true;
             }
         }
         Analytics.SIEVE_RE_SIEVE_2.end();
     }
 
-    private static void collect(int loopSize, ByteArray baseLogs, ByteArray logs, List<BSmoothData> bSmoothList, byte baseLog, long mask, int x, BitSet baseVector) {
+    private static BigInteger calculateReminder(long[] valueA, BigInteger sievingValue) {
+        BigInteger v0 = BigInteger.valueOf(valueA[0]);
+        BigInteger v1 = BigInteger.valueOf(valueA[1]);
+        BigInteger v2 = BigInteger.valueOf(valueA[2]);
+        return sievingValue.divide(v0.multiply(v1).multiply(v2));
+    }
+
+    private static void collect(int loopSize, ByteArray logs, List<BSmoothData> bSmoothList, byte baseLog, long mask, int x) {
         Analytics.start();
         for (int i = 0; i < loopSize; i += 8) {
             if ((logs.getLong(i) & mask) > 0) {
                 for (int k = 0; k < 8; k++) {
                     if (logs.getByte(i + k) >= baseLog) {
-                        bSmoothList.add(BSmoothDataPool.get(x + i + k, baseVector));
+                        bSmoothList.add(BSmoothDataPool.get(x + i + k));
                     }
                 }
             }
         }
-        logs.clear(baseLogs);
+        logs.clear();
         Analytics.SIEVE_COLLECT.end();
     }
 
@@ -139,25 +139,6 @@ public class Siever implements Runnable {
         return mask;
     }
 
-    private static int precomputeWheels(ByteArray baseLogs, List<Wheel> wheels) {
-        Analytics.start();
-        int wheelStartingPosition = 0;
-        int maxWheelPrime = MagicNumbers.instance.maxWheelPrime;
-        for (int i = 0, wheelsSize = wheels.size(); i < wheelsSize; i++) {
-            Wheel wheel = wheels.get(i);
-            if (wheel.ignore) {
-                continue;
-            }
-            if (wheel.prime > maxWheelPrime) {
-                break;
-            }
-            wheel.update(baseLogs);
-            wheelStartingPosition++;
-        }
-        Analytics.SIEVER_STATIC_WHEELS.end();
-        return wheelStartingPosition;
-    }
-
     private static List<Wheel> buildWheels(PolynomialData polynomialData) {
         Analytics.start();
         List<Wheel> wheels = polynomialData.buildWheels();
@@ -165,13 +146,12 @@ public class Siever implements Runnable {
         return wheels;
     }
 
-    private static PolynomialData next(ByteArray baseLogs, PolynomialData polynomialData) {
+    private static PolynomialData next(PolynomialData polynomialData) {
         // it takes time for the queue to fill up, so don't run statistics before the first item
         if (polynomialData != null) {
             try {
                 Analytics.start();
                 polynomialData = DataQueue.polynomialData.take();
-                baseLogs.clear();
                 Analytics.SIEVE_QUEUE_POLY.end();
             } catch (InterruptedException e) {
                 return null;
@@ -186,8 +166,8 @@ public class Siever implements Runnable {
         return polynomialData;
     }
 
-    private static byte calculateBaseLog(double deltaLog, PolynomialData polynomialData, long x) {
-        double baseValue = polynomialData.getSievingValue(x).doubleValue();
+    private static byte calculateBaseLog(double deltaLog, PolynomialData polynomialData, int x) {
+        double baseValue = polynomialData.getSievingValueA(x).doubleValue();
         if (baseValue < 0) {
             baseValue *= -1;
         }

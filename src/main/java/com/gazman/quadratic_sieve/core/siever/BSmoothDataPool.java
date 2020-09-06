@@ -1,19 +1,18 @@
 package com.gazman.quadratic_sieve.core.siever;
 
-import java.util.BitSet;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class BSmoothDataPool {
     private static final Queue<BSmoothData> dataQueue = new ConcurrentLinkedDeque<>();
 
-    public static BSmoothData get(int localX, BitSet baseVector){
+    public static BSmoothData get(int localX){
         BSmoothData data = dataQueue.poll();
         if(data == null) {
-            data = new BSmoothData(localX, baseVector);
+            data = new BSmoothData(localX);
         }
         else{
-            data.init(localX, baseVector);
+            data.init(localX);
         }
         return data;
     }

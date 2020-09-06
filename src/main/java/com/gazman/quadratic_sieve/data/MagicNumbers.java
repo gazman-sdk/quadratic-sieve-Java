@@ -10,7 +10,7 @@ import static com.gazman.quadratic_sieve.debug.Logger.log;
 public class MagicNumbers {
 
     public static final MagicNumbers instance = new MagicNumbers();
-    public static final int DEMO_BIT_SIZE = 220;
+    public static final int DEMO_BIT_SIZE = 200;
     public static final long DEMO_SEED = 123;
     public int minPrimeSize;
     public int loopsCount;

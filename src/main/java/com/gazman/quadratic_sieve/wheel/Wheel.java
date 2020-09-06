@@ -7,52 +7,63 @@ import com.gazman.quadratic_sieve.utils.ByteArray;
 import java.util.List;
 
 public class Wheel {
-    public final int prime;
-    private final int primeIndex;
+
     private final byte log;
+    private final int prime;
+    private final int aPrimeIndex;
+    private final int bPrimeIndex;
+    private int currentAPosition; // Comes from getSievingValueA
+    private int currentBPosition; // Comes from getSievingValueB
+    private int startingAPosition;
+    private int startingBPosition;
     private final long maxLong = Long.MAX_VALUE / PrimeBase.instance.maxPrime;
-    public boolean ignore;
-    private int currentPosition;
-    private int startingPosition;
-    private int delta;
 
-    public Wheel(int prime, int primeIndex, int startingPosition, int delta, double scale) {
+    public Wheel(int a, int b, int prime, int primeIndex, double scale) {
         this.prime = prime;
-        this.primeIndex = primeIndex;
-        log = (byte) Math.round(Math.log(prime) * scale);
-        reset(startingPosition, delta);
-    }
+        this.aPrimeIndex = primeIndex + PrimeBase.instance.primeBase.size();
+        this.bPrimeIndex = primeIndex;
+        startingAPosition = currentAPosition = a;
+        startingBPosition = currentBPosition = b;
 
-    public void reset(int startingPosition, int delta) {
-        this.delta = delta;
-        this.startingPosition = (startingPosition + prime - delta % prime) % prime;
-        this.currentPosition = this.startingPosition;
-        ignore = false;
+        log = (byte) (Math.log(prime) * scale);
     }
 
     public void update(ByteArray logs) {
         int length = logs.capacity;
-        int currentPosition = this.currentPosition;
         byte log = this.log;
         int prime = this.prime;
-        while (currentPosition < length) {
-            logs.add(currentPosition, log);
-            currentPosition += prime;
+        while (currentAPosition < length) {
+            logs.add(currentAPosition, log);
+            currentAPosition += prime;
+        }
+        while (currentBPosition < length) {
+            logs.add(currentBPosition, log);
+            currentBPosition += prime;
         }
 
-        this.currentPosition = currentPosition - length;
+        this.currentAPosition = currentAPosition - length;
+        this.currentBPosition = currentBPosition - length;
     }
 
     public void updateSmooth(List<BSmoothData> bSmoothList) {
         for (int i = 0, bSmoothListSize = bSmoothList.size(); i < bSmoothListSize; i++) {
             BSmoothData bSmoothData = bSmoothList.get(i);
-            if ((bSmoothData.localX - delta) % prime == startingPosition) {
-                bSmoothData.vector.flip(primeIndex);
+            int mod = bSmoothData.localX % prime;
+            if (mod == startingAPosition) {
+                bSmoothData.vector.flip(aPrimeIndex);
 
-                if (bSmoothData.value[bSmoothData.valueIndex] > maxLong) {
-                    bSmoothData.valueIndex++;
+                if (bSmoothData.valueA[bSmoothData.valueAIndex] > maxLong) {
+                    bSmoothData.valueAIndex++;
                 }
-                bSmoothData.value[bSmoothData.valueIndex] *= prime;
+                bSmoothData.valueA[bSmoothData.valueAIndex] *= prime;
+            }
+            else if (mod == startingBPosition) {
+                bSmoothData.vector.flip(bPrimeIndex);
+
+                if (bSmoothData.valueB[bSmoothData.valueBIndex] > maxLong) {
+                    bSmoothData.valueBIndex++;
+                }
+                bSmoothData.valueB[bSmoothData.valueBIndex] *= prime;
             }
         }
     }
