@@ -148,7 +148,7 @@ public class MathUtils {
         result[1] = -1;
 
         if (prime == 2) {
-            result[0] =  (n % 2);
+            result[0] = (n % 2);
             result[1] = -1;
             return result;
         }
@@ -157,8 +157,8 @@ public class MathUtils {
             k = (prime / 4);
 
             x = modPowLong(bigN, k + 1, bigPrime) % prime;
-            result[0] =  x;
-            result[1] =  (prime - x);
+            result[0] = x;
+            result[1] = (prime - x);
             return result;
         }
 
@@ -229,4 +229,74 @@ public class MathUtils {
         }
         return v;
     }
+
+    private static int inv(int a, int m) {
+        int m0 = m, t, q;
+        int x0 = 0, x1 = 1;
+
+        if (m == 1)
+            return 0;
+
+        // Apply extended Euclid Algorithm
+        while (a > 1) {
+            // q is quotient
+            q = a / m;
+
+            t = m;
+
+            // m is remainder now, process same as
+            // euclid's algo
+            m = a % m;
+            a = t;
+
+            t = x0;
+
+            x0 = x1 - q * x0;
+
+            x1 = t;
+        }
+
+        if (x1 < 0) {
+            x1 += m0;
+        }
+
+        return x1;
+    }
+
+
+    public static int chinesReminder(int[] num, int[] rem) {
+        int length = rem.length;
+        int prod = 1;
+        for (int i = 0; i < length; i++) {
+            prod *= num[i];
+        }
+
+        int result = 0;
+
+        // Apply above formula
+        for (int i = 0; i < length; i++) {
+            int pp = prod / num[i];
+            result += rem[i] * inv(pp, num[i]) * pp;
+        }
+
+        return result % prod;
+    }
+
+    public static BigInteger chinesReminderBigInt(BigInteger[] num, BigInteger[] rem) {
+        int length = rem.length;
+        BigInteger prod = BigInteger.ONE;
+        for (int i = 0; i < length; i++) {
+            prod = prod.multiply(num[i]);
+        }
+
+        BigInteger result = BigInteger.ZERO;
+
+        for (int i = 0; i < length; i++) {
+            BigInteger pp = prod.divide(num[i]);
+            result = result.add(rem[i].multiply(pp.modInverse(num[i])).multiply(pp));
+        }
+
+        return result.mod(prod);
+    }
+
 }
