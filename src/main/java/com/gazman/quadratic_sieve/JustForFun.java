@@ -4,11 +4,12 @@ import com.gazman.quadratic_sieve.data.PrimeBase;
 import com.gazman.quadratic_sieve.utils.MathUtils;
 import com.gazman.quadratic_sieve.utils.ModularSqrt;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static com.gazman.quadratic_sieve.debug.Logger.log;
 
@@ -18,101 +19,78 @@ public class JustForFun {
         BigInteger n = QuadraticSieve.generateN(300, 123);
         BigInteger n2 = n.multiply(BigInteger.TWO);
 
-        PrimeBase.instance.build(n2, 100_000);
-        log();
+        List<BigInteger> smallPrimeBase = buildSmallPrimeBase(n2, 10_000);
 
-        List<Integer> primes = PrimeBase.instance.primeBase;
 
-        int size = primes.size();
-        long[][] positions = new long[size][2];
+        BigInteger prime = BigDecimal.valueOf(Math.pow(n2.doubleValue(), 1 / 6.0) + 5).toBigInteger();
 
-        int firstPrime = 1000;
-        int intLimit = (int) Math.sqrt(Integer.MAX_VALUE);
+        ExecutorService executor = Executors.newWorkStealingPool();
 
-        for (int i = firstPrime; i < size; i++) {
-            Integer p = primes.get(i);
-            BigInteger prime = BigInteger.valueOf(p);
-            if (prime.equals(BigInteger.TWO)) {
-                continue;
-            }
+        while (true) {
+            prime = prime.nextProbablePrime();
+            BigInteger finalPrime = prime;
+            executor.execute(() -> {
+                if (!MathUtils.isRootInQuadraticResidues(n2, finalPrime)) {
+                    return;
+                }
 
-            long[] flats = MathUtils.ressol(prime.longValue(), n2.mod(prime).longValue());
-            if (p < intLimit) {
-
-                int q = p * p;
-
-                BigInteger mod = n2.mod(BigInteger.valueOf(q));
-
-                flats[0] = q - ModularSqrt.modularSqrtModPower(mod, q, p, (int) flats[0]);
-                flats[1] = q - ModularSqrt.modularSqrtModPower(mod, q, p, (int) flats[1]);
-
-            } else {
-                BigInteger q = prime.pow(2);
-
+                BigInteger sqr = MathUtils.modSqrt(n2, finalPrime);
+                BigInteger q = finalPrime.pow(2);
                 BigInteger mod = n2.mod(q);
 
-                flats[0] = q.subtract(ModularSqrt.modularSqrtModPower(mod, q, prime, BigInteger.valueOf(flats[0]))).longValue();
-                flats[1] = q.subtract(ModularSqrt.modularSqrtModPower(mod, q, prime, BigInteger.valueOf(flats[1]))).longValue();
+                BigInteger p1 = q.subtract(ModularSqrt.modularSqrtModPower(mod, q, finalPrime, sqr));
+                BigInteger p2 = q.subtract(ModularSqrt.modularSqrtModPower(mod, q, finalPrime, finalPrime.subtract(sqr)));
 
-            }
-            Arrays.sort(flats);
-            positions[i] = flats;
+                factor(n2, finalPrime, p1, smallPrimeBase);
+                factor(n2, finalPrime, p2, smallPrimeBase);
+            });
         }
-
-        log("Calculated positions");
-        log();
-
-        Map<Long, BigInteger> map = new HashMap<>(1024 * 10);
-
-
-        int min = 10000;
-        long step = 10_000_000_000L;
-        long target = 0;
-
-        for (int k = 0; k < 1000; k++) {
-            target += step;
-            map.clear();
-
-
-            for (int i = firstPrime; i < size; i++) {
-                long q = primes.get(i) * (long) primes.get(i);
-                BigInteger p = BigInteger.valueOf(q);
-
-                long[] position = positions[i];
-                for (int j = 0; j < 2; j++) {
-                    while (position[j] < target) {
-                        map.put(position[j], map.getOrDefault(position[j], BigInteger.ONE).multiply(p));
-                        position[j] += q;
-                    }
-                }
-            }
-
-            for (Map.Entry<Long, BigInteger> entry : map.entrySet()) {
-                BigInteger a = entry.getValue();
-                if (a.bitLength() < 50) {
-                    continue;
-                }
-
-                BigInteger ab = n2.subtract(BigInteger.valueOf(entry.getKey()).pow(2));
-
-                BigInteger reminder = ab.divide(a);
-
-                for (int i = 0; i < firstPrime; i++) {
-                    BigInteger p = BigInteger.valueOf(primes.get(i)).pow(2);
-                    while (true) {
-                        BigInteger mod = reminder.mod(p);
-                        if (!mod.equals(BigInteger.ZERO)) break;
-                        reminder = reminder.divide(p);
-                        a = a.multiply(p);
-                    }
-                }
-                if (reminder.bitLength() <= min) {
-                    min = reminder.bitLength();
-                    log("min", min, "2n",n2, "c", entry.getKey(), "f", a.sqrt(), "db", reminder);
-                }
-            }
-        }
-        log("Sieve done Map size", map.size());
-        log();
     }
+
+    private static int min = 1000;
+    private static int minC = 1000;
+
+    private static void factor(BigInteger n2, BigInteger f, BigInteger c, List<BigInteger> smallPrimeBase) {
+        if (c.bitLength() > 100) {
+            return;
+        }
+        if (c.bitLength() < minC) {
+            log("MinC", format("c", c));
+            minC = c.bitLength();
+        }
+        f = f.pow(2);
+        BigInteger ab = n2.subtract(c.pow(2));
+        BigInteger reminder = ab.divide(f);
+
+        for (int i = 0, size = smallPrimeBase.size(); i < size; i++) {
+            BigInteger p = smallPrimeBase.get(i);
+            while (true) {
+                BigInteger mod = reminder.mod(p);
+                if (!mod.equals(BigInteger.ZERO)) {
+                    break;
+                }
+                reminder = reminder.divide(p);
+                f = f.multiply(p);
+            }
+        }
+        if (reminder.bitLength() <= min) {
+            min = reminder.bitLength();
+            log("min", min, format("c", c), format("f", f.sqrt()), format("db", reminder));
+        }
+    }
+
+    private static List<BigInteger> buildSmallPrimeBase(BigInteger n2, int primeBaseSize) {
+        PrimeBase.instance.build(n2, primeBaseSize);
+        List<BigInteger> smallPrimeBase = new ArrayList<>(PrimeBase.instance.primeBase.size());
+        smallPrimeBase.add(BigInteger.valueOf(4));
+        for (int prime : PrimeBase.instance.primeBase) {
+            smallPrimeBase.add(BigInteger.valueOf(prime * (long) prime));
+        }
+        return smallPrimeBase;
+    }
+
+    private static String format(String name, BigInteger v) {
+        return name + " " + String.format("%s(%d)", v, v.bitLength());
+    }
+
 }
