@@ -79,7 +79,7 @@ public class Siever implements Runnable {
 
             for (BSmoothData bSmoothData : bSmoothList) {
                 BigInteger sievingValue = polynomialData.getSievingValue(bSmoothData.localX);
-                BigInteger reminder = sievingValue.divide(bSmoothData.bigValue);
+                BigInteger reminder = sievingValue.divide(bSmoothData.bigValue == null ? BigInteger.valueOf(bSmoothData.value) : bSmoothData.bigValue);
                 bSmoothData.reminder = reminder.longValue();
             }
             Analytics.SIEVE_RE_SIEVE.end();
